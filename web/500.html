@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>系统错误</title>
+</head>
+<body>
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="1" class="text_12" bgcolor="#ffffff">
+  <tr>
+    <td colspan="3" align="center" valign="middle"><table border="0" cellspacing="1" cellpadding="0" class="text_12" width="500" align="center" bgcolor="#ffffff">
+      
+      <tr> <td align="right"><img src="theme/style/PeopleLogin.gif" width="136" height="125"></td>
+        <td bgcolor="#ffffff"><table width="300" height="150"  border="0" align="center" cellpadding="1" cellspacing="0" bordercolorlight="#A5A5A5" bordercolordark="#D5D5D5" class="text_12" bgcolor="#ffffff">
+            <tr>
+			
+              <td align="center"><font color=red>信息提示：
+                    系统发生错误，请重新登陆！
+              </font></td>
+            </tr>
+            <tr>
+              <td align="center"><input type="image" name="imageField" src="theme/style/cxdl.jpg" onClick="reload();"></td>
+            </tr>
+        </table></td>
+       
+      </tr>
+    </table></td>
+  </tr>
+</table>
+<script type="text/javascript">
+    function reload()
+    {
+        try{
+            var mainWindow = self;
+            if(self.opener) {
+                self.opener.reload();
+                self.close();
+            } else {
+                while(mainWindow != top) {
+                    mainWindow = mainWindow.parent;
+                }
+                mainWindow.location.href = "index.jsp";
+            }
+
+        }catch(ex){}
+    }
+</script>
+</body>
+</html>

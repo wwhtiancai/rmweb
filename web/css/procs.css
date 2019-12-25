@@ -1,0 +1,28 @@
+.procs {
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	width: 400px;
+	height: 40px;
+	position: absolute;
+	top: 230px;
+	left: 300px;
+	line-height: 20px;
+	display: none;
+}
+.procs .ot {
+	width: 400px;
+	height: 20px;
+	line-height: 20px;
+	border: solid 1px #CCCCCC;
+	text-align: left;
+}
+.procs_in {
+	background-image: url(../images/procs.jpg);
+	background-repeat: repeat-x;
+	width: 110px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	border: 0px;
+}

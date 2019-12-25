@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root id="root" name="选择卡口类型" value=""> 
+	  <folder id="1" name="卡口类型" value="">
+		  <item id="11" value="国际卡口">国际卡口</item> 
+		  <item id="12" value="省际卡口">省际卡口</item> 
+		  <item id="13" value="市际卡口">市际卡口</item> 
+		  <item id="14" value="县际卡口">县际卡口</item> 
+		  <item id="15" value="市（县、区）内卡口">市（县、区）内卡口</item> 
+		  <item id="16" value="其它卡口">其它卡口</item>  
+	  </folder>
+</root>

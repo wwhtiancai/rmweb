@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.SysuserMapper">
+
+    <insert id="create" parameterType="com.tmri.share.frm.bean.SysUser">
+        <![CDATA[
+        insert into frm_sysuser(yhdh, xm, mm, glbm, sfzmhm, zhyxq, mmyxq, sfmj, rybh, xtgly)
+        values (#{yhdh}, #{xm}, frm_sys_pkg.encrypt(#{yhdh}, #{mm}), #{glbm}, #{sfzmhm}, to_date('2099-12-31', 'yyyy-MM-dd'),
+        to_date('2099-12-31', 'yyyy-MM-dd'), #{sfmj}, #{rybh}, 2)
+        ]]>
+    </insert>
+
+</mapper>

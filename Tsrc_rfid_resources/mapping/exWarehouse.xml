@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ExWarehouseMapper">
+
+    <select id="fetchByCkdh" parameterType="String" resultType="com.tmri.rfid.bean.ExWarehouseEntry">
+        SELECT * FROM rfid_inventory_out e WHERE e.ckdh = #{ckdh}
+    </select>
+	
+    <select id="getMaxCkdh" parameterType="String" resultType="String">
+        select max(rio.ckdh)+1 from rfid_inventory_out rio 
+		where rio.ckdh like CONCAT('${ckdh}','%' )
+    </select>
+
+	<select id="queryList" parameterType="map" resultType="com.tmri.rfid.bean.ExWarehouseEntry">
+        SELECT e.*,fs.xm as jbrxm,fd.bmmc as bmmc FROM rfid_inventory_out e 
+        	left join FRM_DEPARTMENT fd on e.ssbm = fd.glbm 
+        	left join FRM_SYSUSER fs on e.jbr = fs.yhdh
+        WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="ckdh != null and ckdh != ''">
+            	and e.ckdh = #{ckdh} 
+            </if>
+            <if test="glbm != null and glbm != ''">
+            	and e.ssbm = #{glbm} 
+            </if>
+            <if test="jbr != null and jbr != ''">
+            	and fs.xm = #{jbr} 
+            </if>
+            <if test="ckrqks != null and ckrqks != ''">
+            	and e.ckrq &gt;= to_date(#{ckrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="ckrqjs != null and ckrqjs != ''">
+            	and e.ckrq &lt;= to_date(#{ckrqjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="type == 2">
+            	and e.zt = 1
+            </if>
+        </trim>
+        order by e.ckrq desc
+    </select>
+    
+    <insert id="create" parameterType="com.tmri.rfid.bean.ExWarehouseEntry">
+        INSERT INTO rfid_inventory_out (CKDH, JBR, CKRQ, SQDH, CPLB, CPDM, SSBM, BZ, CKSL)
+                VALUES (#{ckdh}, #{jbr}, #{ckrq}, #{sqdh}, #{cplb}, #{cpdm}, #{ssbm}, #{bz}, #{cksl})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.ExWarehouseEntry">
+        UPDATE rfid_inventory_out e SET 
+          	<trim suffixOverrides=",">
+	          	<if test="ckdh != null">
+	              	ckdh = #{ckdh},
+	          	</if>
+          		<if test="ssbm != null">
+	              	ssbm = #{ssbm},
+	          	</if>
+          		<if test="bz != null">
+	              	bz = #{bz},
+	          	</if>
+          		<if test="cplb != null">
+	              	cplb = #{cplb},
+	          	</if>
+          		<if test="cpdm != null">
+	              	cpdm = #{cpdm},
+	          	</if>
+          	</trim>
+        WHERE e.ckdh = #{ckdh}
+    </update>
+    
+    <delete id="deleteByCkdh" parameterType="String">
+        delete from rfid_inventory_out where ckdh=#{ckdh}
+    </delete>
+    
+    <update id="examine" parameterType="String">
+    	UPDATE rfid_inventory_out e SET e.zt= #{zt} where e.ckdh= #{ckdh}
+    </update>
+    
+    <select id="queryCount" parameterType="map" resultType="Integer">
+		select nvl(sum(e.cksl),0) from rfid_inventory_out e 
+		WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="ckdh != null and ckdh != ''">
+            	and e.ckdh = #{ckdh} 
+            </if>
+            <if test="glbm != null and glbm != ''">
+            	and e.ssbm = #{glbm} 
+            </if>
+            <if test="jbr != null and jbr != ''">
+            	and fs.xm = #{jbr} 
+            </if>
+            <if test="ckrqks != null and ckrqks != ''">
+            	and e.ckrq &gt;= to_date(#{ckrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="ckrqjs != null and ckrqjs != ''">
+            	and e.ckrq &lt;= to_date(#{ckrqjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="zt != null">
+            	and e.zt = #{zt} 
+            </if>
+        </trim>
+	</select>
+</mapper>

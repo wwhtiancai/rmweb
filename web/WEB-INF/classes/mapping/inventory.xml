@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.InventoryMapper">
+
+    <select id="fetchByBzhh" parameterType="String" resultType="com.tmri.rfid.bean.Inventory">
+    	select ri.*, fd.bmmc as ssbmmc, rp.cpmc as cpmc, rpc.lbmc as cplbmc 
+    	from rfid_inventory ri, frm_department fd, rfid_product rp, rfid_product_category rpc
+        where ri.ssbm = fd.glbm(+) and ri.cpdm = rp.cpdm(+) and rp.cplb = rpc.cplb(+) and ri.bzhh = #{bzhh}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.Inventory">
+        select ri.*, fd.bmmc as ssbmmc, rp.cpmc as cpmc, rpc.cplb as cplb, rpc.lbmc as cplbmc from rfid_inventory ri,
+        frm_department fd, rfid_product rp, rfid_product_category rpc
+        where ri.ssbm = fd.glbm(+) and ri.cpdm = rp.cpdm(+) and rp.cplb = rpc.cplb(+)
+        <trim>
+            <if test="rwh != null">
+                and ri.rwh = #{rwh}
+            </if>
+            <if test="bzhh != null">
+                and ri.bzhh = #{bzhh}
+            </if>
+            <if test="bzxh != null">
+                and ri.bzxh = #{bzxh}
+            </if>
+            <if test="zt != null">
+                and ri.zt = #{zt}
+            </if>
+            <if test="ssbm != null">
+                and ri.ssbm = #{ssbm}
+            </if>
+            <if test="not_zt != null">
+                <![CDATA[and ri.zt <> #{not_zt} ]]>
+            </if>
+            <if test="kh != null">
+                and <![CDATA[ri.qskh <= #{kh} and ri.zzkh >= #{kh}]]>
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryList" parameterType="map" resultType="com.tmri.rfid.bean.Inventory">
+        select ri.*, fd.bmmc as ssbmmc, rp.cpmc as cpmc, rpc.lbmc as cplbmc from rfid_inventory ri, frm_department fd,
+        rfid_product rp, rfid_product_category rpc
+        where ri.ssbm = fd.glbm(+) and ri.cpdm = rp.cpdm(+) and rp.cplb = rpc.cplb(+)
+        <trim suffixOverrides="and">
+            <if test="bzhh != null and bzhh != ''">
+                and ri.bzhh = #{bzhh}
+            </if>
+            <if test="bzxh != null and bzxh != ''">
+                and ri.bzxh = #{bzxh}
+            </if>
+            <if test="kh != null and kh!=''">
+                and ri.qskh &lt;= #{kh} and ri.zzkh &gt;= #{kh}
+            </if>
+            <if test="ssbm != null and ssbm!=''">
+                and ri.ssbm = #{ssbm}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.Inventory">
+        INSERT INTO rfid_inventory (BZHH, QSKH, ZZKH, SSBM, ZT, BZXH, CPDM)
+                VALUES (#{bzhh}, #{qskh}, #{zzkh}, #{ssbm}, #{zt}, #{bzxh}, #{cpdm})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.Inventory">
+        UPDATE rfid_inventory e
+          SET e.qskh = #{qskh}, e.zzkh = #{zzkh}, e.ssbm = #{ssbm}, e.cpdm = #{cpdm}, e.zt = #{zt}, e.bzxh=${bzxh}
+        WHERE e.bzhh = #{bzhh}
+    </update>
+
+    <update id="inventoryInByHh" parameterType="com.tmri.rfid.bean.Inventory">
+        UPDATE rfid_inventory e
+          SET e.zt = #{zt}, e.ssbm = #{glbm}
+        WHERE e.bzhh = #{bzhh}
+    </update>
+
+    <update id="inventoryInByXh" parameterType="com.tmri.rfid.bean.Inventory">
+        UPDATE rfid_inventory e
+          SET e.zt = #{zt}, e.ssbm = #{glbm}
+        WHERE e.bzxh = #{bzxh}
+    </update>
+
+    <!--     <update id="inventoryOutByHh" parameterType="com.tmri.rfid.bean.Inventory">
+            MODIFY rfid_inventory e
+              SET e.zt = 5
+            WHERE e.bzhh = #{bzhh}
+        </update>
+
+        <update id="inventoryOutByXh" parameterType="com.tmri.rfid.bean.Inventory">
+            MODIFY rfid_inventory e
+              SET e.zt = 5
+            WHERE e.bzxh = #{bzxh}
+        </update> -->
+
+    <update id="inventoryOutByCkdh" parameterType="com.tmri.rfid.bean.Inventory">
+        UPDATE rfid_inventory e SET e.zt = 5,e.ssbm = (
+        	select roa.sqbm from RFID_INVENTORY_OUT rio,RFID_ORDER_APPLICATION roa 
+			where rio.ckdh = #{ckdh} and rio.sqdh = roa.sqdh 
+        )
+		where e.bzxh in 
+		(select riod.bzhm from RFID_INVENTORY_OUT_DETAIL riod 
+		where riod.ckdh = #{ckdh} and riod.dw = 1) or 
+		e.bzhh in 
+		(select riod.bzhm from RFID_INVENTORY_OUT_DETAIL riod 
+		where riod.ckdh = #{ckdh} and riod.dw = 2)
+    </update>
+
+
+    <delete id="deleteByBzhh" parameterType="String">
+        delete from rfid_inventory where bzhh=#{bzhh}
+    </delete>
+
+    <select id="queryByBZXH" parameterType="String" resultType="com.tmri.rfid.bean.Inventory">
+        select * from rfid_inventory ri, rfid_inventory_in_detail riid
+         where ri.ssbm = #{glbm} and riid.bzhh = ri.bzhh
+         and riid.bzxh = #{bzxh} order by ri.bzhh
+    </select>
+
+    <select id="queryOccupied" parameterType="String" resultType="String">
+        select CONCAT(CONCAT(ri.qskh, '-'), ri.zzkh) from rfid_inventory ri
+         <![CDATA[
+          where ((ri.qskh <= CONCAT(${sf}, lpad(${qskh}, 10, '0')) and
+                  ri.qskh >= CONCAT(${sf}, lpad(${zzkh}, 10, '0')))
+            or (ri.zzkh <= CONCAT(${sf}, lpad(${zzkh}, 10, '0')) and
+                ri.zzkh >= CONCAT(${sf}, lpad(${qskh}, 10, '0'))))
+           and ri.zt <> 6
+         ]]> union
+        select re.kh from RFID_ERI re
+        <![CDATA[
+          where re.bzhh is null
+            and re.kh >= CONCAT(${sf}, lpad(${qskh}, 10, '0'))
+            and re.kh <= CONCAT(${sf}, lpad(${zzkh}, 10, '0'))
+
+
+        ]]>
+    </select>
+
+    <insert id="reserve" parameterType="java.util.HashMap" statementType="CALLABLE">
+        <![CDATA[
+
+
+        {call RFID_INVENTORY_PKG.reserve(
+                #{In_sf, mode=IN,jdbcType=VARCHAR}, #{In_qskh,mode=IN,jdbcType=INTEGER},
+                #{In_sl, mode=IN,jdbcType=INTEGER}, #{In_vest_capacity,mode=IN,jdbcType=INTEGER},
+                #{In_box_capacity,mode=IN,jdbcType=INTEGER}, #{In_rwh, mode=IN,jdbcType=VARCHAR},
+                #{In_cpdm, mode=IN, jdbcType=VARCHAR},
+                #{In_cpbm, mode=IN, jdbcType=VARCHAR},
+                #{Out_jg,mode=OUT,jdbcType=INTEGER}, #{Out_Msg, mode=OUT,jdbcType=VARCHAR}
+        )}
+
+
+        ]]>
+    </insert>
+
+    <select id="queryAvailableKh" parameterType="String" resultType="map">
+        <![CDATA[
+
+
+        with o as (
+        select nvl(lag(e) over (order by n), minn) st, nvl(n, maxn) en from (
+        select lag(kh, 1) over (partition by sf order by kh) n, kh e, min(kh) over(partition by sf) minn, max(kh) over(partition by sf) maxn from rfid_eri
+        where sf = ${sf} and bzhh is null and zt <> 2
+        )
+        where nvl(e -n -1 , 1) <> 0 or n is null
+        union
+        select qskh st, zzkh en from rfid_inventory where qskh >= concat(${sf}, '0000000000') and zzkh <= concat(${sf}, '9999999999') and zt <> 6)
+        select concat(${sf}, lpad(nvl2(qskd, mod((qskd + 1), 10000000000) , 0), 10, '0')) qskd,
+               concat(${sf}, lpad(mod(zzkd - 1, 10000000000), 10, '0')) zzkd from ( select lag(en, 1) over (order by st ) qskd, st zzkd, en from o )
+        where zzkd > ${sf} * 10000000000 and zzkd - nvl2(qskd, qskd + 1, ${sf} * 10000000000) - 1>= ${capacity}
+        union select concat(${sf}, lpad(nvl2(max(o.en), mod(max(o.en) + 1, 10000000000), 0), 10, '0')),
+        concat(${sf}, '9999999999') from o
+
+
+        ]]>
+    </select>
+
+    <select id="queryLastFinished" resultType="String">
+        <![CDATA[
+
+        with o as (
+        select ri.bzhh, count(*) n from rfid_inventory ri, rfid_eri re
+        where re.zt = 1 and ri.qskh <= re.kh and ri.zzkh >= re.kh and ri.rwh = #{rwh} group by ri.bzhh)
+        select min(ri2.bzhh) from rfid_inventory ri2, o
+        where ri2.bzhh = o.bzhh(+)
+        and ri2.rwh = #{rwh}
+        and nvl(o.n, 0) < #{capacity}
+
+        ]]>
+    </select>
+
+    <!-- 根据条件获取库存卡片数量 -->
+    <select id="getSumByCondition" parameterType="com.tmri.rfid.bean.Inventory" resultType="Integer">
+        select sum(ri.zzkh-ri.qskh+1) from RFID_INVENTORY ri where 1=1
+        <trim>
+            <if test="rwh != null">
+                and ri.rwh = #{rwh}
+            </if>
+            <if test="bzhh != null">
+                and ri.bzhh = #{bzhh}
+            </if>
+            <if test="bzxh != null">
+                and ri.bzxh = #{bzxh}
+            </if>
+            <if test="zt != null">
+                and ri.zt = #{zt}
+            </if>
+            <if test="ssbm != null">
+                and ri.ssbm = #{ssbm}
+            </if>
+            <if test="cpdm != null">
+                and ri.cpdm = #{cpdm}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 获取预出库数量 -->
+    <select id="getPrepareOutNum" parameterType="String" resultType="Integer">
+        select NVL(sum(riod.sjsl),0) from RFID_INVENTORY_OUT rio,RFID_INVENTORY_OUT_DETAIL riod
+        where riod.ckdh = rio.ckdh and rio.cpdm = #{cpdm} and rio.ssbm = #{ssbm} and rio.zt = 1
+        <!-- select NVL(sum(riod.sjsl),0) from RFID_INVENTORY_OUT rio,RFID_INVENTORY_OUT_DETAIL riod
+            where riod.ckdh = rio.ckdh and rio.cpdm = 'KRDZBS' and rio.ssbm = '320200000000' and rio.zt = 1
+        select sum(ri.zzkh-ri.qskh+1) from RFID_INVENTORY ri where bzxh in
+            (select riod.bzhm from RFID_INVENTORY_OUT rio,RFID_INVENTORY_OUT_DETAIL riod
+            where riod.dw = 1 and riod.ckdh = rio.ckdh and rio.cpdm = #{cpdm} and rio.ssbm = #{ssbm} and rio.zt = 1
+            )
+            or bzhh in (
+            select riod.bzhm from RFID_INVENTORY_OUT rio,RFID_INVENTORY_OUT_DETAIL riod
+            where riod.dw = 2 and riod.ckdh = rio.ckdh and rio.cpdm = #{cpdm} and rio.ssbm = #{ssbm} and rio.zt = 1
+            ) -->
+    </select>
+
+    <select id="queryByCkdh" parameterType="String" resultType="com.tmri.rfid.bean.Inventory">
+	    select ri.* from RFID_INVENTORY ri,RFID_INVENTORY_OUT_DETAIL riod,RFID_INVENTORY_OUT rio
+			where riod.ckdh = rio.ckdh and rio.ckdh = #{ckdh}
+		      	and (ri.bzhh = riod.bzhm or ri.bzxh = riod.bzhm)
+    </select>
+
+    <select id="getXhByKh" parameterType="String" resultType="com.tmri.rfid.bean.Inventory">
+        SELECT 1 AS DW, NULL AS bzhh, e.bzxh, MIN(E.QSKH) AS qskh, MAX(E.ZZKH) AS zzkh
+        FROM RFID_INVENTORY E
+        LEFT JOIN RFID_PRODUCT PP
+        ON PP.CPDM = E.CPDM
+        WHERE E.QSKH &gt;= to_number(#{qskh})
+        AND E.ZZKH &lt;= to_number(#{zzkh})
+        AND PP.CPDM = #{cpdm}
+        AND E.ZT = #{zt}
+        GROUP BY E.BZXH
+        HAVING MOD(COUNT(1), 10) = 0
+        UNION
+        SELECT 2 AS DW, e1.bzhh, e1.bzxh,QSKH , ZZKH
+        FROM RFID_INVENTORY E1
+        WHERE E1.ZT = #{zt}
+        AND e1.qskh &gt;= to_number(#{qskh})
+        AND e1.zzkh &lt;= to_number(#{zzkh})
+        AND e1.cpdm = #{cpdm}
+        AND E1.BZXH IN (SELECT E.BZXH
+                        FROM RFID_INVENTORY E
+                        LEFT JOIN RFID_PRODUCT PP
+                        ON PP.CPDM = E.CPDM
+                        WHERE E.QSKH &gt;= to_number(#{qskh})
+                        AND E.ZZKH &lt;= to_number(#{zzkh})
+                        AND PP.CPDM = #{cpdm}
+                        AND E.ZT = #{zt}
+                        GROUP BY E.BZXH
+                        HAVING MOD(COUNT(1), 10) != 0)
+        ORDER BY bzxh, bzhh
+    </select>
+
+    <select id="queryKc" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM rfid_eri e, rfid_inventory i
+        WHERE e.bzhh = i.bzhh AND i.ssbm = #{glbm} AND i.zt &lt;&gt; 6
+        AND e.zt = 1 AND e.clxxbfid IS NULL
+    </select>
+
+</mapper>

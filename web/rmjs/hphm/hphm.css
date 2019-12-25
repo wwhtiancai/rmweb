@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+td.key_1:hover{
+	color:#FF9900;
+}
+td.key_2:hover{
+	color:#FF9900;
+}
+td.key_3:hover{
+	color:#FF9900;
+}
+.border{
+	background-color:#FFFFFF;
+}
+.key_1{
+	background-color:#99CCFF;
+	font:"黑体";
+	font-size:12px;
+	vertical-align:middle;
+	text-align:center;
+	height:16px;
+	cursor:hand;
+	outline-color:#990099;
+	padding-top: 2px;
+}
+.key_2{
+	background-color:#CCCCFF;
+	font:"黑体";
+	font-size:12px;
+	vertical-align:middle;
+	text-align:center;
+	height:16px;
+	cursor:hand;
+	outline-color:#990099;
+	padding-top: 2px;
+}
+.key_3{
+	background-color: #FFFFFF;
+	font:"黑体";
+	font-size:12px;
+	vertical-align:middle;
+	text-align:center;
+	height:16px;
+	cursor:hand;
+	outline-color:#990099;
+	padding-top: 2px;
+}
+.key_normal{
+	background-color: #F0E45E;
+	font:"黑体";
+	font-size:12px;
+	vertical-align:middle;
+	text-align:center;
+	height:16px;
+	cursor:hand;
+	outline-color:#990099;
+	padding-top: 2px;
+}
+.hpys0{
+	background-color: white;
+	color:black;
+	font-weight: bold;
+}
+.hpys01{
+	background-color: yellow;
+	color:black;
+}
+.hpys02{
+	background-color: blue;
+	color:white;
+}
+.hpys03{
+	background-color: black;
+	color:white;
+}
+.hpys04{
+	background-color: green;
+	color:white;
+}
+.hpys99{
+	background-color: #AAAAAA;
+	color:black;
+}
+.hpys{
+	background-color: #AAAAAA;
+	color:black;
+}

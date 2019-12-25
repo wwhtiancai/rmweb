@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<!--  
+	<script src="../jquery/jquery-1.6.2.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+	<script src="jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+	-->
+	<script type="text/javascript"
+	src="http://127.0.0.1:8080/NaSoft_TGIS/epgis/js/third_libs/jquery/jquery-1.6.2.js"></script>
+<link rel="stylesheet" href="http://127.0.0.1:8080/NaSoft_TGIS/epgis/js/third_libs/prettyPhoto/css/prettyPhoto.css"  type="text/css"  charset="utf-8"/>
+<script type="text/javascript" src="http://127.0.0.1:8080/NaSoft_TGIS/epgis/js/third_libs/prettyPhoto/jquery.prettyPhoto.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){	
+			/**
+			$("a[rel^='prettyPhoto']").prettyPhoto({
+				theme: 'facebook',
+				slideshow:5000, 
+				autoplay_slideshow:true,
+				social_tools:""
+			});	
+			*/
+			
+		/**
+			var api_images = ['images/fullscreen/image1.jpg','images/fullscreen/image2.jpg','images/fullscreen/image3.jpg'];
+			var  api_titles = ['Title 1','Title 2','Title 3'];
+            var api_descriptions = ['Description 1','Description 2','Description 3']
+			$.prettyPhoto.open(api_images,api_titles,api_descriptions);
+		*/	
+		 $().prettyPhoto({
+				imgId:"imageId",
+				theme: 'light_square',
+				slideshow:3000, 
+				autoplay_slideshow:true,
+				social_tools:""
+		});
+		  var api_images = ['images/fullscreen/1.jpg','images/fullscreen/2.jpg','images/fullscreen/3.jpg'];
+		  var api_titles = ['Title 1','Title 2','Title 3'];
+		  var  api_descriptions = ['Description 1','Description 2','Description 3'];
+			var set_position =1;	
+			$.prettyPhoto.open(api_images,api_titles,api_descriptions,set_position);
+			
+			//$.prettyPhoto.open('images/fullscreen/1.jpg','Title','Description');
+			//$.prettyPhoto.changePage('next');
+			//$.prettyPhoto.changePage('previous');
+			//$.prettyPhoto.close();
+		});
+		
+	</script>
+	</head>
+	<body>	
+	<div id="imageId" ></div>	
+	</body>
+<html>

@@ -1,0 +1,208 @@
+v\: * {
+	behavior: url(#default#VML);
+	display: inline-block
+}
+
+body {
+	margin: 0, 0, 0, 0;
+	padding: 0, 0, 0, 0;
+}
+/**周边视频 */
+a.zbspOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/zbsp.png) no-repeat;
+}
+a.zbspOff:hover {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/zbsp_hover.png) no-repeat;
+}
+
+a.zbspOn {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/zbsp_down.png) no-repeat;
+}
+
+a.zbspOn:hover {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/zbsp_hover.png) no-repeat;
+}
+
+/** 周边警力 */
+a.zbjlOff{
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/zbjl.png) no-repeat;
+}
+a.zbjlOff:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/zbjl_hover.png) no-repeat;
+}
+
+a.zbjlOn{
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/zbjl_down.png) no-repeat;
+}
+
+a.zbjlOn:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/zbjl_hover.png) no-repeat;
+}
+
+/** 应急资源 */
+a.yjzyOff{
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/yjzy.png) no-repeat;
+}
+
+a.yjzyOff:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/yjzy_hover.png) no-repeat;
+}
+
+a.yjzyOn{	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/yjzy_down.png) no-repeat;
+}
+
+a.yjzyOn:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/yjzy_hover.png) no-repeat;
+}
+/** 其他资源 */
+a.qtzyOff{
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/qtzy.png) no-repeat;
+}
+a.qtzyOff:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/qtzy_hover.png) no-repeat;
+}
+
+a.qtzyOn{	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/qtzy_down.png) no-repeat;
+}
+
+a.qtzyOn:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/qtzy_hover.png) no-repeat;
+}
+/**预警确认 */
+a.yjqrOff{
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/yjqr.png) no-repeat;
+}
+a.yjqrOff:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/yjqr_hover.png) no-repeat;
+}
+a.yjqrOn {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/yjqr_down.png) no-repeat;
+}
+a.yjqrOn:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/yjqr_hover.png) no-repeat;
+}
+
+/**人工采集 */
+a.rgcjOff{
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/rgcj.png) no-repeat;
+}
+a.rgcjOff:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/rgcj_hover.png) no-repeat;
+}
+a.rgcjOn {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/rgcj_down.png) no-repeat;
+}
+a.rgcjOn:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/rgcj_hover.png) no-repeat;
+}
+
+/**预警处置 */
+a.yjczOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/yjcz.png) no-repeat;
+}
+a.yjczOff:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/yjcz_hover.png) no-repeat;
+}
+a.yjczOn {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/yjcz_down.png) no-repeat;
+}
+
+a.yjczOn:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/yjcz_hover.png) no-repeat;
+}
+
+/**处置反馈 */
+a.czfkOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/czfk.png) no-repeat;
+}
+
+a.czfkOff:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/czfk_hover.png) no-repeat;
+}
+a.czfkOn {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/yjzh/bottomToolbar/czfk_down.png) no-repeat;
+}
+
+a.czfkOn:hover{	
+	height: 64px;
+	width: 64px;
+	background:url(../images/business/yjzh/bottomToolbar/czfk_hover.png) no-repeat;
+}
+
+span.bottomToolbarclass {
+	width: 70;
+	height: 70;
+	text-align: center;
+	font-size: 12px;
+}
+
+span.bottomToolbarclass2 {
+	width: 70;
+	height: 70;
+	text-align: center;
+	font-size: 12px;
+}

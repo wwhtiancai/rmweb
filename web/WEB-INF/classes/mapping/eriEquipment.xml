@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriEquipmentMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.EriEquipmentBean">
+        select * from RFID_ERI_EQUIPMENT_APPLY where xh = #{xh}
+    </select>
+    
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriEquipmentBean">
+        SELECT ea.xh, rw.xh as sbh, ea.aqmkxh, ea.glbm, ea.bz, ea.zt, ea.byzd, ea.gxrq, sm.xp1gy as gy
+        FROM RFID_ERI_EQUIPMENT_APPLY ea, RFID_SECURITY_MODEL sm, RFID_ERI_READER_WRITER rw
+        WHERE ea.aqmkxh = sm.xh(+) and ea.aqmkxh = rw.aqmkxh(+)
+            <if test="xh != null and xh !=''">
+                and ea.xh = #{xh}
+            </if>
+            <if test="glbm != null and glbm!=''">
+                and ea.glbm = #{glbm}
+            </if>
+            <if test="zt != null and zt!=''">
+                and ea.zt = #{zt}
+            </if>
+            <if test="bz != null and bz!=''">
+                and ea.bz = #{bz}
+            </if>
+            <if test="byzd != null and byzd!=''">
+                and ea.byzd = #{byzd}
+            </if>
+            <if test="gxrq != null and gxrq!=''">
+                and ea.gxrq = #{gxrq}
+            </if>
+            <if test="aqmkxh != null">
+                and ea.aqmkxh = #{aqmkxh}
+            </if>
+    </select>
+    
+     <update id="updateState" parameterType="long">
+        UPDATE RFID_ERI_EQUIPMENT_APPLY
+        SET  zt= #{zt}
+        WHERE xh = #{xh}
+    </update>
+    
+     <update id="update" parameterType="com.tmri.rfid.bean.EriEquipmentBean">
+        UPDATE RFID_ERI_EQUIPMENT_APPLY e  SET e.gxrq = sysdate,
+                 e.sbh = #{sbh},
+               	 e.gy = #{gy},
+               	 e.glbm = #{glbm},
+               	 e.zt = #{zt}, 
+               	 e.bz = #{bz}, 
+               	 e.byzd = #{byzd}
+        WHERE e.xh = #{xh}
+    </update>
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriEquipmentBean">
+        <selectKey keyProperty="xh" resultType="long" order="BEFORE">
+            SELECT SEQ_RFID_ERI_EQUIPMENT_APPLY.nextval as xh from dual
+        </selectKey>
+        INSERT INTO RFID_ERI_EQUIPMENT_APPLY (xh, sbh, gy, glbm, bz, zt, byzd, gxrq, aqmkxh)
+        VALUES (#{xh}, #{sbh}, #{gy}, #{glbm}, #{bz}, #{zt}, #{byzd}, #{gxrq}, #{aqmkxh})
+    </insert>
+
+     <delete id="deleteById" parameterType="string">
+        delete from RFID_ERI_EQUIPMENT_APPLY where xh=#{xh}
+    </delete>
+</mapper>

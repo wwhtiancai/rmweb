@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.OrderApplicationMapper">
+    
+    <resultMap id="orderApplication" type="com.tmri.rfid.bean.OrderApplication">
+        <result property="sqdh" column="sqdh"/>
+        <result property="sqbm" column="sqbm"/>
+        <result property="cplb" column="cplb"/>
+        <result property="cpdm" column="cpdm"/>
+        <result property="jbr" column="jbr"/>
+        <result property="sqrq" column="sqrq"/>
+        <result property="sl" column="sq"/>
+        <result property="zt" column="zt"/>
+        <result property="wcrq" column="wcrq"/>
+        <result property="lxr" column="lxr"/>
+        <result property="lxdh" column="lxdh"/>
+        <result property="cz" column="cz"/>
+        <result property="bz" column="bz"/>
+        <result property="shyj" column="shyj"/>
+    </resultMap>
+
+    <resultMap id="orderApplicationView" type="com.tmri.rfid.ctrl.view.OrderApplicationView">
+        <result property="bmmc" column="bmmc"/>
+        <result property="lbmc" column="lbmc"/>
+        <result property="cpmc" column="cpmc"/>
+    </resultMap>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.OrderApplication">
+        insert into RFID_ORDER_APPLICATION (SQDH, SQBM, CPLB, CPDM, JBR, SQRQ, SL, ZT, WCRQ, LXR, LXDH, CZ, BZ)
+              values (#{sqdh}, #{sqbm}, #{cplb}, #{cpdm}, #{jbr}, #{sqrq}, #{sl}, #{zt}, #{wcrq}, #{lxr}, #{lxdh}, #{cz}, #{bz})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.OrderApplication">
+        update RFID_ORDER_APPLICATION roa
+           set sqbm = #{sqbm},
+               cplb = #{cplb},
+               cpdm = #{cpdm},
+               jbr = #{jbr},
+               sqrq = #{sqrq},
+               sl = #{sl},
+               zt = #{zt},
+               wcrq = #{wcrq},
+               lxr = #{lxr},
+               lxdh = #{lxdh},
+               cz = #{cz},
+               bz = #{bz},
+               shyj = #{shyj}
+         where sqdh = #{sqdh}
+    </update>
+
+    <update id="updateByCondition" parameterType="hashmap">
+        update RFID_ORDER_APPLICATION roa set
+            <trim suffixOverrides=",">
+                <if test="zt != null">
+                    zt = #{zt},
+                </if>
+                <if test="sl != null">
+                    sl = #{sl},
+                </if>
+                <if test="wcrq != null">
+                    wcrq = #{wcrq},
+                </if>
+                <if test="cplb != null">
+                    cplb = #{cplb},
+                </if>
+                <if test="cpdm != null">
+                    cpdm = #{cpdm},
+                </if>
+                <if test="lxr != null">
+                    lxr = #{lxr},
+                </if>
+                <if test="lxdh != null">
+                    lxdh = #{lxdh},
+                </if>
+                <if test="cz != null">
+                    cz = #{cz},
+                </if>
+                <if test="bz != null">
+                    bz = #{bz},
+                </if>
+                <if test="shyj != null">
+                    shyj = #{shyj}
+                </if>
+            </trim>
+        where 1 = 1
+            <trim>
+                <if test="cond_sqdh != null">
+                    and sqdh = #{cond_sqdh}
+                </if>
+                <if test="cond_sqbm != null">
+                    and sqbm = #{cond_sqbm}
+                </if>
+                <if test="cond_jbr != null">
+                    and jbr = #{cond_jbr}
+                </if>
+                <if test="cond_sqrq != null">
+                    and sqrq = #{cond_sqrq}
+                </if>
+                <if test="cond_cplb != null">
+                    and cplb = #{cond_cplb}
+                </if>
+                <if test="cond_cpdm != null">
+                    and cpdm = #{cond_cpdm}
+                </if>
+                <if test="cond_sl != null">
+                    and sl = #{cond_sl}
+                </if>
+                <if test="cond_zt != null">
+                    and zt = #{cond_zt}
+                </if>
+                <if test="cond_wcrq != null">
+                    and wcrq = #{cond_wcrq}
+                </if>
+                <if test="lxr != null">
+                    and lxr = #{cond_lxr}
+                </if>
+                <if test="lxdh != null">
+                    and lxdh = #{cond_lxdh}
+                </if>
+                <if test="cz != null">
+                    and cz = #{cond_cz}
+                </if>
+            </trim>
+    </update>
+    
+    <update id="updateYcksl" parameterType="String">
+        update RFID_ORDER_APPLICATION set ycksl = (
+			select sum(ri.zzkh-ri.qskh+1) from RFID_INVENTORY ri 
+			where bzxh in (
+			  <!-- 包装箱号 --> 
+			  select riod.bzhm from RFID_INVENTORY_OUT_DETAIL riod 
+			  where riod.ckdh in (select rio.ckdh
+			  from RFID_INVENTORY_OUT rio, RFID_ORDER_APPLICATION roa
+			  where rio.sqdh= roa.sqdh and roa.sqdh = #{sqdh}) 
+			  and dw = 1
+			) or bzhh in (
+			  <!--包装盒号 -->
+			  select riod.bzhm from RFID_INVENTORY_OUT_DETAIL riod 
+			  where riod.ckdh in (select rio.ckdh
+			  from RFID_INVENTORY_OUT rio, RFID_ORDER_APPLICATION roa
+			  where rio.sqdh= roa.sqdh and roa.sqdh = #{sqdh}) 
+			  and dw = 2
+			)
+		)
+		where sqdh = #{sqdh}
+    </update>
+
+    <select id="queryAll" resultMap="orderApplication">
+        select * from RFID_ORDER_APPLICATION;
+    </select>
+    
+    <select id="queryForView" resultMap="orderApplicationView" parameterType="hashmap">
+        select roa.*, rpc.lbmc as lbmc, rp.cpmc as cpmc, fd.bmmc as bmmc
+          from RFID_ORDER_APPLICATION roa, RFID_PRODUCT_CATEGORY rpc, RFID_PRODUCT rp, FRM_DEPARTMENT fd
+         where roa.cplb = rpc.cplb(+)
+           and roa.cpdm = rp.cpdm(+)
+           and roa.sqbm = fd.glbm(+)
+        <trim>
+            <if test="sqbm != null">
+                and roa.sqbm = #{sqbm}
+            </if>
+            <if test="bmmc != null">
+               and bmmc like CONCAT(CONCAT('%', #{bmmc}), '%')
+            </if>
+            <if test="jbr != null">
+                and roa.jbr like CONCAT(CONCAT('%', #{jbr}), '%')
+            </if>
+            <if test="zt != null">
+                and roa.zt = #{zt}
+            </if>
+            <if test="cplb != null">
+                and roa.cplb = #{cplb}
+            </if>
+            <if test="cpdm != null">
+                and roa.cpdm = #{cpdm}
+            </if>
+            <if test="sqdh != null">
+                and roa.sqdh = #{sqdh}
+            </if>
+        </trim>
+        order by sqrq desc
+    </select>
+
+
+</mapper>

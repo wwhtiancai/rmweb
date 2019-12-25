@@ -1,0 +1,121 @@
+/**通用表格样式**/
+.common_listtable{
+	font-size: 12px;
+	width: 100%;
+	background-color: #909090;
+	border: 0;
+	
+}
+.common_listtable th{
+	font-weight: bolder;
+	background-color: #72AFCA;
+	height: 20px;
+	color:#FFFFFF;
+}
+.common_listtable td{
+	background-color: #FAFAFA;
+	height: 20px;
+	text-align: center;
+}
+.common_vlisttable{
+	font-size: 12px;
+	width: 100%;
+	background-color: #CCCCCC;
+	border: 0;
+}
+.common_vlisttable td{
+	background-color: #F7F7F7;
+	height: 20px
+}
+.common_vlisttable td.head{
+	color:#177BC7;
+	background-color: #E5F6FD;
+	text-align:right;
+	height: 20px
+}
+.common_vlisttable font.font_red{	
+	color:red;
+}
+.common_vlisttable td.head10{
+	color:#177BC7;
+	background-color: #E5F6FD;
+	height: 20px;
+	text-align:right;
+	width:10%;
+}
+.common_vlisttable td.head15{
+	color:#177BC7;
+	background-color: #E5F6FD;
+	height: 20px;
+	text-align:right;
+	width:15%;
+}
+.common_vlisttable td.head35{	
+	height: 20px;
+	text-align:right;
+	width:35%;
+}
+.common_vlisttable td.head50{	
+	height: 20px;
+	width:50%;
+}
+.common_vlisttable td.bhead{
+	font-weight: bolder;
+	color:#177BC7;
+	background-color: #E5F6FD;
+	height: 20px
+}
+.common_vlisttable td.headright{
+	width:100px;
+	overflow:visible;
+	text-align:right;
+	color:#177BC7;
+	background-color: #E5F6FD;
+	height: 20px
+}
+.icon-markers-to-map{
+	background:url('../../images/business/common/markers_to_map.png') no-repeat center center;
+}
+
+/** 无锡缉查布控系统条件与查询结果统一样式 **/
+
+.query_conditon_tab {
+	font-size: 12px;
+	text-align:center;	
+	border: 1px solid #00c5ff;
+	background-color: #CCCCCC;
+	width: 100%;
+}
+
+.rmBackground{
+	font-size: 12px;
+	text-align:left;	
+	border: 1px solid #00c5ff;		
+	background:#F7F7F7;
+	width: 100%;
+}
+
+.query_conditon_tab .head_label_left{
+	text-align:left;
+	font-size:12px;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	color:#0181E3;
+	background:#E5F7FD;
+}
+
+.query_conditon_tab .head_label_right {
+	text-align:right;
+	font-size:12px;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	color:#0181E3;
+	background:#E5F7FD;
+}
+.query_conditon_tab .tab_value {	
+	text-align:left;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	font-size:12px;
+	background:#F7F7F7;
+}

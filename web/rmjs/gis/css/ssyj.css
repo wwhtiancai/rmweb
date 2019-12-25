@@ -1,0 +1,50 @@
+/** 无锡缉查布控系统条件与查询结果统一样式 **/ 
+
+.query_conditon_tab {
+	font-size: 12px;
+	text-align:center;	
+	border: 1px solid #00c5ff;
+	background-color: #CCCCCC;
+	width: 100%;
+}
+
+.rmBackground{
+	font-size: 12px;
+	text-align:left;	
+	border: 1px solid #00c5ff;		
+	background:#F7F7F7;
+	width: 100%;
+}
+
+.query_conditon_tab .head_label_left{
+	text-align:left;
+	font-size:12px;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	color:#0181E3;
+	background:#E5F7FD;
+}
+.query_conditon_tab .head_label_center {
+	text-align:center;
+	font-size:12px;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	color:#0181E3;
+	background:#E5F7FD;
+}
+.query_conditon_tab .head_label_right {
+	text-align:right;
+	font-size:12px;
+	padding:3px 3px 3px 3px;
+	height:24px;	
+	width:60px;
+	color:#0181E3;
+	background:#E5F7FD;
+}
+.query_conditon_tab .tab_value {	
+	text-align:left;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	font-size:12px;
+	background:#F7F7F7;
+}

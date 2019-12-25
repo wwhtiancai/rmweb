@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.BatchTaskMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.BatchTask">
+        SELECT * FROM RFID_BATCH_TASK e WHERE e.xh = #{xh}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.BatchTask">
+        SELECT * FROM RFID_BATCH_TASK e
+        <trim prefix="where" prefixOverrides="and">
+            <if test="xh != null">
+                and xh = #{xh}
+            </if>
+            <if test="hpzl != null">
+                and hpzl = #{hpzl}
+            </if>
+            <if test="hphm != null">
+                and hphm = upper(#{hphm})
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="czr != null">
+                and czr = #{czr}
+            </if>
+        </trim>
+        order by xh
+    </select>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.BatchTask">
+        UPDATE RFID_BATCH_TASK e  SET e.hpzl = #{hpzl}, e.hphm = upper(#{hphm}), e.finish_at = #{finishAt}, e.zt=#{zt}
+        WHERE e.xh = #{xh}
+    </update>
+</mapper>

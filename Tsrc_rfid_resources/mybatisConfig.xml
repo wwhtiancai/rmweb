@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+
+
+    <plugins>
+        <plugin interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+            <property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.OracleDialect"/>
+        </plugin>
+    </plugins>
+
+    <mappers>
+
+        <mapper resource="mapping/eri.xml"/>
+        <mapper resource="mapping/vehicle.xml"/>
+        <mapper resource="mapping/eriCustomizeRecord.xml"/>
+        <mapper resource="mapping/eriInitializeRecord.xml"/>
+        <mapper resource="mapping/inventory.xml"/>
+        <mapper resource="mapping/product.xml"/>
+        <mapper resource="mapping/productCategory.xml"/>
+        <mapper resource="mapping/orderApplication.xml"/>
+        <mapper resource="mapping/productApply.xml"/>
+        <mapper resource="mapping/productApplyDetail.xml"/>
+        <mapper resource="mapping/SecurityModel.xml"/>
+        <mapper resource="mapping/device.xml"/>
+        <mapper resource="mapping/deviceStation.xml"/>
+        <mapper resource="mapping/customizeTask.xml"/>
+        <mapper resource="mapping/customizeTask.xml"/>
+        <mapper resource="mapping/eriScrapApp.xml"/>
+ 		<mapper resource="mapping/eriScrapDetail.xml"/>
+ 		<mapper resource="mapping/eriEquipment.xml"/>
+
+        <mapper resource="mapping/securityModelLog.xml"/>
+        <mapper resource="mapping/warehouse.xml"/>
+        <mapper resource="mapping/warehouseDetail.xml"/>
+        <mapper resource="mapping/exWarehouse.xml"/>
+        <mapper resource="mapping/exWarehouseDetail.xml"/>
+        <mapper resource="mapping/materialApply.xml"/>
+        <mapper resource="mapping/materialWarehouse.xml"/>
+        <mapper resource="mapping/materialInventory.xml"/>
+        <mapper resource="mapping/materialEri.xml"/>
+        <mapper resource="mapping/productionTask.xml"/>
+        <mapper resource="mapping/dbOperation.xml"/>
+        <mapper resource="mapping/electronicCertificate.xml"/>
+        <mapper resource="mapping/encryptorIndex.xml"/>
+        <mapper resource="mapping/corpsWarehouse.xml"/>
+        <mapper resource="mapping/corpsWarehouseDetail.xml"/>
+        <mapper resource="mapping/eriReaderWriter.xml"/>
+        <mapper resource="mapping/eriReaderWriterActivation.xml"/>
+        <mapper resource="mapping/vehicleLog.xml"/>
+
+        <mapper resource="mapping/eriOperation.xml"/>
+        <mapper resource="mapping/externalRequest.xml"/>
+        <mapper resource="mapping/dataExGA.xml"/>
+        <mapper resource="mapping/dataExZW.xml"/>
+        <mapper resource="mapping/eriCustomizeRequest.xml"/>
+        <mapper resource="mapping/eriCustomizeData.xml"/>
+        
+        <mapper resource="mapping/eriPasted.xml"/>
+        <mapper resource="mapping/warehouseCount.xml"/>
+
+        <mapper resource="mapping/operationLog.xml"/>
+        <mapper resource="mapping/department.xml"/>
+        <mapper resource="mapping/sysuser.xml"/>
+        <mapper resource="mapping/reviewRecord.xml"/>
+        <mapper resource="mapping/statistics.xml"/>
+        <mapper resource="mapping/installHistory.xml"/>
+        <mapper resource="mapping/batchTask.xml"/>
+        <mapper resource="mapping/eriUnbind.xml"/>
+
+    </mappers>
+</configuration>

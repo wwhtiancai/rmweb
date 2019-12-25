@@ -1,0 +1,64 @@
+.root{
+	width:14px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -144px 0;
+}
+.minus{
+	width:18px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -18px 0;
+}
+.minus_bottom{
+	width:18px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -36px 0;
+}
+.plus{
+	width:18px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -54px 0;
+}
+.plus_bottom{
+	width:18px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -162px 0;
+}
+.folder_close{
+	width:15px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -126px 0;
+}
+.folder_open{
+	width:15px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -108px 0;
+}
+.body_line{
+	padding-left:18px;
+	background:url(../img/JXTree.gif) repeat-y -180px 0;
+}
+.body_empty{
+	padding-left:18px;
+}
+.page{
+	width:14px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat 0 0;
+}
+.join{
+	width:18px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -90px 0;
+}
+.join_bottom{
+	width:19px;
+	height:18px;
+	background:url(../img/JXTree.gif) no-repeat -72px 0;
+}
+.text{
+ font-size:12px;
+ cursor:default;
+}
+.checkbox{
+  height:19px;
+}

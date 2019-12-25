@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.MaterialInventoryMapper">
+
+    <insert id="insertBatchInventory" parameterType="java.util.List">
+		insert into rfid_raw_eri_inventory (xh, bzhh, bzxh, rkdh, zt)
+			SELECT SEQ_RFID_RAW_ERI_INVENTORY.NEXTVAL, A.* FROM(
+			<foreach collection="materialInventorys" item="inventory" index="index"  
+			            separator="union all">
+			  ( select  #{inventory.bzhh,jdbcType=VARCHAR},
+			  			#{inventory.bzxh,jdbcType=VARCHAR},
+			  			#{inventory.rkdh,jdbcType=VARCHAR},
+			  			1 from dual)
+			</foreach>
+			) A
+	</insert>
+	
+</mapper>

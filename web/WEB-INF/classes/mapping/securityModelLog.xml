@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.SecurityModelLogMapper">
+    <insert id="create" parameterType="com.tmri.rfid.bean.SecurityModelLog">
+        INSERT INTO RFID_SECURITY_MODEL_OPERATION (ID,XH, LX, QULX, XP1GY, XP2GY, CAGYSYH, CAGY, XP1MYBB, XP1YHCXBB, XP2YHCXBB,
+        STM32GJBB, CCRQ, DLBBB, CZLX, CZRQ ,CZR)
+                VALUES (#{id},#{xh}, #{lx}, #{qulx}, #{xp1gy}, #{xp2gy}, #{cagysyh}, #{cagy},
+                        #{xp1mybb}, #{xp1yhcxbb}, #{xp2yhcxbb}, #{stm32gjbb}, #{ccrq}, #{dlbbb}, #{czlx} ,#{czrq} ,#{czr})
+    </insert>
+    
+    <select id="generateSequence" resultType="int">
+        SELECT SEQ_RFID_SEC_MODEL_OPERATION.nextval from dual
+    </select>
+</mapper>

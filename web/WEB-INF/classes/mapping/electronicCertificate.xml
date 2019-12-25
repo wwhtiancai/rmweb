@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ElectronicCertificateMapper">
+    
+    <resultMap id="electronicCertificate" type="com.tmri.rfid.bean.ElectronicCertificate">
+        <result column="xh" property="xh"/>
+        <result column="zsnr" property="zsnr" jdbcType="CLOB"/>
+        <result column="scrq" property="scrq"/>
+        <result column="zt" property="zt"/>
+        <result column="ssztlx" property="ssztlx"/>
+        <result column="ssztbh" property="ssztbh"/>
+        <result column="zsbh" property="zsbh"/>
+    </resultMap>
+
+    <select id="queryById" parameterType="String" resultMap="electronicCertificate">
+        SELECT * FROM RFID_E_CERT e WHERE e.xh = #{xh}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultMap="electronicCertificate">
+        SELECT * FROM RFID_E_CERT
+        <trim prefix="where" prefixOverrides="and">
+            <if test="xh != null">
+                and xh = #{xh}
+            </if>
+            <if test="ssztlx != null">
+                and ssztlx = #{ssztlx}
+            </if>
+            <if test="ssztbh != null">
+                and ssztbh = #{ssztbh}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="zsbh != null">
+                and zsbh = #{zsbh}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.ElectronicCertificate">
+        <selectKey resultType="long" keyProperty="xh" order="BEFORE">
+            select seq_rfid_e_cert.nextval from dual
+        </selectKey>
+        insert into rfid_e_cert (xh, zsnr, scrq, zt, ssztlx, ssztbh, zsbh) VALUES
+            (#{xh}, #{zsnr}, #{scrq}, #{zt}, #{ssztlx}, #{ssztbh}, #{zsbh})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.ElectronicCertificate">
+        update rfid_e_cert
+        set zsnr = #{zsnr}, zt = #{zt}
+        where xh = #{xh}
+    </update>
+
+</mapper>

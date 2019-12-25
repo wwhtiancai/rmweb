@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.SecurityModelMapper">
+
+    <select id="queryById" parameterType="String" resultType="com.tmri.rfid.bean.SecurityModel">
+        SELECT * FROM RFID_SECURITY_MODEL e WHERE e.xh = upper(#{xh})
+    </select>
+
+    <select id="generateSequence" resultType="long">
+        SELECT ${sequenceName}.nextval from dual
+    </select>
+
+    <select id="createSequence">
+        CREATE SEQUENCE ${sequenceName} INCREMENT BY 1 START WITH 1
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.SecurityModel">
+        INSERT INTO RFID_SECURITY_MODEL (XH, LX, QULX, XP1GY, XP2GY, CAGYSYH, CAGY, XP1MYBB, XP1YHCXBB, XP2YHCXBB,
+        STM32GJBB, CCRQ, DLBBB, CSHRQ, CZR, SCSJRQ, SCSJCZR)
+                VALUES (upper(#{xh}), #{lx}, #{qulx}, #{xp1gy}, #{xp2gy}, #{cagysyh}, #{cagy},
+                        #{xp1mybb}, #{xp1yhcxbb}, #{xp2yhcxbb}, #{stm32gjbb}, #{ccrq}, #{dlbbb}, #{cshrq}, #{czr} ,#{scsjrq} ,#{scsjczr})
+    </insert>
+    
+    
+	<update id="updateByCondition" parameterType="map">
+        UPDATE RFID_SECURITY_MODEL e SET e.xh = #{xh},
+        <trim suffixOverrides=",">
+            <if test="lx != null">
+                e.lx = #{lx},
+            </if>
+            <if test="qulx != null">
+                e.qulx = #{qulx},
+            </if>
+            <if test="xp1gy != null">
+                e.xp1gy = #{xp1gy},
+            </if>
+            <if test="xp2gy != null">
+                e.xp2gy = upper(#{xp2gy}),
+            </if>
+            <if test="cagysyh != null">
+                e.cagysyh = #{cagysyh},
+            </if>
+            <if test="cagy != null">
+                e.cagy = #{cagy},
+            </if>
+            <if test="xp1mybb != null">
+                e.xp1mybb = #{xp1mybb},
+            </if>
+            <if test="xp1yhcxbb != null">
+                e.xp1yhcxbb = #{xp1yhcxbb},
+            </if>
+            <if test="xp2yhcxbb != null">
+                e.xp2yhcxbb = #{xp2yhcxbb},
+            </if>
+            <if test="stm32gjbb != null">
+                e.stm32gjbb = #{stm32gjbb},
+            </if>
+            <if test="ccrq != null">
+                e.ccrq = #{ccrq},
+            </if>
+            <if test="dlbbb != null">
+                e.dlbbb = #{dlbbb},
+            </if>
+            <if test="cshrq != null">
+                e.cshrq = #{cshrq},
+            </if>
+            <if test="czr != null">
+                e.czr = #{czr},
+            </if>
+            <if test="scsjrq != null">
+                e.scsjrq = #{scsjrq},
+            </if>
+            <if test="scsjczr != null">
+                e.scsjczr = #{scsjczr},
+            </if>
+        </trim>
+         WHERE e.xh = upper(#{xh})
+    </update>
+    
+    
+    <select id="queryList" parameterType="map" resultType="com.tmri.rfid.bean.SecurityModel">
+        SELECT * FROM RFID_SECURITY_MODEL e WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="xh != null and xh != ''">
+            	and e.xh = #{xh} 
+            </if>
+            <if test="lx != null and lx != ''">
+            	and e.lx = #{lx} 
+            </if>
+            <if test="czr != null and czr != ''">
+            	and e.czr = #{czr} 
+            </if>
+            <if test="ccrqks != null and ccrqks != ''">
+            	and e.ccrq &gt;= to_date(#{ccrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="ccrqjs != null and ccrqjs != ''">
+            	and e.ccrq &lt;= to_date(#{ccrqjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="cshrqks != null and cshrqks != ''">
+            	and e.cshrq &gt;= to_date(#{cshrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="cshrqjs != null and cshrqjs != ''">
+            	and e.cshrq &lt;= to_date(#{cshrqjs}, 'yyyy-mm-dd')
+            </if>
+        </trim>
+    </select>
+    
+</mapper>

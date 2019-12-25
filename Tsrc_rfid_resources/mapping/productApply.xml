@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ProductApplyMapper">
+    
+    <resultMap id="productApply" type="com.tmri.rfid.bean.ProductApply">
+        <result column="LYDH" property="lydh"/>
+        <result column="LYR" property="lyr"/>
+        <result column="LYBM" property="lybm"/>
+        <result column="GLBM" property="glbm"/>
+        <result column="LYRQ" property="lyrq"/>
+        <result column="BZ" property="bz"/>
+        <result column="LYBMMC" property="lybmmc"/>
+        <result column="GLBMMC" property="glbmmc"/>
+    </resultMap>
+
+    <select id="queryById" parameterType="java.lang.String" resultMap="productApply">
+        select rpa.*, fd1.bmmc as lybmmc, fd2.bmmc as glbmmc
+        from rfid_product_apply rpa, frm_department fd1, frm_department fd2
+        where rpa.lybm = fd1.glbm(+)
+        and rpa.glbm = fd2.glbm(+)
+        and rpa.LYDH = #{_parameter}
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.ProductApply">
+        insert into RFID_PRODUCT_APPLY (LYDH, LYBM, LYR, GLBM, LYRQ, BZ)
+                values (#{lydh}, #{lybm}, #{lyr}, #{glbm}, #{lyrq}, #{bz})
+    </insert>
+
+    <select id="queryByCondition" resultMap="productApply" parameterType="hashmap">
+        select rpa.*, fd1.bmmc as lybmmc, fd2.bmmc as glbmmc
+        from rfid_product_apply rpa, frm_department fd1, frm_department fd2
+        where rpa.lybm = fd1.glbm(+)
+        and rpa.glbm = fd2.glbm(+)
+        <trim>
+            <if test="lybm != null">
+                and rpa.lybm = #{lybm}
+            </if>
+            <if test="lydh != null">
+                and rpa.lydh = #{lydh}
+            </if>
+            <if test="lyr != null">
+                and rpa.lyr = #{lyr}
+            </if>
+            <if test="lyrqks != null">
+                <![CDATA[and rpa.lyrq >= #{lyrqks}]]>
+            </if>
+            <if test="lyrqjs != null">
+                <![CDATA[and rpa.lyrq <= #{lyrqjs}]]>
+            </if>
+            <if test="glbm != null">
+                and rpa.glbm = #{glbm}
+            </if>
+            <if test="lydh != null">
+                and rpa.lydh = #{lydh}
+            </if>
+        </trim>
+        order by rpa.lyrq desc
+    </select>
+
+</mapper>

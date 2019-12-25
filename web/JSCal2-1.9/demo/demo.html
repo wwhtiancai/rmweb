@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="src/css/jscal2.css" />
+    <link type="text/css" rel="stylesheet" href="src/css/border-radius.css" />
+    <!-- <link type="text/css" rel="stylesheet" href="src/css/reduce-spacing.css" /> -->
+
+    <link id="skin-win2k" title="Win 2K" type="text/css" rel="alternate stylesheet" href="src/css/win2k/win2k.css" />
+    <link id="skin-steel" title="Steel" type="text/css" rel="alternate stylesheet" href="src/css/steel/steel.css" />
+    <link id="skin-gold" title="Gold" type="text/css" rel="alternate stylesheet" href="src/css/gold/gold.css" />
+    <link id="skin-matrix" title="Matrix" type="text/css" rel="alternate stylesheet" href="src/css/matrix/matrix.css" />
+
+    <link id="skinhelper-compact" type="text/css" rel="alternate stylesheet" href="src/css/reduce-spacing.css" />
+
+    <script src="src/js/jscal2.js"></script>
+    <script src="src/js/unicode-letter.js"></script>
+
+    <!-- you actually only need to load one of these; we put them all here for demo purposes -->
+    <script src="src/js/lang/ca.js"></script>
+    <script src="src/js/lang/cn.js"></script>
+    <script src="src/js/lang/cz.js"></script>
+    <script src="src/js/lang/de.js"></script>
+    <script src="src/js/lang/es.js"></script>
+    <script src="src/js/lang/fr.js"></script>
+    <script src="src/js/lang/hr.js"></script>
+    <script src="src/js/lang/it.js"></script>
+    <script src="src/js/lang/jp.js"></script>
+    <script src="src/js/lang/nl.js"></script>
+    <script src="src/js/lang/pl.js"></script>
+    <script src="src/js/lang/pt.js"></script>
+    <script src="src/js/lang/ro.js"></script>
+    <script src="src/js/lang/ru.js"></script>
+    <script src="src/js/lang/sk.js"></script>
+    <script src="src/js/lang/sv.js"></script>
+
+    <!-- this must stay last so that English is the default one -->
+    <script src="src/js/lang/en.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="demopage.css" />
+  </head>
+  <body style="background-color: #fff">
+
+    <table>
+      <tr>
+        <td valign="top" style="width: 30em;">
+          <h1><a href="http://www.dynarch.com/projects/calendar/">The new coolest JavaScript calendar</a></h1>
+          <div id="cont"></div>
+          <script type="text/javascript">
+            var LEFT_CAL = Calendar.setup({
+                    cont: "cont",
+                    weekNumbers: false,
+                    selectionType: Calendar.SEL_MULTIPLE
+            })
+          </script>
+
+          <p>
+            <a href="http://www.dynarch.com/projects/calendar/doc/">Extensive API documentation is available at www.dynarch.com</a>
+          </p>
+
+          <p>
+            To select a date range, click the start date, then
+            SHIFT+click on the end date.  You can also use CTRL+click
+            to select/unselect individual dates.
+          </p>
+          <p>
+            You can use the mouse wheel to scroll through months.  If
+            the » or « or “Today” buttons are hovered, scroll through
+            years.
+          </p>
+          <p>
+            Keyboard operations, when the calendar is focused (note
+            you can focus it with TAB):
+          </p>
+          <ul>
+            <li><b>Arrows</b>: highlight a date</li>
+            <li><b>ENTER</b>: select highlighted date</li>
+            <li><b>CTRL-ENTER</b>: toggle selection for highlighted date</li>
+            <li><b>SHIFT-ENTER</b>: select range end</li>
+            <li><b>PAGE UP/DOWN</b>, or <b>CTRL-LEFT/RIGHT</b>: select month</li>
+            <li><b>CTRL-UP/DOWN</b>: select year</li>
+            <li><b>HOME</b>: go Today</li>
+            <li><b>SPACE</b>: display menu, focus the year entry</li>
+            <li><b>Type digit</b>: display the menu, begin typing year</li>
+            <li><b>Type letter</b>: toggle between months that start with that letter (according to selected language)</li>
+            <li><b>ESC</b>: dismiss menu (if present).  Otherwise, dismiss calendar popup if in popup mode</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.DepartmentMapper">
+
+    <insert id="create" parameterType="com.tmri.share.frm.bean.Department">
+        <![CDATA[
+        insert into FRM_DEPARTMENT (glbm, bmmc, bmqc, fzjg, bmjb, fzr, lxr, lxdh, czhm, lxdz, sjbm, bz)
+        values (#{glbm}, #{bmmc}, #{bmqc}, #{fzjg}, #{bmjb}, #{fzr}, #{lxr}, #{lxdh}, #{czhm}, #{lxdz}, #{sjbm}, #{bz})
+        ]]>
+    </insert>
+
+    <delete id="deleteById" parameterType="string">
+        <![CDATA[
+          delete from frm_department where glbm = #{id}
+        ]]>
+    </delete>
+
+</mapper>

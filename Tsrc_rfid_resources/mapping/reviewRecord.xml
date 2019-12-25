@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ReviewRecordMapper">
+
+    <select id="queryById" resultType="com.tmri.rfid.bean.ReviewRecord" parameterType="long">
+        <![CDATA[
+          select * from rfid_review_record where xh = #{id}
+        ]]>
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.ReviewRecord">
+        <selectKey keyProperty="xh" resultType="long" order="BEFORE">
+            select SEQ_RFID_REVIEW_RECORD__XH.nextval as xh from dual
+        </selectKey>
+        insert into RFID_REVIEW_RECORD (xh, ywdm, ywxh, zt, yj, shrdh, shsj)
+        values (#{xh}, #{ywdm}, #{ywxh}, #{zt}, #{yj}, #{shrdh}, #{shsj})
+    </insert>
+
+    <select id="queryByCondition" resultType="com.tmri.rfid.bean.ReviewRecord" parameterType="map">
+        select * from rfid_review_record
+        <trim prefix="where" prefixOverrides="and">
+            <if test="xh != null">
+                and xh = #{xh}
+            </if>
+            <if test="ywdm != null">
+                and ywdm = #{ywdm}
+            </if>
+            <if test="ywxh != null">
+                and ywxh = #{ywxh}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="shrdh != null">
+                and shrdh = #{shrdh}
+            </if>
+        </trim>
+        order by xh
+    </select>
+
+</mapper>

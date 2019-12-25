@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.WarehouseCountMapper">
+    
+	<select id="queryList" parameterType="map" resultType="com.tmri.rfid.bean.WarehouseCount">
+        SELECT e.*, fs.xm as czrxm FROM RFID_RAW_ERI_COUNT e 
+			left join frm_sysuser fs on e.czr = fs.yhdh
+			WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="xh != null and xh != ''">
+            	and e.xh = #{xh} 
+            </if>
+            <if test="jfdw != null and jfdw != ''">
+            	and e.jfdw like CONCAT(CONCAT('%','${jfdw}'),'%')
+            </if>
+            <if test="czrxm != null and czrxm != ''">
+            	and fs.xm like CONCAT(CONCAT('%','${czrxm}'),'%')
+            </if>
+            <if test="rkrqks != null and rkrqks != ''">
+            	and e.rkrq &gt;= to_date(#{rkrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="rkrqjs != null and rkrqjs != ''">
+            	and e.rkrq &lt;= to_date(#{rkrqjs}, 'yyyy-mm-dd')
+            </if>
+        </trim>
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.WarehouseCount">
+    	<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="xh">
+            select seq_rfid_raw_eri_count.nextval as xh from dual
+        </selectKey>
+        INSERT INTO RFID_RAW_ERI_COUNT (XH, COUNT, RKRQ, CZR, JFDW, BZ)
+                VALUES (#{xh}, #{count}, #{rkrq}, #{czr}, #{jfdw}, #{bz})
+    </insert>
+    
+    <select id="fetchByXH" parameterType="String" resultType="com.tmri.rfid.bean.WarehouseCount">
+    	SELECT e.*, fs.xm as czrxm FROM RFID_RAW_ERI_COUNT e 
+			left join frm_sysuser fs on e.czr = fs.yhdh
+			WHERE e.xh = #{xh} 
+    </select>
+	
+	<select id="queryCount" parameterType="map" resultType="Integer">
+        SELECT sum(count) FROM RFID_RAW_ERI_COUNT e 
+			WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="xh != null and xh != ''">
+            	and e.xh = #{xh} 
+            </if>
+            <if test="jfdw != null and jfdw != ''">
+            	and e.jfdw like CONCAT(CONCAT('%','${jfdw}'),'%')
+            </if>
+            <if test="czrxm != null and czrxm != ''">
+            	and fs.xm like CONCAT(CONCAT('%','${czrxm}'),'%')
+            </if>
+            <if test="rkrqks != null and rkrqks != ''">
+            	and e.rkrq &gt;= to_date(#{rkrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="rkrqjs != null and rkrqjs != ''">
+            	and e.rkrq &lt;= to_date(#{rkrqjs}, 'yyyy-mm-dd')
+            </if>
+        </trim>
+    </select>
+	
+</mapper>

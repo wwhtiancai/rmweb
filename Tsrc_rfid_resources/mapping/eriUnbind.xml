@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriUnbindMapper">
+
+
+    <select id="queryEriUnbindView" parameterType="map" resultType="com.tmri.rfid.ctrl.view.EriUnbindView">
+        select ru.tid,ru.kh,rvl.fzjg,rvl.hphm,rvl.hpzl,ru.czr,ru.created_at 
+			from RFID_UNBIND ru,RFID_VEHICLE_LOG rvl
+			where ru.clxxbfid = rvl.id
+			<if test="kh != null">
+                and ru.kh = #{kh}
+            </if>
+			<if test="hpzl != null">
+                and rvl.hpzl = #{hpzl}
+            </if>
+            <if test="hphm != null">
+                and rvl.hphm = upper(#{hphm})
+            </if>
+        order by xh desc
+    </select>
+
+	
+    <insert id="insert" parameterType="com.tmri.rfid.bean.EriUnbind">
+        insert into RFID_UNBIND (xh,tid,kh,Clxxbfid,Czr,Created_At) 
+        	values (seq_rfid_unbind_xh.nextval,#{tid},#{kh},#{clxxbfid},#{czr},sysdate)
+    </insert>
+
+</mapper>

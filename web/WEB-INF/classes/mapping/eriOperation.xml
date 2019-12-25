@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriOperationMapper">
+
+ 
+	<!-- 公安部入库 -->
+	<select id="queryRkByTid" parameterType="String" resultType="com.tmri.rfid.bean.EriOperation">
+        select 3 as type,riid.rkdh as dh,rii.JBR,rii.RKRQ as rq,rii.ssbm,fd.bmmc,fs.xm as jbrxm 
+			from RFID_ERI re,RFID_INVENTORY_IN_DETAIL riid,RFID_INVENTORY_IN rii,RFID_INVENTORY ri,FRM_DEPARTMENT fd,FRM_SYSUSER fs
+			where (re.bzhh = riid.bzhm or ri.bzxh=riid.bzhm) and ri.bzhh = re.bzhh and fs.yhdh = rii.jbr and
+				riid.rkdh=rii.rkdh and rii.ssbm=fd.glbm and re.tid = #{tid}
+        	order by rii.rkrq desc
+    </select>
+    
+    <!-- 公安部出库 -->
+	<select id="queryCkByTid" parameterType="String" resultType="com.tmri.rfid.bean.EriOperation">
+        select 4 as type,riod.ckdh as dh,rio.JBR,rio.CKRQ as rq,rio.ssbm,fd.bmmc,fs.xm as jbrxm
+			from RFID_ERI re,RFID_INVENTORY_OUT_DETAIL riod,RFID_INVENTORY_OUT rio,RFID_INVENTORY ri,FRM_DEPARTMENT fd,FRM_SYSUSER fs
+			where (re.bzhh = riod.bzhm or ri.bzxh = riod.bzhm) and ri.bzhh = re.bzhh and fs.yhdh = rio.jbr and
+				riod.ckdh=rio.ckdh and rio.ssbm=fd.glbm and re.tid = #{tid}
+        	order by rio.ckrq desc
+    </select>
+    
+    <!-- 总队入库 -->
+	<select id="queryZdrkByTid" parameterType="String" resultType="com.tmri.rfid.bean.EriOperation">
+        select 5 as type,rciid.rkdh as dh,rcii.JBR,rcii.RKRQ as rq,rcii.ssbm,fd.bmmc,fs.xm as jbrxm
+			from RFID_ERI re,RFID_CORPS_INVENTORY_IN_DETAIL rciid,RFID_CORPS_INVENTORY_IN rcii,RFID_INVENTORY ri,FRM_DEPARTMENT fd,FRM_SYSUSER fs
+			where (re.bzhh = rciid.bzhm or ri.bzxh = rciid.bzhm) and ri.bzhh = re.bzhh and fs.yhdh = rcii.jbr and
+				rciid.rkdh=rcii.rkdh and rcii.ssbm=fd.glbm and re.tid = #{tid}
+			order by rcii.rkrq desc
+    </select>
+    
+    <!-- 支队领用 -->
+	<select id="queryLyByTid" parameterType="String" resultType="com.tmri.rfid.bean.EriOperation">
+    	select 6 as type,lylist.lydh as dh,fs.xm as jbrxm,lylist.lyr as lyr,lylist.LYRQ as rq,fd1.bmmc as bmmc,fd2.bmmc as glbmmc 
+			from (select rpa.* 
+				from RFID_ERI re,RFID_PRODUCT_APPLY_DETAIL r_pad,RFID_PRODUCT_APPLY rpa,RFID_INVENTORY ri
+				where (re.bzhh = r_pad.bzh or ri.bzxh = r_pad.bzh) and ri.bzhh = re.bzhh 
+				and r_pad.lydh=rpa.lydh and re.tid = #{tid}) lylist
+			left join FRM_DEPARTMENT fd1 on lylist.lybm=fd1.glbm
+			left join FRM_DEPARTMENT fd2 on lylist.glbm=fd2.glbm
+			left join FRM_SYSUSER fs on lylist.jbr = fs.yhdh
+    </select>
+    
+
+	<!-- 个性化信息 -->
+    <select id="getCustomizeRecordByTid" parameterType="String" resultType="com.tmri.rfid.bean.EriOperation">
+    	   SELECT  ecr.id as id,  7 AS TYPE, ecr.gxhrq AS rq, ecr.gxhczr AS jbr, ecr.zt AS gxhzt, rv.hphm, rv.hpzl, rv.fzjg, fs.xm AS jbrxm FROM
+			  RFID_ERI_CUSTOMIZE_RECORD ECR, RFID_VEHICLE_LOG RV,frm_sysuser fs, rfid_eri e
+			  WHERE  ECR.CLXXBFID = RV.ID(+)
+			  AND ecr.tid = e.tid
+			   AND  ecr.gxhczr = fs.yhdh(+)
+			   AND  ecr.tid = #{tid}
+    </select>
+
+	<select id="queryBfByTid" parameterType="String" resultType="com.tmri.rfid.bean.EriOperation">
+		SELECT 8 AS TYPE, a.wcrq AS rq, a.czr AS jbrxm, bfyy AS bz, a.bfdh AS dh FROM rfid_eri_scrap_detail d, rfid_eri_scrap_application a, rfid_eri e
+ WHERE a.bfdh = d.bfdh AND a.zt = 5 AND (d.tid = e.tid OR d.kh = e.kh) AND e.tid = #{tid}
+	</select>
+</mapper>

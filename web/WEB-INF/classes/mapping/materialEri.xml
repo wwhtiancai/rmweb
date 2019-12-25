@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.MaterialEriMapper">
+
+    <insert id="insertBatchEri" parameterType="java.util.List">
+		insert into rfid_raw_eri (tid, bzhh, bzxh)
+		<foreach collection="materialEris" item="eri" index="index"  
+		            separator="union all">
+		  ( select  #{eri.tid,jdbcType=VARCHAR}, 
+		  			#{eri.bzhh,jdbcType=VARCHAR},
+		  			#{eri.bzxh,jdbcType=VARCHAR} from dual)
+		</foreach>
+	</insert>
+	
+</mapper>

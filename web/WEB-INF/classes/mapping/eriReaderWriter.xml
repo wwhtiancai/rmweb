@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriReaderWriterMapper">
+
+    <!--<resultMap id="eriReaderWriter" type="com.tmri.rfid.bean.EriReaderWriter">
+        <association property="securityModel" select="querySecurityModel" column="aqmkxh"
+                     javaType="com.tmri.rfid.bean.SecurityModel"/>
+    </resultMap>
+
+    <select id="querySecurityModel" parameterType="String" resultType="com.tmri.rfid.bean.SecurityModel">
+        select * from RFID_SECURITY_MODEL where xh  = #{xh}
+    </select>-->
+
+    <select id="queryById" parameterType="String" resultType="com.tmri.rfid.bean.EriReaderWriter">
+        select * from RFID_ERI_READER_WRITER where xh = #{id}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriReaderWriter">
+        select rw.*, sm.xp1gy as aqmkgy from RFID_ERI_READER_WRITER rw, RFID_SECURITY_MODEL sm
+        where rw.aqmkxh = sm.xh(+)
+        <trim>
+            <if test="xh != null">
+                and xh = #{xh}
+            </if>
+            <if test="aqmkxh != null">
+                and aqmkxh = #{aqmkxh}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="sqzt != null">
+                and sqzt = #{sqzt}
+            </if>
+            <if test="qyzt != null">
+                and qyzt = #{qyzt}
+            </if>
+            <if test="glbm != null">
+                and glbm = #{glbm}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriReaderWriter">
+        insert into RFID_ERI_READER_WRITER (XH, AQMKXH, JHRQ, ZT, SQZT, YHXX, ZXRQ, ZXYY, QYZT, GLBM)
+        values (#{xh}, #{aqmkxh}, #{jhrq}, #{zt}, #{sqzt}, #{yhxx}, #{zxrq}, #{zxyy}, #{qyzt}, #{glbm})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.EriReaderWriter">
+        update RFID_ERI_READER_WRITER
+          set aqmkxh = #{aqmkxh},
+          jhrq = #{jhrq},
+          zt = #{zt},
+          sqzt = #{sqzt},
+          yhxx = #{yhxx},
+          zxrq = #{zxrq},
+          zxyy = #{zxyy},
+          qyzt = #{qyzt},
+          glbm = #{glbm}
+          where xh = #{xh}
+    </update>
+
+    <update id="updateByCondition" parameterType="map">
+        update RFID_ERI_READER_WRITER set
+          <trim suffixOverrides=",">
+              <if test="aqmkxh != null">
+                AQMKXH = #{aqmkxh},
+              </if>
+              <if test="jhrq != null">
+                  jhrq = #{jhrq},
+              </if>
+              <if test="zt != null">
+                  zt = #{zt},
+              </if>
+              <if test="sqzt != null">
+                  sqzt = #{sqzt},
+              </if>
+              <if test="yhxx != null">
+                  yhxx = #{yhxx},
+              </if>
+              <if test="zxrq != null">
+                  zxrq = #{zxrq},
+              </if>
+              <if test="zxyy != null">
+                  zxyy = #{zxyy},
+              </if>
+              <if test="qyzt != null">
+                  qyzt = #{qyzt},
+              </if>
+              <if test="glbm != null">
+                  glbm = #{glbm},
+              </if>
+          </trim>
+        WHERE
+          <trim prefixOverrides="and">
+            <if test="cond_xh != null">
+                and xh = #{cond_xh}
+            </if>
+              <if test="cond_zt != null">
+                  and zt = #{cond_zt}
+              </if>
+              <if test="cond_aqmkxh != null">
+                  and aqmkxh = #{cond_aqmkxh}
+              </if>
+          </trim>
+    </update>
+
+</mapper>

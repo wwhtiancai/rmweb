@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriCustomizeRecordMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.EriCustomizeRecord">
+        select * from RFID_ERI_CUSTOMIZE_RECORD where id = #{id}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriCustomizeRecord">
+        select ECR.*, RV.HPHM, RV.HPZL, RV.FZJG from RFID_ERI_CUSTOMIZE_RECORD ECR, RFID_VEHICLE_LOG RV where ECR.CLXXBFID = RV.ID(+)
+        <trim>
+            <if test="id != null">
+              and id = #{id}
+            </if>
+            <if test="tid != null">
+                and tid = #{tid}
+            </if>
+            <if test="lsh != null">
+                and ecr.lsh = #{lsh}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="clxxbfid != null">
+                and clxxbfid = #{clxxbfid}
+            </if>
+            <if test="gxhrq != null">
+                and gxhrq = #{gxhrq}
+            </if>
+            <if test="gxhczr != null">
+                and gxhczr = #{gxhczr}
+            </if>
+            <if test="qqxh != null">
+                and qqxh = #{qqxh}
+            </if>
+            <if test="hphm != null">
+                and rv.hphm = #{hphm}
+            </if>
+            <if test="hpzl != null">
+                and rv.hpzl = #{hpzl}
+            </if>
+            <if test="fzjg != null">
+                and rv.fzjg = #{fzjg}
+            </if>
+        </trim>
+    </select>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.EriCustomizeRecord">
+        UPDATE RFID_ERI_CUSTOMIZE_RECORD
+        SET tid = #{tid}, lsh = #{lsh}, zt = #{zt}, clxxbfid = #{clxxbfid}, gxhrq = #{gxhrq},
+        gxhczr = #{gxhczr}, sbyy = substr(#{sbyy}, 0, 2000), qqxh = #{qqxh}, kh = #{kh}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateByCondition" parameterType="map">
+        UPDATE RFID_ERI_CUSTOMIZE_RECORD SET
+        <trim suffixOverrides=",">
+            <if test="tid != null">
+                tid = #{tid},
+            </if>
+            <if test="lsh != null">
+                lsh = #{lsh},
+            </if>
+            <if test="zt != null">
+                zt = #{zt},
+            </if>
+            <if test="clxxbfid != null">
+                clxxbfid = #{clxxbfid},
+            </if>
+            <if test="gxhrq != null">
+                gxhrq = #{gxhrq},
+            </if>
+            <if test="gxhczr != null">
+                gxhczr = #{gxhczr},
+            </if>
+            <if test="sbyy != null">
+                sbyy = #{sbyy},
+            </if>
+            <if test="qqxh != null">
+                qqxh = #{qqxh},
+            </if>
+            <if test="kh != null">
+                kh = #{kh},
+            </if>
+        </trim>
+        WHERE
+        <trim prefixOverrides="and">
+            <if test="cond_id != null">
+                and id = #{cond_id}
+            </if>
+            <if test="cond_tid != null">
+                and tid = #{cond_tid}
+            </if>
+            <if test="cond_lsh != null">
+                and lsh = #{cond_lsh}
+            </if>
+            <if test="cond_zt != null">
+                and zt = #{cond_zt}
+            </if>
+            <if test="cond_clxxbfid != null">
+                and clxxbfid = #{cond_clxxbfid}
+            </if>
+            <if test="cond_gxhrq != null">
+                and gxhrq = #{cond_gxhrq}
+            </if>
+            <if test="cond_gxhczr != null">
+                and gxhczr = #{cond_gxhczr}
+            </if>
+            <if test="cond_qqxh != null">
+                and qqxh = #{cond_qqxh}
+            </if>
+            <if test="cond_kh != null">
+                and kh = #{cond_kh}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriCustomizeRecord">
+        <selectKey keyProperty="id" keyColumn="id" order="BEFORE" resultType="long">
+            select SEQ_RFID_ERI_CUSTOMIZE_RECORD.nextval as id from dual
+        </selectKey>
+        INSERT INTO RFID_ERI_CUSTOMIZE_RECORD (ID, TID, LSH, ZT, CLXXBFID, GXHRQ, GXHCZR, SBYY, QQXH, KH)
+        VALUES (#{id}, #{tid}, #{lsh}, #{zt}, #{clxxbfid}, #{gxhrq}, #{gxhczr}, #{sbyy}, #{qqxh}, #{kh})
+    </insert>
+
+</mapper>

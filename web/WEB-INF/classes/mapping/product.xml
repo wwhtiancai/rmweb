@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ProductMapper">
+
+	<select id="queryList" resultType="com.tmri.rfid.bean.Product">
+        SELECT * FROM rfid_product e WHERE e.zt=1
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.Product">
+        select * from RFID_PRODUCT where 1 = 1
+        <trim>
+            <if test="cpdm != null">
+                and cpdm = #{cpdm}
+            </if>
+            <if test="cpmc != null">
+                and cpmc = #{cpmc}
+            </if>
+            <if test="cplb != null">
+                and cplb = #{cplb}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="gysdm != null">
+                and gysdm = #{gysdm}
+            </if>
+            <if test="tzz != null">
+                and tzz = #{tzz}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryProductForViewByCPDM" parameterType="String" resultType="com.tmri.rfid.ctrl.view.ProductView">
+        select rp.*, rpc.lbmc as cplbmc from RFID_PRODUCT rp, RFID_PRODUCT_CATEGORY rpc
+        where rp.cplb = rpc.cplb
+          and rp.cpdm = #{_parameter}
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.Product">
+        <![CDATA[INSERT INTO RFID_PRODUCT (cpdm, cpmc, cplb, zt, gysmc, tzz, cpbm)
+            VALUES (#{cpdm}, #{cpmc}, #{cplb}, #{zt}, #{gysmc}, #{tzz}, 
+            (select to_char(max(cpbm)+1,'00') from RFID_PRODUCT))
+            ]]>
+    </insert>
+    
+    <delete id="deleteProduct" parameterType="map">
+        delete from RFID_PRODUCT where cpdm=#{cpdm} and cplb = #{cplb}
+    </delete>
+    
+    <update id="updateByCondition" parameterType="map">
+    UPDATE RFID_PRODUCT e SET e.cpdm = #{cpdm},
+    <trim suffixOverrides=",">
+        <if test="cpmc != null">
+            e.cpmc = #{cpmc},
+        </if>
+           <if test="zt != null">
+            e.zt = #{zt},
+        </if>
+           <if test="gysmc != null">
+            e.gysmc = #{gysmc},
+        </if>
+           <if test="tzz != null">
+            e.tzz = #{tzz},
+        </if>
+    </trim>
+    WHERE e.cpdm = upper(#{cpdm}) and e.cplb = #{cplb}
+    </update>
+    
+</mapper>

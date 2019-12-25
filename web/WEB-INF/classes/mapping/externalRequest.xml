@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ExternalRequestMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.ExternalRequest">
+        select * from RFID_EXTERNAL_REQUEST where xh = #{id}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.ExternalRequest">
+        select * from RFID_EXTERNAL_REQUEST
+        <trim prefix="where" prefixOverrides="and">
+            <if test="xh != null">
+                and xh = #{xh}
+            </if>
+            <if test="qqmc != null">
+                and qqmc = #{qqmc}
+            </if>
+            <if test="qqcs != null">
+                and qqcs = #{qqcs}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+        </trim>
+    </select>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.ExternalRequest">
+        UPDATE RFID_EXTERNAL_REQUEST
+        SET QQMC = #{qqmc}, QQCS = #{qqcs}, ZT = #{zt}, CLJG = #{cljg}, GXSJ = #{gxsj}
+        WHERE xh = #{xh}
+    </update>
+
+    <update id="updateByCondition" parameterType="map">
+        UPDATE RFID_EXTERNAL_REQUEST SET
+        <trim suffixOverrides=",">
+            <if test="zt != null">
+                zt = #{zt},
+            </if>
+            <if test="gxsj != null">
+                gxsj = #{gxsj},
+            </if>
+            <if test="cljg != null">
+                cljg = #{cljg},
+            </if>
+        </trim>
+        WHERE
+        <trim prefixOverrides="and">
+            <if test="cond_xh != null">
+                and xh = #{cond_xh}
+            </if>
+            <if test="cond_qqmc != null">
+                and qqmc = #{cond_qqmc}
+            </if>
+            <if test="cond_zt != null">
+                and zt = #{cond_zt}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.ExternalRequest">
+        <selectKey resultType="long" keyProperty="xh" order="BEFORE">
+            select SEQ_RFID_EXTERNAL_REQUEST.nextval as xh from dual
+        </selectKey>
+        INSERT INTO RFID_EXTERNAL_REQUEST (XH, QQMC, QQCS, ZT, CLJG, CJSJ)
+        VALUES (#{xh}, #{qqmc}, #{qqcs}, #{zt}, #{cljg}, #{cjsj})
+    </insert>
+
+</mapper>

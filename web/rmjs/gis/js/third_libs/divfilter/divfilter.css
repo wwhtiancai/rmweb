@@ -1,0 +1,19 @@
+.selected-c  .divFilterList{font-size:12px;float:left;position:relative;height:20px;padding:0 20px 0 5px;border:1px solid #cfcdc7;background:#eef1f8;margin-right:0px;margin-bottom:2px;line-height:20px;}
+.selected-c  .chk{font-size:12px;float:left;position:relative;height:20px;padding:0 0px 0 5px;border:1px solid #cfcdc7;margin-right:0px;margin-bottom:2px;line-height:20px;}
+.selected-c .divFilterList:hover,
+.selected-c .hover{border:1px solid #999;}
+.selected-c  .divFilterList  a{float:none;white-space:nowrap;height:20px;line-height:20px;margin-top:0;background:none;text-decoration:none;color:#333;}
+.selected-c  .chk  a{float:none;white-space:nowrap;height:20px;line-height:20px;margin-top:0;background:none;text-decoration:none;color:#333;}
+.selected-c .divFilterList  a:hover{background:none;color:#333;}
+.selected-c  .divFilterList  span{color:#0181E3;}
+.selected-c  .chk  span{color:#0181E3;}
+.selected-c .divFilterList  b{display:block;width:7px;height:7px;position:absolute;right:6px;top:6px;background:url(img/20130606B.png) no-repeat -37px -62px;cursor:pointer;font-size: 6px}
+.selected-c .more {width: 100%;position:relative}
+.selected-c .o-more{float:right;position:relative;width:40px;height:20px;padding-right:14px;line-height:20px;line-height:21px\9;text-align:right;text-decoration:none;cursor:pointer;color:#005AA0;}
+.selected-c .o-more b{position:absolute;right:5px;top:9px;overflow:hidden;width:7px;height:5px;background:url(img/2013100702.gif) no-repeat;}
+/*.selected-c  DIV{float:left;position:relative;height:20px;padding:0 20px 0 5px;border:1px solid #E6E6E6;margin-right:15px;margin-bottom:2px;line-height:20px;}*/
+.divfilter-win{background:#fafafa;border:1px solid #E5F7FD;"z-Index":9999;position:"absolute"}
+.divfilter-win .title{width:100%;height:25px;background:#E5F7FD;color: #638cef;font-weight: bolder;padding-top: 5px;padding-left: 5px}
+.divfilter-win .title .close{position:absolute;right:6px;top:5px;;background:#E5F7FD;color:"blue";cursor: pointer;}
+.divfilter-win .title .chk{position:absolute;right:20px;}
+.divfilter-win .selected-c {padding:5 5 5 5}

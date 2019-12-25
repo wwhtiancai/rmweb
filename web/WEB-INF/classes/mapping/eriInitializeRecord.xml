@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriInitializeRecordMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.EriInitializeRecord">
+        select * from RFID_ERI_INIT_RECORD where id = #{id}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriInitializeRecord">
+        select * from RFID_ERI_INIT_RECORD where 1 = 1
+        <trim>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="tid != null">
+                and tid = #{tid}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="sf != null">
+                and sf = #{sf}
+            </if>
+            <if test="ph != null">
+                and ph = #{ph}
+            </if>
+            <if test="klx != null">
+                and klx = #{klx}
+            </if>
+            <if test="cshrq != null">
+                and cshrq = #{cshrq}
+            </if>
+            <if test="cshczr != null">
+                and cshczr = #{cshczr}
+            </if>
+        </trim>
+    </select>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.EriInitializeRecord">
+        UPDATE RFID_ERI_INIT_RECORD
+        SET tid = #{tid}, zt = #{zt}, cshrq = #{cshrq}, cshczr = #{cshczr}, kh = #{kh}, sbh = #{sbh}, gwh = #{gwh}, sbyy = #{sbyy},
+            ph = #{ph}, klx = #{klx}, sf = #{sf}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateByCondition" parameterType="map">
+        UPDATE RFID_ERI_INIT_RECORD SET
+        <trim suffixOverrides=",">
+            <if test="tid != null">
+                tid = #{tid},
+            </if>
+            <if test="zt != null">
+                zt = #{zt},
+            </if>
+            <if test="cshrq != null">
+                cshrq = #{cshrq},
+            </if>
+            <if test="cshczr != null">
+                cshczr = #{cshczr},
+            </if>
+            <if test="kh != null">
+                kh = #{kh}
+            </if>
+            <if test="gwh != null">
+                gwh = #{gwh}
+            </if>
+            <if test="sbh != null">
+                sbh = #{sbh}
+            </if>
+            <if test="sbyy != null">
+                sbyy = #{sbyy}
+            </if>
+            <if test="sf != null">
+                sf = #{sf}
+            </if>
+            <if test="ph != null">
+                ph = #{ph}
+            </if>
+            <if test="klx != null">
+                klx = #{klx}
+            </if>
+        </trim>
+        WHERE
+        <trim prefixOverrides="and">
+            <if test="cond_id != null">
+                and id = #{cond_id}
+            </if>
+            <if test="cond_tid != null">
+                and tid = #{cond_tid}
+            </if>
+            <if test="cond_zt != null">
+                and zt = #{cond_zt}
+            </if>
+            <if test="cond_cshrq != null">
+                and cshrq = #{cond_cshrq}
+            </if>
+            <if test="cond_cshczr != null">
+                and cshczr = #{cond_cshczr}
+            </if>
+            <if test="cond_gwh != null">
+                and gwh = #{cond_gwh}
+            </if>
+            <if test="cond_sbh != null">
+                and sbh = #{cond_sbh}
+            </if>
+            <if test="cond_kh != null">
+                and kh = #{cond_kh}
+            </if>
+            <if test="cond_ph != null">
+                and ph = #{cond_ph}
+            </if>
+            <if test="cond_sf != null">
+                and sf = #{cond_sf}
+            </if>
+            <if test="cond_klx != null">
+                and klx = #{cond_klx}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriInitializeRecord">
+        INSERT INTO RFID_ERI_INIT_RECORD (ID, TID, ZT, cshrq, cshczr, KH, SBH, GWH, SBYY, SF, KLX, PH)
+        VALUES (SEQ_RFID_ERI_INIT_RECORD.nextval, #{tid}, #{zt}, #{cshrq}, #{cshczr}, #{kh}, #{sbh}, #{gwh}, #{sbyy}, #{sf}, #{klx}, #{ph})
+    </insert>
+
+</mapper>

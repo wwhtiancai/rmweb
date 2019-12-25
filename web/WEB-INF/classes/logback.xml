@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="App" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>C:/logs/app.log</File>
+        <encoder>
+            <pattern>%date [%level] [%thread] %logger{80}.%method:%line - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>C:/logs/app.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder>
+            <pattern>%date [%level] [%thread] %logger{80}.%method:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="Error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>C:/logs/error.log</File>
+        <encoder>
+            <pattern>%date [%level] [%thread] %logger{80}.%method:%line - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>C:/logs/error.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    <appender name="Debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>C:/logs/debug.log</File>
+        <encoder>
+            <pattern>%date [%level] [%thread] %logger{80}.%method:%line - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>C:/logs/debug.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+    <logger name="com.tmri.rfid.service.impl.ExchangeServiceImpl" level="ERROR">
+        <appender-ref ref="App"/>
+    </logger>
+    <logger name="com.tmri.rfid" level="debug">
+        <appender-ref ref="App"/>
+    </logger>
+    <logger name="org.apache.commons.httpclient" level="trace">
+        <appender-ref ref="Debug"/>
+        <appender-ref ref="Console"/>
+    </logger>
+    <root level="debug">
+        <appender-ref ref="Debug"/>
+        <appender-ref ref="Console"/>
+    </root>
+    <root level="error">
+        <appender-ref ref="Error"/>
+    </root>
+</configuration>

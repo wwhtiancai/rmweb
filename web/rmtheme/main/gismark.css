@@ -1,0 +1,120 @@
+v\: * {
+	behavior: url(#default#VML);
+	display: inline-block
+}
+
+/*	for query	*/
+.query{
+	width:100%;
+	text-align:center;
+	border-collapse:collapse; 
+	border-spacing:0
+}
+.query .top{
+	text-align:left;
+	font-size:14px;
+	font-weight:bold;
+	font-family:宋体,Arial Narrow;
+	width:100%;
+	line-height:24px;
+	padding:1px 1px 1px 1px;
+	color:#cc5522;
+	border-bottom-color:#c0d0df;
+	border-bottom-width:2px;
+	border-bottom-style:solid;
+}
+.query .bottom{
+	font-size:14px;
+	font-family:宋体,Arial Narrow;
+	line-height:20px;
+	width:100%;
+	padding:2px 2px 2px 2px;
+
+}
+.query .head{
+	text-align:right;
+	font-family:宋体,Arial Narrow;
+	line-height:24px;
+	padding:0px 0px 0px 0px;
+	font-size:12px;
+}
+.query .body{
+	text-align:left;
+	font-family:宋体,Arial Narrow;
+	line-height:20px;
+	font-size:12px;
+	border-top:1px solid;
+	border-bottom:1px solid; 
+	border-right:1px solid; 
+	border-left:1px solid; 
+	background:white
+}
+.query .deepblue{
+	font-weight:bold;
+	color:#577693;
+}
+.query .button{
+	background-image:url(rmtheme/main/log_an2.gif);
+	BORDER-TOP-WIDTH:0px; 
+	background-position:0px 0px;
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	width:98px;
+	line-height:19px;
+	border-right-width:0px;
+	font-size: 12px;
+	text-decoration: none;
+	cursor:hand;
+}
+
+/*	for list	*/
+.list{
+	width:100%;
+	background:#666666;
+	text-align:center;
+}
+.list_scrollbar{
+	width:100%;
+}
+
+.list .top{
+	text-align:left;
+	font-size:12px;
+	font-weight:bold;
+	font-family:宋体,Arial Narrow;
+	width:100%;
+	line-height:21px;
+	padding:1px 1px 1px 1px;
+	color:#cc5522;
+	border-bottom-color:#c0d0df;
+	border-bottom-width:2px;
+	border-bottom-style:solid;
+}
+
+.list .head{
+	background:#72AFCA;
+	text-align:center;
+	padding:2px 2px 2px 2px;
+	font-size:12px;
+	font-weight:bold;
+	color:white;
+	height:24px;
+}
+.list .out{
+	background:#FAFAFA;
+	text-align:center;
+	padding:2px 2px 2px 2px;
+	font-size:12px;
+	color:black;
+	height:22px;
+	padding-left:8px;
+}
+.list .over{
+	background:#FFFF33;
+	text-align:center;
+	padding:2px 2px 2px 2px;
+	font-size:12px;
+	color:black;
+	height:22px;
+	padding-left:8px;
+}

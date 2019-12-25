@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.VehicleLogMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.VehicleLog">
+        <![CDATA[ select * from rfid_vehicle_log where id = #{id} ]]>
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.VehicleLog">
+        SELECT * FROM RFID_VEHICLE_LOG e WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="hpzl != null and hpzl != ''">
+                and e.hpzl = #{hpzl}
+            </if>
+            <if test="hphm != null and hphm != ''">
+                and e.hphm = #{hphm}
+            </if>
+            <if test="fzjg != null">
+                and e.fzjg = #{fzjg}
+            </if>
+            <if test="syr != null and syr != ''">
+                and e.syr = #{syr}
+            </if>
+
+            <if test="hdzkks != null and hdzkks != ''">
+                and e.hdzk &gt;= #{hdzkks}
+            </if>
+            <if test="hdzkjs != null and hdzkjs != ''">
+                and e.hdzk &gt;= #{hdzkjs}
+            </if>
+            <if test="yxqzks != null and yxqzks != ''">
+                and e.yxqz &gt;= to_date(#{yxqzks}, 'yyyy-mm-dd')
+            </if>
+            <if test="yxqzjs != null and yxqzjs != ''">
+                and e.yxqz &lt;= to_date(#{yxqzjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="bxzzrqks != null and bxzzrqks != ''">
+                and e.bxzzrq &gt;= to_date(#{bxzzrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="bxzzrqjs != null and bxzzrqjs != ''">
+                and e.bxzzrq &lt;= to_date(#{bxzzrqjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="clxxid != null">
+                and e.clxxid = #{clxxid}
+            </if>
+            <if test="jdcxh != null">
+                and e.jdcxh = #{jdcxh}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="createByClxxid" parameterType="com.tmri.rfid.bean.VehicleLog">
+        <selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="id">
+            select SEQ_RFID_VEHICLE_LOG__ID.nextval as id from dual
+        </selectKey>
+        insert into RFID_VEHICLE_LOG (ID, CLXXID, HPZL, HPHM, CLLX, SYXZ, FZJG, HDZZL, HDZK, YXQZ,
+          CSYS, CCRQ, QZBFQZ, BXZZRQ, BZ, PL, CLSBDH, ZZL, GL, JDCXH, CLPP, SYR, ZQYZL, CJRQ, LSH, ZBZL)
+        select #{id}, rv.id, rv.hpzl, rv.hphm, rv.cllx, rv.syxz, rv.fzjg, rv.hdzzl,
+          rv.hdzk, rv.yxqz, rv.csys, rv.ccrq, rv.qzbfqz, rv.bxzzrq, rv.bz, rv.pl, rv.clsbdh, rv.zzl, rv.gl, rv.xh,
+          rv.clpp, rv.syr, rv.zqyzl, sysdate, rv.lsh, rv.zbzl from rfid_vehicle rv
+        where rv.id = #{clxxid}
+    </insert>
+</mapper>

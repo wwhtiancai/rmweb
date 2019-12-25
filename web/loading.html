@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<title>系统正在处理 ... ...</title>
+</head>
+
+<body leftmargin="0" topmargin="0" onLoad="query();">
+<form name="querymid" target="paramIframex" method="post">
+	  <input type="hidden" name="kssj" value=""/>
+	  <input type="hidden" name="jssj" value=""/>
+	  <input type="hidden" name="lsh" value=""/>
+	  <input type="hidden" name="tdbh" value=""/>
+</form>
+
+<div id="waitting_wf" style="position:absolute;z-index:10;top:50px;left:50px;DISPLAY: block;">
+<table width="66%" border="0" cellpadding="0" cellspacing="1" class="Size_1">
+  <tr>
+    <td width="141" height="20" align="center"><img src="images/running.gif" alt="正在查询......" width="141" height="141"></td>
+    <td width="150" align="center"><p>查询请求已发送</p>
+      <p>等待返回查询结果</p></td>
+    </tr>
+</table>
+</div>
+
+<script language="javascript" type="text/javascript">
+var loadx=false;
+function query(){
+	if(!loadx){
+		pageUrl = window.location;
+		var path=pageUrl.toString()
+		var p=path.split("&");
+		var i=0;
+		var at=p[0].split("?");
+		querymid.action=at[1]+"?"+at[2];
+		for(i=1;i<p.length;i++){
+		  v=p[i].split("=");
+		  document.all[v[0]].value=v[1];
+		}
+		loadx=true;
+		querymid.submit();
+	}
+}
+
+</script>
+
+<iframe name="paramIframex" marginwidth="0" marginheight="0" 
+height="100%" width="100%" frameborder="0"></iframe>
+</body>
+</html>

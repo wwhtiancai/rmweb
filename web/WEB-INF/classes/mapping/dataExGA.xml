@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.DataExGAMapper">
+    
+    <!-- 保存交换信息到交换平台 -->
+    <insert id="saveData" parameterType="com.tmri.rfid.bean.DataExch">
+		insert into VEH_IS_COMM_EXCH (bh, sjlx, sjnr1, sjnr2, sjnr3, sjnr4, sjnr5, sjnr6, sjnr7, sjnr8, sjnr9, sjnr10, clbj, cjsj)
+		    values ( 
+		    	(select 
+				decode(
+				  (select max(e.bh) as maxbh from VEH_IS_COMM_EXCH e
+				  where e.bh like concat(to_char(sysdate,'yymmdd'),'%'))
+				  , null , 
+				  concat(to_char(sysdate,'yymmdd'),to_char('00000000')),
+				  (select max(e.bh)+1 as maxbh from VEH_IS_COMM_EXCH e
+				  where e.bh like concat(to_char(sysdate,'yymmdd'),'%'))
+				) from dual)
+		    ,#{sjlx},#{sjnr1,jdbcType=VARCHAR},#{sjnr2,jdbcType=VARCHAR},#{sjnr3,jdbcType=VARCHAR},
+		    #{sjnr4,jdbcType=VARCHAR},#{sjnr5,jdbcType=VARCHAR},#{sjnr6,jdbcType=VARCHAR},
+		    #{sjnr7,jdbcType=VARCHAR},#{sjnr8,jdbcType=VARCHAR},#{sjnr9,jdbcType=VARCHAR},
+		    #{sjnr10,jdbcType=VARCHAR},5,sysdate)
+	</insert>
+	    
+	<!-- 用存储过程存储数据，并获取ID -->
+    <select id="selectSaveBH" parameterType="map" statementType="CALLABLE">
+		<![CDATA[
+        {call VEH_IS_COMM_EXCH_PKG.SaveExch(
+                #{sjlx,mode=IN,jdbcType=VARCHAR},#{sjnr1,mode=IN,jdbcType=VARCHAR},#{sjnr2,mode=IN,jdbcType=VARCHAR},
+                #{sjnr3,mode=IN,jdbcType=VARCHAR},#{sjnr4,mode=IN,jdbcType=VARCHAR},#{sjnr5,mode=IN,jdbcType=VARCHAR},
+                #{sjnr6,mode=IN,jdbcType=VARCHAR},#{sjnr7,mode=IN,jdbcType=VARCHAR},#{sjnr8,mode=IN,jdbcType=VARCHAR},
+                #{sjnr9,mode=IN,jdbcType=VARCHAR},#{sjnr10,mode=IN,jdbcType=VARCHAR},#{clbj,mode=IN,jdbcType=INTEGER},
+                #{mid,mode=IN,jdbcType=VARCHAR},#{Out_BH,mode=OUT,jdbcType=VARCHAR}
+        )}
+        ]]>
+	</select>
+	
+	<!-- 获取单条记录 -->
+	<select id="getLoneData" parameterType="String" resultType="com.tmri.rfid.bean.DataExch">
+        select * from VEH_IS_COMM_EXCH 
+        	where clbj = 0 and substr(sjlx,25,1) = '2'
+        		<if test="sjlx != null and sjlx !=''">
+        			and sjlx like CONCAT('%', #{sjlx})
+            	</if>
+    </select>
+	<!-- 获取有多条记录的首条记录 -->
+	<select id="getFirstData" parameterType="String" resultType="com.tmri.rfid.bean.DataExch">
+        select substr(sjlx,1,14) as mid,substr(sjlx,15,10) sxh,vice.*
+			from VEH_IS_COMM_EXCH vice 
+			where clbj = 0
+				and substr(sjlx,15,10)='0000000000' 
+				and substr(sjlx,25,1) = '1' 
+				<if test="sjlx != null and sjlx !=''">
+        			and sjlx like CONCAT('%', #{sjlx})
+            	</if>
+    </select>
+    <!-- 根据母记录获取子记录 -->
+    <select id="getSonData" parameterType="String" resultType="com.tmri.rfid.bean.DataExch">
+     	select substr(sjlx,1,14) as mid,substr(sjlx,15,10) sxh,vice.* 
+        	from VEH_IS_COMM_EXCH vice
+        	where clbj = 0
+        		and substr(sjlx,1,14) = #{mid} and substr(sjlx,25,1) = '3' 
+        		<if test="sjlx != null and sjlx !=''">
+        			and sjlx like CONCAT('%', #{sjlx})
+            	</if>
+        	order by sxh
+    </select>
+	
+	
+	<!-- 获取交换信息 -->
+    <select id="getData" parameterType="String" resultType="com.tmri.rfid.bean.DataExch">
+        select * from VEH_IS_COMM_EXCH where clbj = 0 and sjlx like CONCAT('%',#{sjlx})
+    </select>
+    
+    <!-- 更新已成功同步数据 -->
+    <update id="updateFlag" parameterType="map">
+        UPDATE VEH_IS_COMM_EXCH e SET clbj = 1
+        WHERE e.bh in 
+		<foreach collection="bhs" item="bh"  open="(" separator="," close=")">  
+	        #{bh}  
+	    </foreach>  
+    </update>
+    
+</mapper>

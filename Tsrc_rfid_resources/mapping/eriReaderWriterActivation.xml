@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriReaderWriterActivationMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.EriReaderWriterActivation">
+        select * from RFID_ERI_RW_ACTIVATION where xh = #{xh}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriReaderWriterActivation">
+        select * from RFID_ERI_RW_ACTIVATION where
+        <trim prefixOverrides="and">
+            <if test="dxqxh != null">
+                and dxqxh = #{dxqxh}
+            </if>
+            <if test="ydxqxh != null">
+                and ydxqxh = #{ydxqxh}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="sqzt != null">
+                and sqzt = #{sqzt}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriReaderWriterActivation">
+        insert into RFID_ERI_RW_ACTIVATION (XH, DXQXH, YDXQXH, AQMKXH, CZRQ, CZR, ZT, SQZT, YHXX)
+        values (SEQ_RFID_ERI_RW_ACTIVATION.nextval, #{dxqxh}, #{ydxqxh}, #{aqmkxh}, #{czrq}, #{czr}, #{zt}, #{sqzt}, #{yhxx})
+    </insert>
+
+    <update id="updateByCondition" parameterType="map">
+        update RFID_ERI_RW_ACTIVATION
+        <trim prefix="set" suffixOverrides=",">
+            <if test="dxqxh != null">
+                dxqxh = #{dxqxh},
+            </if>
+            <if test="aqmkxh != null">
+                aqmkxh = #{aqmkxh},
+            </if>
+            <if test="ydxqxh != null">
+                ydxqxh = #{ydxqxh},
+            </if>
+            <if test="aqmkxh != null">
+                aqmkxh = #{aqmkxh},
+            </if>
+            <if test="czrq != null">
+                czrq = #{czrq},
+            </if>
+            <if test="wcrq != null">
+                wcrq = #{wcrq},
+            </if>
+            <if test="zt != null">
+                zt = #{zt},
+            </if>
+            <if test="sqzt != null">
+                sqzt = #{sqzt},
+            </if>
+            <if test="yhxx != null">
+                yhxx = #{yhxx},
+            </if>
+            <if test="czr != null">
+                czr = #{czr},
+            </if>
+            <if test="sbyy != null">
+                sbyy = substr(#{sbyy}, 0, 256),
+            </if>
+        </trim>
+        where
+        <trim prefixOverrides="and">
+            <if test="cond_dxqxh != null">
+                and dxqxh = #{cond_dxqxh}
+            </if>
+            <if test="cond_ydxqxh != null">
+                and ydxqxh = #{cond_ydxqxh}
+            </if>
+            <if test="cond_zt != null">
+                and zt = #{cond_zt}
+            </if>
+            <if test="cond_sqzt != null">
+                and sqzt = #{cond_sqzt}
+            </if>
+        </trim>
+    </update>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.EriReaderWriterActivation">
+        update RFID_ERI_RW_ACTIVATION
+        set dxqxh = #{dxqxh}, ydxqxh = #{ydxqxh}, aqmkxh = #{aqmkxh}, czrq = #{czrq}, wcrq = #{wcrq}, zt = #{zt}, sqzt = #{sqzt},
+        yhxx = #{yhxx}, czr= #{czr}, sbyy = substr(#{sbyy}, 0, 256)
+        where xh = #{xh}
+    </update>
+
+</mapper>

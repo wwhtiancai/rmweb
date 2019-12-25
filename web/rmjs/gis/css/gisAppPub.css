@@ -1,0 +1,241 @@
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:none;color:FF6D00;font-weight:bold;letter-spacing:-1px;}
+a:active{text-decoration:none;}
+body{
+	margin-bottom:0;
+	margin-left:0;
+	margin-right:0;
+	margin-top:0;
+	background:white;
+}
+ul{
+	padding:0px;
+	margin:0px;
+}
+li{
+	list-style-type:none;
+	float:left;
+	text-align:left;
+	padding:0px;
+	margin:0px;
+}
+img{
+	vertical-align: absmiddle;
+	border: 0px none;
+}
+form{
+	margin:0;
+	padding:0;
+	border:0;
+}
+select{ 
+	font-size:12px;
+	color:black;
+	background:white;
+}
+input{
+	background-color:expression((this.readOnly&&this.readOnly==true)?"#FBF1C9":"");
+	font-size:12px;
+	border:expression(this.type=="text"?"1px solid #666666":"style");
+	padding:1px 1px 0 2px;
+	width:expression(this.type=="text"?"80%":"style");
+}
+pre{
+	margin:0;
+	paddign:0;
+	border:0;
+	font-size:0px;
+	line-height:normal;
+}
+
+/*	for query	*/
+.query{
+	width:100%;
+	text-align:center;
+	background:#CCCCCC;
+}
+.query .head{
+	text-align:right;
+	font-size:12px;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	color:#0181E3;
+	background:#E5F7FD;
+}
+.query .body{
+	text-align:left;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	font-size:12px;
+	background:#F7F7F7;
+}
+.query .submit{
+	text-align:right;
+	padding:3px 3px 3px 3px;
+	height:24px;
+	font-size:12px;
+	background:#F7F7F7;
+}
+.queryresult{
+	font-size:1px;
+	font-weight:normal;
+	line-height:normal;
+	height:1px;
+	background:white;
+}
+
+/*	for button	*/
+.button_detail{
+	width:22px;
+	height:20px;
+	background-image:url(../../../rmtheme/main/button_detail.gif);
+	cursor:pointer;
+}
+.button_new{
+	background:url(../../../rmtheme/main/button_new.gif);
+	background-position:0px 0px;
+	BORDER-TOP-WIDTH:0px; 
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	border-right-width:0px;
+	width:69px;
+	height:22px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:12px;
+	letter-spacing:3px;
+	padding:3px 0 0 16px;
+}
+.button_save{
+	background:url(../../../rmtheme/main/button_save.gif);
+	background-position:0px 0px;
+	BORDER-TOP-WIDTH:0px; 
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	border-right-width:0px;
+	width:69px;
+	height:22px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:12px;
+	letter-spacing:3px;
+	padding:3px 0 0 16px;
+}
+.button_del{
+	background:url(../../../rmtheme/main/button_del.gif);
+	background-position:0px 0px;
+	BORDER-TOP-WIDTH:0px; 
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	border-right-width:0px;
+	width:69px;
+	height:22px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:12px;
+	letter-spacing:3px;
+	padding:3px 0 0 16px;
+}
+.button_close{
+	background:url(../../../rmtheme/main/button_close.gif);
+	background-position:0px 0px;
+	BORDER-TOP-WIDTH:0px; 
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	border-right-width:0px;
+	width:69px;
+	height:22px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:12px;
+	letter-spacing:3px;
+	padding:3px 0 0 16px;
+}
+
+.button_query{
+	background:url(../../../rmtheme/main/button_query.gif);
+	background-position:0px 0px;
+	BORDER-TOP-WIDTH:0px; 
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	border-right-width:0px;
+	width:69px;
+	height:22px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:12px;
+	letter-spacing:3px;
+	padding:3px 0 0 16px;
+}
+.button_other{
+	background:url(../../../rmtheme/main/button_other.gif);
+	background-position:0px 0px;
+	BORDER-TOP-WIDTH:0px; 
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	border-right-width:0px;
+	width:100px;
+	height:22px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:12px;
+	padding:3px 0 0 13px;
+}
+
+.button_left{
+	background:url(../../../rmtheme/main/button_left.gif);
+	background-position:0px 0px;
+	BORDER-TOP-WIDTH:0px; 
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	border-right-width:0px;
+	width:69px;
+	height:22px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:12px;
+	letter-spacing:3px;
+	padding:3px 0 0 16px;
+}
+.button_right{
+	background:url(../../../rmtheme/main/button_right.gif);
+	background-position:0px 0px;
+	BORDER-TOP-WIDTH:0px; 
+	BORDER-LEFT-WIDTH:0px;
+	border-bottom-width:0px;
+	border-right-width:0px;
+	width:69px;
+	height:22px;
+	text-decoration:none;
+	cursor:pointer;
+	font-size:12px;
+	letter-spacing:3px;
+	padding:3px 0 0 16px;
+}
+
+.button{
+	display: inline-block;
+	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+	*display: inline;
+	vertical-align: baseline;
+	margin: 0 2px;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	padding: .5em 2em .55em;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 2px 2px rgba(0,0,0,.2);
+	box-shadow: 0 3px 3px rgba(0,0,0,.2);
+}
+.button:hover {
+	text-decoration: none;
+}
+.button:active {
+	position: relative;
+	top: 1px;
+}

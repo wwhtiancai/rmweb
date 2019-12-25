@@ -1,0 +1,1901 @@
+html {
+    font: 12px/1.5 tahoma,arial,\5FAE\8F6F\96C5\9ED1,sans-serif;
+    font-family: "Microsoft YaHei","Î¢ÈíÑÅºÚ",tahoma,arial,simsun,"ËÎÌå";
+}
+
+html,body,form{
+    height:100%;
+}
+
+.forth {
+    width : 25%;
+    float: left;
+}
+
+.half {
+    width : 50%;
+    float: left;
+}
+
+.fifth {
+    width: 20%;
+    float: left;
+}
+
+.third {
+    width: 33%;
+    float: left;
+}
+
+.new_panel {
+    width: 100%;
+    margin: 0px auto;
+}
+
+.new_panel .title {
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+    padding: 20px;
+}
+
+.new_panel .panel-header {
+    height: 60px;
+    background-color: cornflowerblue;
+}
+
+.new_panel .panel-body {
+}
+
+.new_panel .footer {
+
+}
+
+.row {
+    position: relative;
+    width: 100%;
+}
+
+.magnet {
+    height: 200px;
+    position: relative;
+    background-color: white;
+    width: 800px;
+    float:left;
+    margin:6px;
+}
+
+.magnet-thumbnail {
+    margin-top:25px;
+    margin-left:10px;
+    float:left;
+    height: 150px;
+    width: 150px;
+}
+
+.magnet-info {
+    margin-top:25px;
+    margin-left:20px;
+    float: left;
+}
+
+.magnet-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    height: 30px;
+    line-height: 30px;
+}
+
+.magnet-body {
+    margin-top: 5px;
+}
+
+.magnet-tip {
+    color: grey;
+    font-size: 13px;
+    line-height: 17px;
+}
+
+.magnet .download_box {
+    margin-top: 15px;
+}
+
+.magnet .btn_box {
+    float: left;
+    margin-right: 14px;
+    width: 100px;
+}
+
+.magnet .btn_box a {
+    display: block;
+    height: 22px;
+    border: 1px solid #ccc;
+    line-height: 22px;
+    text-indent: 30px;
+    position: relative;
+    color: #a3a3a3;
+    text-decoration: none;
+    padding-right:10px;
+}
+
+.magnet .btn_box a i {
+    position: absolute;
+    top: 50%;
+    background-image: url('../../images/ic_spr.png');
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.magnet .btn_box a:hover {
+    text-decoration: none;
+    border-color: #0097ff;
+}
+
+.ic_win {
+    background-position: 0 0;
+    width: 17px;
+    height: 18px;
+    margin-top: -9px;
+    left: 5px;
+}
+
+li:hover .ic_win, a.cur .ic_win, li.lay-on .ic_win  {
+    background-position: 0 -36px;
+}
+
+li:hover .btn_box a,
+li.lay-on .btn_box a {
+    color: #0097ff;
+}
+
+em, i {
+    font-style: normal;
+}
+
+ul {
+    margin: 0px;
+    padding-left:0px;
+    padding-right: 0px;
+    font-weight:normal;
+    padding-top: 0px;
+}
+
+li {
+    padding: 0;
+    list-style-type: none;
+    vertical-align: bottom;
+}
+
+.clearfix:after {
+    display: block;
+    height: 0px;
+    visibility: hidden;
+    clear: both;
+    content : "";
+}
+
+.clearfix {
+    zoom : 1;
+}
+
+body.rfid {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB",
+    "Hiragino Sans GB W3", "Microsoft YaHei UI", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", sans-serif;
+    color: #333;
+    background-color: #ECF0F1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background: #3498DB;
+    color: #ffffff;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 970px;
+    }
+}
+
+.rfid a {
+    cursor : pointer;
+}
+
+.rfid .wrapper {
+    position: relative;
+    height: auto !important;
+    min-height: 100%;
+}
+
+.rfid .text-error {
+    color: #E74C3C;
+}
+
+.rfid .text-success {
+    color: #ECF0F1;
+}
+
+.main-content {
+    padding-top: 50px;
+    width: 950px;
+    margin: auto;
+    padding-bottom: 140px;
+}
+
+.rfid-footer {
+    color: #fff;
+    text-align:center;
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #434a54;
+    padding: 40px;
+}
+
+.rfid .navbar {
+    border-radius: 0;
+    margin-bottom: 0px;
+}
+
+.angle-up {
+    width: 20px;
+}
+
+.edit-profile {
+    border-top: 1px dotted #e6e6e6;
+}
+
+.left-side-content {
+    float: left;
+    width: 180px;
+}
+
+.right-side-content {
+    width: 740px;
+    margin-left: 20px;
+    float:right;
+    min-height: 300px;
+}
+
+.clean-list {
+    font-size: 13px;
+    border-bottom: 1px dotted #e6e6e6;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.clean-list .list-header {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    padding: 0px 10px 0 4px;
+    border-radius: 1px 1px 0 0;
+}
+
+.clean-list .list-header + .list-body {
+    margin-top: 8px;
+}
+
+.clean-list .list-body ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.clean-list .list-item {
+    line-height: 1.25;
+    position: relative;
+    z-index: 0;
+    display: block;
+    color: #333;
+}
+
+.clean-list .list-item .list-item-label {
+    display: block;
+    padding: 4px 4px;
+    color: #333;
+}
+
+.clean-list .list-item.selected {
+    font-weight: bold;
+    z-index: 1;
+    color: #000;
+}
+
+.clean-list .list-item.selected .list-item-label {
+    color: #3498DB;
+}
+
+.rfid .normal-header {
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.rfid .large-header {
+    font-size: 32px;
+    font-weight: 100;
+}
+
+.rfid .med-header {
+    font-size: 18px;
+}
+
+.rfid .large-header, .rfid .normal-header, .rfid .med-header, .rfid .small-header {
+    line-height: 1.2;
+}
+
+.rfid .large-header.no-margin, .rfid .normal-header.no-margin, .rfid .med-header.no-margin,
+.rfid .small-header.no-margin, .rfid .large-sub-header.no-margin, .rfid .med-sub-header.no-margin, .rfid .small-sub-header.no-margin {
+    margin: 0;
+}
+
+.rfid .large-header.top {
+    display: inline-block;
+    zoom: 1;
+    margin-botoom: 0;
+}
+
+.rfid .large-header.top,
+.rfid .normal-header.top,
+.rfid .med-header.top,
+.rfid .small-header.top {
+    margin-top: 0;
+}
+
+.rfid .large-header,
+.rfid .normal-header,
+.rfid .med-header,
+.rfid .small-header,
+.rfid .large-sub-header,
+.rfid .med-sub-header,
+.rfid .small-sub-header {
+    margin: 10px 0;
+    line-height: 1;
+    text-rendering: optimizelegibility;
+}
+
+.rfid h1, .rfid h2, .rfid h3, .rfid h4, .rfid h5, .rfid h6 {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    text-rendering: optimizelegibility;
+}
+
+.inline-control-group {
+    float: right;
+}
+
+.form-label.mandatory:after {
+    content: '*';
+    color: #E74C3C;
+    margin-left: 5px;
+}
+
+.rfid .light-rule {
+    width: 100%;
+    border-bottom: 1px dotted #2980B9;
+    padding: 5px 0;
+}
+
+.rfid a {
+    color: #333;
+}
+
+.rfid a:hover {
+    color: #2980B9;
+}
+
+.rfid a.btn:hover {
+    color: white;
+}
+
+.white-card {
+    width: 100%;
+    border: 1px solid #d6d6d6;
+    padding: 0;
+    margin-bottom: 15px;
+    background: white;
+    position: relative;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    overflow: visible;
+}
+
+.new-object-square {
+    cursor: pointer;
+    border: 2px dashed #ababab;
+    height: 241px;
+    text-align: center;
+    background: none !important;
+}
+
+
+.new-object-square .new-object-plus {
+    background-image: url("../../images/Plus_icons.png");
+    background-position: -145px 50%;
+    height: 104px;
+    width: 104px;
+    position: absolute;
+    top: 50%;
+    margin-top: -68px;
+    margin-left: -52px;
+    left: 50%
+}
+
+.new-object-square .new-object-title {
+    color: #888;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.main-content .content-area {
+    padding-top: 30px;
+}
+
+.std-form-section {
+    border-bottom: 1px solid #dedede;
+    border-width: 1px 0;
+}
+
+.std-form-section.padded {
+    padding: 20px 15px;
+}
+
+.rfid-choice-tabs {
+    width: 100%;
+}
+
+.rfid-choice {
+    position: relative;
+    padding: 15px;
+    height: 60px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.rfid-choice.selected {
+    width: 725px;
+    background-color: #CBE290;
+    cursor: default;
+}
+
+.rfid-choice.selected .expanded {
+    display: block;
+}
+
+.rfid-choice .expanded {
+    display: none;
+}
+
+.rfid-choice .rfid-choice-title {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.rfid-choice .expanded .rfid-choice-title {
+    color: #333;
+}
+
+.rfid-choice .rfid-choice-text {
+    font-size: 12px;
+}
+
+.rfid-choice .expanded .rfid-choice-text {
+    width: 500px;
+}
+
+.rfid-choice .collapsed {
+    display: block;
+}
+
+.rfid-choice.selected .collapsed {
+    display: none;
+}
+
+.rfid .btn {
+    border-radius: 3px;
+}
+
+.btn-success {
+    background-color: #55a32a;
+    border-color: #55a32a;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open > .dropdown-toggle.btn-success {
+    color: #fff;
+    background-color: #449219;
+    border-color: #449219;
+}
+
+.checkbox-field {
+    padding-top: 7px;
+}
+
+.error-message {
+    color : red;
+    display: none;
+}
+
+.error-message label {
+    margin-bottom: 0px;
+    font-size: 12px;
+}
+
+.form-control.error {
+    border-color: #E74C3C;
+    color: #E74C3C;
+}
+
+.error-tooltip {
+    border: 1px solid #ff485b;
+    color: #ff485b;
+    position: absolute;
+    background: none repeat scroll 0 0 #f4f4f4;
+    border-radius: 3px;
+    font-size: 12px;
+    margin: 0 5px;
+    padding: 2px 5px;
+    top: 52px;
+    z-index: 99;
+}
+
+.error-tooltip .outer-tip {
+    border-bottom: 5px solid #ff485b;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    height: 0;
+    left: 6px;
+    position: absolute;
+    top: -5px;
+    width: 0;
+}
+
+.error-tooltip .inner-tip {
+    border-bottom: 4px solid #f4f4f4;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    height: 0;
+    left: 7px;
+    position: absolute;
+    top: -4px;
+    width: 0;
+}
+
+.error-tooltip label {
+    font-size: 12px;
+    margin-bottom : 0px;
+    font-weight: normal;
+    font-color: red;
+}
+
+.form-group {
+    clear: both;
+    position: relative;
+}
+
+.form-group .label {
+    margin-bottom : 5px;
+}
+
+.icon {
+    background-image: url("../../images/icon.png");
+    background-position: 100px 100px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.aquareGrayIcon {
+    background-position: 4px 4px;
+    height: 12px;
+    width: 12px;
+}
+.aquareRedIcon {
+    background-position: 4px -7px;
+    height: 12px;
+    width: 12px;
+}
+.triangleRedLeftIcon {
+    background-position: -19px 1px;
+    height: 12px;
+    width: 12px;
+}
+.triangleGrayLeftIcon {
+    background-position: -43px 4px;
+    height: 12px;
+    width: 12px;
+}
+.moreThanRedLeftIcon {
+    background-position: -68px 3px;
+    height: 12px;
+    width: 12px;
+}
+.triangleRedDownIcon {
+    background-position: -91px 0;
+    height: 12px;
+    width: 12px;
+}
+.goLastRedIcon {
+    background-position: -43px -10px;
+    height: 12px;
+    width: 12px;
+}
+.goNextRedIcon {
+    background-position: -67px -10px;
+    height: 12px;
+    width: 12px;
+}
+.triangleGrayDownIcon {
+    background-position: -91px -12px;
+    height: 12px;
+    width: 12px;
+}
+.dotBlackIcon {
+    background-position: 4px -22px;
+    height: 12px;
+    width: 12px;
+}
+.dotGreenIcon {
+    background-position: -20px -22px;
+    height: 12px;
+    width: 12px;
+}
+.triangleLitterGreenLeftIcon {
+    background-position: -44px -24px;
+    height: 12px;
+    width: 12px;
+}
+.triangleLittleGrayLeftIcon {
+    background-position: -67px -22px;
+    height: 12px;
+    width: 12px;
+}
+.triangleLittleWhiteLeftIcon {
+    background-position: -92px -22px;
+    height: 12px;
+    width: 12px;
+}
+.failureRedIcon {
+    background-position: 0 -56px;
+    height: 19px;
+    width: 20px;
+}
+.correctGreenIcon {
+    background-position: -48px -56px;
+    height: 25px;
+    width: 34px;
+}
+.exclamationCircleIcon {
+    background-position: 0 -96px;
+    height: 16px;
+    width: 15px;
+}
+.rotateIcon {
+    background-position: -32px -96px;
+    height: 15px;
+    width: 14px;
+}
+.interrogationGreenIcon {
+    background-position: -64px -96px;
+    height: 16px;
+    width: 11px;
+}
+.interrogationWhiteIcon {
+    background-position: 0 -128px;
+    height: 16px;
+    width: 15px;
+}
+.interrogationYellowIcon {
+    background-position: -32px -128px;
+    height: 15px;
+    width: 15px;
+}
+.minusRedIcon {
+    background-position: -61px -130px;
+    height: 12px;
+    width: 12px;
+}
+.plusRedIcon {
+    background-position: -85px -130px;
+    height: 12px;
+    width: 12px;
+}
+.failureCircleIcon {
+    background-position: 0 -161px;
+    height: 13px;
+    width: 13px;
+}
+.correctCircleIcon {
+    background-position: -30px -161px;
+    height: 13px;
+    width: 13px;
+}
+.minusCircleIcon {
+    background-position: -60px -161px;
+    height: 13px;
+    width: 13px;
+}
+.threeCircleOrangeIcon {
+    background-position: 0 -192px;
+    height: 18px;
+    width: 20px;
+}
+.threeRectangleListOrangeIcon {
+    background-position: -33px -192px;
+    height: 17px;
+    width: 20px;
+}
+.twoRectangleListOrangeIcon {
+    background-position: -73px -192px;
+    height: 18px;
+    width: 20px;
+}
+.correctRedIcon {
+    background-position: 0 -224px;
+    height: 12px;
+    width: 12px;
+}
+.rectangleGreenIcon {
+    background-position: -32px -224px;
+    height: 15px;
+    width: 27px;
+}
+.rectangleYellowIcon {
+    background-position: -72px -224px;
+    height: 15px;
+    width: 27px;
+}
+.rectangleWhiteIcon {
+    background-position: 0 -256px;
+    height: 15px;
+    width: 27px;
+}
+.wordFuIcon {
+    background-position: -40px -256px;
+    height: 19px;
+    width: 19px;
+}
+.correctGreenCircleWhiteIcon {
+    background-position: 0 -280px;
+    height: 35px;
+    width: 38px;
+}
+.exclamationOrangeCircleWhiteIcon {
+    background-position: -40px -280px;
+    height: 35px;
+    width: 34px;
+}
+.heartYellowIcon {
+    background-position: -71px -255px;
+    height: 15px;
+    width: 19px;
+}
+.eLetterOrangeIcon {
+    background-position: 0 -320px;
+    height: 12px;
+    width: 12px;
+}
+.houseGreenIcon {
+    background-position: -16px -319px;
+    height: 12px;
+    width: 13px;
+}
+.triangleRedLeftLittleIcon {
+    background-position: -24px 4px;
+    height: 12px;
+    width: 10px;
+}
+.correctGrayGoldIcon {
+    background-position: -84px -160px;
+    height: 13px;
+    width: 19px;
+}
+.wordZhuanIcon {
+    background-position: -80px -340px;
+    height: 17px;
+    width: 19px;
+}
+.closeButtonRed {
+    background-position: -31px -319px;
+    height: 12px;
+    width: 12px;
+}
+.jielidaiIcon {
+    background-position: -45px -319px;
+    height: 12px;
+    width: 13px;
+}
+.newUser {
+    background-position: 0 -339px;
+    height: 17px;
+    width: 32px;
+}
+.enjoymentIcon {
+    background-position: -37px -339px;
+    height: 17px;
+    width: 36px;
+}
+.mobileIcon {
+    background-position: -81px -321px;
+    height: 18px;
+    width: 18px;
+}
+.auctionIcon {
+    background-position: -81px -301px;
+    height: 18px;
+    width: 18px;
+}
+.member1Icon {
+    background-position: -108px -124px;
+    height: 18px;
+    width: 18px;
+}
+.member2Icon {
+    background-position: -107px -95px;
+    height: 18px;
+    width: 18px;
+}
+.member3Icon {
+    background-position: -107px -155px;
+    height: 18px;
+    width: 18px;
+}
+.newMessageIcon {
+    background-position: -109px -70px;
+    height: 18px;
+    width: 18px;
+}
+.noMessageIcon {
+    background-position: -147px -67px;
+    height: 18px;
+    width: 18px;
+}
+.correctIcon {
+    background-position: -107px -39px;
+    height: 18px;
+    width: 18px;
+}
+.errorIcon {
+    background-position: -106px -11px;
+    height: 18px;
+    width: 18px;
+}
+.errorIcon {
+    background-position: -146px -248px;
+    height: 18px;
+    width: 18px;
+}
+.alert-icon {
+    background-position: -107px -248px;
+    height: 18px;
+    width: 18px;
+}
+.transfer-icon {
+    background-position: -72px -67px;
+    height: 18px;
+    width: 18px;
+}
+.mobile-icon {
+    background-position: -76px -38px;
+    height: 20px;
+    width: 11px;
+}
+.auction-icon {
+    background-position: -72px -11px;
+    height: 18px;
+    width: 18px;
+}
+.new-user-icon {
+    background-position: -10px -11px;
+    height: 18px;
+    width: 32px;
+}
+.recommend-icon {
+    background-position: -10px -39px;
+    height: 18px;
+    width: 32px;
+}
+.enjoyment-icon {
+    background-position: -10px -67px;
+    height: 18px;
+    width: 32px;
+}
+.hot-icon {
+    background-position: -10px -95px;
+    height: 18px;
+    width: 32px;
+}
+.new-channel-icon {
+    background-position: -10px -123px;
+    height: 18px;
+    width: 42px;
+}
+.vip-icon {
+    background-position: -10px -150px;
+    height: 18px;
+    width: 32px;
+}
+.lucion-icon {
+    background-position: -109px -189px;
+    height: 18px;
+    width: 18px;
+}
+.clock-icon {
+    background-position: -109px -273px;
+    height: 18px;
+    width: 18px;
+}
+.integral-icon {
+    background-position: -72px -189px;
+    height: 18px;
+    width: 18px;
+}
+.promotion-icon {
+    background-position: -10px -175px;
+    height: 18px;
+    width: 32px;
+}
+.mobile-transfer-icon {
+    background-position: -10px -202px;
+    height: 18px;
+    width: 32px;
+}
+.cash-back-icon {
+    background-position: -10px -253px;
+    height: 18px;
+    width: 32px;
+}
+.coin-back-icon {
+    background-position: -10px -228px;
+    height: 18px;
+    width: 32px;
+}
+.gift-icon {
+    background-position: -10px -279px;
+    height: 18px;
+    width: 32px;
+}
+.download-icon {
+    background-position: -109px -218px;
+    height: 18px;
+    width: 18px;
+}
+.prompt-icon {
+    background-position: -150px -14px;
+    height: 12px;
+    width: 12px;
+}
+.help-icon {
+    background-position: -149px -96px;
+    height: 16px;
+    width: 16px;
+}
+.prompt-popup-icon {
+    background-position: -74px -124px;
+    height: 12px;
+    width: 12px;
+}
+.help-popup-icon {
+    background-position: -74px -152px;
+    height: 16px;
+    width: 16px;
+}
+.success-window-icon {
+    background-position: -59px -223px;
+    height: 35px;
+    width: 38px;
+}
+.failure-window-icon {
+    background-position: -59px -263px;
+    height: 35px;
+    width: 38px;
+}
+.correct-icon {
+    background-position: -112px -42px;
+    height: 12px;
+    width: 12px;
+}
+.warning-icon {
+    background-position: -112px -14px;
+    height: 12px;
+    width: 12px;
+}
+.ordinary-members-icon {
+    background-position: -147px -155px;
+    height: 18px;
+    width: 18px;
+}
+.golden-members-icon {
+    background-position: -147px -188px;
+    height: 18px;
+    width: 18px;
+}
+.platinum-members-icon {
+    background-position: -147px -219px;
+    height: 18px;
+    width: 18px;
+}
+
+.input-wrap {
+    position: relative;
+    padding-right:6px;
+}
+
+.input-wrap .icon {
+    bottom: 2px;
+    right: 10px;
+    position: absolute;
+}
+
+.input-wrap .error-tooltip {
+    top : 30px;
+}
+
+.rfid .body .input-wrap input[type='text'] {
+    padding-right:-3px;
+}
+
+.error-container {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 0 ;
+}
+
+.form-horizontal .control-tip {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: left;
+    color : #55a32a;
+    font-size: 13px;
+}
+
+nav#subCategory {
+    background: #f8f8f8;
+    height: 41px;
+    border-bottom: 1px solid #e6e6e6;
+    width: 100%;
+}
+
+nav#subCategory ul {
+    list-style: none;
+    margin:0 auto;
+    white-space: nowrap;
+    text-align:center;
+    min-width: 1000px;
+    padding: 0;
+}
+
+nav#subCategory ul li {
+    position: static;
+    display: inline-block;
+    zoom: 1;
+    line-height: 20px;
+}
+
+nav#subCategory ul li a {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 12px 12px 9px;
+    display: block;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#content {
+    width: 100%;
+    min-height: 600px;
+    background: #fff;
+}
+
+.rfid .content-after-header {
+    margin-top: 67px;
+}
+
+#content #account {
+    width : 950px;
+    margin: 0 auto;
+}
+
+.center-full-content {
+    position: relative;
+    margin: 0 auto;
+    width: 760px;
+}
+
+.rfid a.colorLink {
+    color: #3498DB;
+}
+
+
+.rfid .small-text {
+    font-size: 13px;
+}
+
+.rfid .normal-text {
+    font-size: 14px;
+}
+
+.rfid .medium-text {
+    font-size: 18px;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: #3498DB;
+}
+
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
+    background-color: #fff;
+}
+
+span.error, div.error, p.error {
+    color: #E40037;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.fieldError {
+    border: solid 1px #FF0000;
+}
+
+.dialog-wrap {
+    border: 1px solid #c4c4c4;
+    background: #fff;
+}
+
+.dialog-wrap .dialog-title {
+    height: 31px;
+    padding: 0 10px;
+    background: #f5f5f5;
+    line-height: 31px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    border: 0;
+}
+
+.dialog-close {
+    display: block;
+    position: absolute;
+    z-index: 100000;
+    top: 5px;
+    right: 10px;
+}
+
+.rfid .btn-sm {
+    padding: 3px 10px;
+}
+
+.rfid .btn {
+    padding: 4px 12px;
+}
+
+.rfid .form-control {
+    padding: 4px 12px;
+    height: 30px;
+}
+.rfid .form-label {
+    font-weight: normal;
+}
+
+.rfid .btn.btn-primary {
+    color: #fff;
+    border: 1px solid #3498DB;
+    background: #3498DB;
+}
+
+.rfid .btn.btn-primary:hover {
+    border: 1px solid #2980B8;
+    background: #2980B8;
+}
+
+.rfid .btn.btn-danger {
+    color: #fff;
+    border: 1px solid #E74C3C;
+    background: #E74C3C;
+}
+
+.rfid .btn.btn-danger:hover {
+    border: 1px solid #E40F31;
+    background: #E40F31;
+}
+
+.rfid .btn.btn-primary-hollow {
+    color: #3498DB;
+    border: 1px solid #3498DB;
+    background: #fff;
+}
+
+.rfid .btn.btn-primary-hollow:hover {
+    color: #fff;
+    background: #3498DB;
+}
+
+.rfid .btn.btn-danger-hollow {
+    color: #E74C3C;
+    border: 1px solid #E74C3C;
+    background: #fff;
+}
+
+.rfid .btn.btn-danger-hollow:hover {
+    color: #fff;
+    background: #E74C3C;
+}
+
+.rfid .btn.btn-primary-qq {
+    color: #fff;
+    background: #5a98de;
+    border: 1px solid #5a98de;
+}
+
+.rfid .btn.btn-primary-qq:hover {
+    background: #6aa2e0;
+    border: 1px solid #6aa2e0;
+}
+
+.rfid .btn.btn-white {
+    color: #4c4c4c;
+    border: 1px solid #ccc;
+    background: #fafafa;
+}
+
+.rfid .btn.btn-white:hover {
+    background-color: #ccc;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.primary-text {
+    color: #3498DB;
+}
+
+.danger-text {
+    color: #E74C3C;
+}
+
+.group {
+    padding: 10px;
+}
+
+.horizontal-field {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.horizontal-field.first-field {
+    padding-left: 0;
+    padding-right: 3px;
+}
+
+.horizontal-field.last-field {
+    padding-right: 0;
+    padding-left: 3px;
+}
+
+.dialog-frame {
+    padding: 10px 20px;
+    background-color: #fff;
+    overflow: hidden;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.flat-dialog.dialog-frame {
+    border: none;
+}
+
+.flat-dialog .dialog-title {
+    background-color: #f0f0f0;
+    text-align: left;
+    margin: -10px -20px 0;
+    padding: 9px 13px;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.2;
+    color: #333;
+}
+
+.flat-dialog .dialog-body {
+    margin-top: 15px;
+}
+
+.flat-dialog .dialog-controls {
+    margin: 15px -20px -10px;
+    text-align: center;
+    padding: 10px 18px;
+    border-top: 1px solid #d6d6d6;
+}
+
+.flat-dialog .dialog-controls .btn {
+    margin-left: 15px;
+}
+
+.rfid .pull-right {
+    float: right;
+}
+
+.rfid .pull-left {
+    float: left;
+}
+
+.dropzone {
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.03);
+    position: relative;
+    padding: 1em;
+}
+
+.dropzone.dz-clickable {
+    cursor: pointer;
+}
+
+.dropzone, .dropzone *, .dropzone-previews, .dropzone-previews * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.dropzone .dz-default.dz-message {
+    position: absolute;
+    width: 428px;
+    margin-left: -214px;
+    margin-top: -10px;
+    top:50%;
+    left:50%;
+    text-align:center;
+}
+
+.btn.btn-big {
+    padding: 10px 15px;
+    font-size: 15px;
+}
+
+.rfid img {
+    vertical-align: middle;
+    border: 0;
+}
+
+.simple-cart {
+    width : 250px;
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.simple-cart-item {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    height: 72px;
+}
+
+.simple-cart-item-pic {
+    float: left;
+    width: 60px;
+}
+
+.simple-cart-item-detail {
+    float:right;
+    width: 160px;
+    max-width: 160px;
+    margin-top: -5px;
+}
+
+.simple-cart-item-price {
+    float:left;
+}
+
+.simple-cart-item-quantity {
+    float: right;
+}
+
+.rfid .w100 {
+    width: 100px;
+}
+
+.rfid .w150 {
+    width: 150px;
+}
+
+.rfid .w200 {
+    width: 200px;
+}
+
+.rfid .w250 {
+    width: 250px;
+}
+
+.rfid .w300 {
+    width: 300px;
+}
+
+.rfid .w350 {
+    width: 350px;
+}
+
+.rfid .w400 {
+    width: 400px;
+}
+
+.rfid .w450 {
+    width: 450px;
+}
+
+.rfid .w500 {
+    width: 500px;
+}
+
+.rfid .w550 {
+    width: 550px;
+}
+
+.rfid .w600 {
+    width: 600px;
+}
+
+.rfid .w650 {
+    width: 650px;
+}
+
+.rfid .w700 {
+    width: 700px;
+}
+
+.rfid .w750 {
+    width: 750px;
+}
+
+.rfid .w800 {
+    width: 800px;
+}
+
+.rfid .w850 {
+    width: 850px;
+}
+
+.rfid .w900 {
+    width: 900px;
+}
+
+.rfid .w950 {
+    width: 950px;
+}
+
+.rfid .help-message-box {
+    border: 1px dotted #e6e6e6;
+    padding: 20px;
+}
+
+.rfid .help-message-box .help-message-title {
+    border-bottom: 1px dotted #e6e6e6;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.rfid .help-message-box .help-message-body {
+    padding: 10px 0;
+}
+
+.rfid .help-message-box .help-message {
+    padding: 5px 0;
+}
+
+.rfid .section .section-title {
+    font-size: 24px;
+    border-bottom: 1px dotted #e6e6e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.rfid .section {
+    margin-bottom: 20px;
+}
+
+.steps-container {
+    position:absolute;
+    width: 100%;
+    top:67px;
+}
+
+ul.steps {
+    list-style: none;
+    display: inline-table;
+    padding-left: 0;
+    padding-bottom: 20px;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+    width: 100%;
+}
+
+ul.steps li {
+    padding: 0 10px 0 0;
+}
+
+ul.steps li:last-child {
+    padding: 0;
+}
+
+ul.steps li .step {
+    display: inline;
+    width: 100%;
+    display: block;
+    float: left;
+    height: 30px;
+    background: #CCC;
+    text-align: center;
+    padding: 1px 60px 0 60px;
+    position: relative;
+    text-decoration: none;
+    margin: 0 10px 0 0;
+    color: #fff;
+}
+
+ul.steps li .step:after {
+    content: "";
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid #CCC;
+    position: absolute; right: -15px; top: 0;
+    z-index: 1;
+}
+
+ul.steps li .step:before {
+    content: "";
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid #fff;
+    position: absolute; left: 0; top: 0;
+}
+
+ul.steps li:first-child .step{
+}
+ul.steps li:first-child .step:before {
+    display: none;
+}
+
+ul.steps li:last-child .step {
+    padding-right: 40px;
+}
+ul.steps li:last-child .step:after {
+    display: none;
+}
+
+ul.steps li .step.current {
+    background: #3498DB;
+}
+
+ul.steps li .step.current:after {
+    border-left-color: #3498DB;
+}
+
+ul.steps li .step.done {
+    background: #2C3E50;
+}
+
+ul.steps li .step.done:after {
+    border-left-color: #2C3E50;
+}
+
+.rfid .white-card {
+    width: 100%;
+    border: 1px solid #d6d6d6;
+    padding: 0;
+    margin-bottom: 15px;
+    background: white;
+    position: relative;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float:left;
+    overflow:visible;
+}
+
+.rfid .white-card .card-meta {
+    color: #fff;
+    padding: 20px 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0), #000);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(#000));
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), #000);
+    background-image: -o-linear-gradient(top, rgba(0,0,0,0), #000);
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0), #000);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#ff000000', GradientType=0);
+    background-color: transparent;
+}
+
+.rfid .white-card .card-meta-top {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+}
+
+.rfid .tiny-square {
+    width: 80px;
+    height: 80px;
+}
+
+.rfid .small-square {
+    width: 120px;
+    height: 120px;
+}
+
+.rfid .medium-square {
+    width: 220px;
+    height: 220px;
+}
+
+.rfid .big-square {
+    width: 360px;
+    height: 360px;
+}
+
+.rfid .large-square {
+    width: 480px;
+    height: 480px;
+}
+
+.rfid .add-card {
+    border: 2px dashed #d6d6d6;
+    cursor: pointer;
+}
+
+.rfid .add-card .add-object-plus {
+    background-image: url("../../images/Plus_icons.png");
+}
+
+.rfid .add-card.medium-square .add-object-plus {
+    background-position: -145px 50%;
+    height: 104px;
+    width: 104px;
+    position: absolute;
+    top: 50%;
+    margin-top: -68px;
+    margin-left: -52px;
+    left: 50%;
+}
+
+.rfid .add-card.small-square .add-object-plus {
+    background-position: 0;
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 28px;
+}
+
+.rfid .empty-card {
+    background-image: url("../../images/empty_document.png");
+    background-position: center 40%;
+    background-repeat: no-repeat;
+    background-color: #f0f0f0;
+}
+
+.rfid .add-card .add-object-title {
+    color: #888;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.rfid .add-card.medium-square .add-object-title {
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.rfid .add-card.small-square .add-object-title {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+
+.rfid .one-line {
+    text-decoration: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}
+
+.rfid .full-screen-photo-viewer {
+    display: none;
+    height: 100%;
+    z-index: 2000;
+    overflow: hidden;
+    position: relative;
+}
+
+.rfid .full-screen-photo-viewer .photo-container {
+    top: 20px;
+    position: absolute;
+}
+
+.rfid .full-screen-photo-viewer .photo-info-container {
+    position: absolute;
+    width: 350px;
+    top: 20px;
+    right: 20px;
+    background: #fff;
+}
+
+.rfid .full-screen-photo-viewer .photo-viewer-controls {
+    transition: all 250ms ease-in-out;
+    background-color: rgba(222,222,222,0.4);
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align:center;
+    width: 100%;
+}
+
+.rfid .full-screen-photo-viewer .photo-ctrl {
+    display: none;
+}
+
+.rfid .full-screen-photo-viewer .nav-left-btn,
+.rfid .full-screen-photo-viewer .nav-right-btn {
+    position: absolute;
+    top: 40%;
+    font-size: 64px;
+    cursor: pointer;
+}
+
+.rfid .full-screen-photo-viewer .nav-left-btn {
+    left: 20px;
+}
+
+.rfid .full-screen-photo-viewer .nav-right-btn {
+    right: 20px;
+}
+
+.rfid .photo-viewer-controls .photo-viewer-control-btn {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    margin: 10px 5px;
+    border-radius: 3px;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.rfid .photo-viewer-controls .photo-viewer-control-btn:hover {
+    background: #3498DB;
+}
+
+.rfid .full-screen-photo-viewer .photo-controls {
+    position: absolute;
+}
+
+.rfid .full-screen-photo-viewer .photo-info-header {
+    height: 45px;
+    border-bottom: 1px solid #d6d6d6;
+    position: relative;
+}
+
+.rfid .photo-info-header .cart:hover {
+    opacity: 1;
+}
+
+.rfid .photo-info-header .cart-count {
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: #3498DB;
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    line-height: 18px;
+    font-size:12px;
+    color: #fff;
+}
+
+.rfid .photo-info-header .close {
+    position: absolute;
+    border-left: 1px solid #d6d6d6;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    right: 0;
+    top: 0;
+    text-align: center;
+}
+
+.rfid .photo-info-container .collection-info {
+    border-bottom: 1px solid #d6d6d6;
+    padding: 10px;
+}
+
+.rfid .collection-info .collection-name {
+    font-size: 24px;
+    overflow: hidden;
+    line-height: 50px;
+    height: 50px;
+}
+
+.rfid .photo-info-container .user-info {
+    padding: 10px;
+    position: relative;
+}
+
+.rfid .user-info #userPhoto {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    left: 20px;
+    top: 10px;
+    border: 1px solid #d6d6d6;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+
+}
+
+.rfid .user-info .user-desc {
+    position: absolute;
+    width: 350px;
+    height: 45px;
+    left: 100px;
+    top: 10px;
+}
+
+.rfid .form-controls {
+    padding: 20px 0;
+    text-align:left;
+}
+
+.rfid .odd {
+    background-color: #FFF;
+}
+
+.rfid .even {
+    background-color: #ECF0F1;
+}
+

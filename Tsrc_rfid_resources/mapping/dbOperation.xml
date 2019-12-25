@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.DBOperationMapper">
+    
+    <resultMap id="dbOperation" type="com.tmri.rfid.bean.DBOperation">
+        <result column="ID" property="id"/>
+        <result column="FILE_NAME" property="fileName"/>
+        <result column="STATUS" property="status"/>
+        <result column="RESULT" property="result" jdbcType="CLOB" javaType="java.lang.String"/>
+        <result column="START_AT" property="startAt"/>
+        <result column="FINISH_AT" property="finishAt"/>
+    </resultMap>
+
+    <select id="queryById" parameterType="int" resultMap="dbOperation">
+        SELECT * FROM FRM_DB_OPERATION e WHERE e.ID = #{id}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultMap="dbOperation">
+        SELECT * FROM FRM_DB_OPERATION e WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="xh != null and xh !=''">
+                and xh = #{xh}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryAll" resultMap="dbOperation">
+        SELECT * FROM FRM_DB_OPERATION order by id desc
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.DBOperation">
+        INSERT INTO FRM_DB_OPERATION (ID, FILE_NAME, STATUS, RESULT, OPERATOR, START_AT, FINISH_AT)
+        VALUES (SEQ_FRM_DB_OPERATION.nextval, #{fileName}, #{status}, #{result}, #{operator}, #{startAt}, #{finishAt})
+    </insert>
+
+</mapper>

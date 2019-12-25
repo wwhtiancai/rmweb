@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriMapper">
+
+    <select id="queryById" parameterType="String" resultType="com.tmri.rfid.bean.Eri">
+        SELECT * FROM rfid_eri e WHERE e.tid = #{id}
+    </select>
+    
+    <select id="queryByCkdh" parameterType="String" resultType="com.tmri.rfid.bean.Eri">
+        select re.* from RFID_ERI re where re.bzhh in 
+			(select ri.bzhh from RFID_INVENTORY ri,
+			       RFID_INVENTORY_OUT_DETAIL riod,RFID_INVENTORY_OUT rio
+			where riod.ckdh = rio.ckdh and rio.ckdh = #{ckdh}
+			      and (ri.bzhh = riod.bzhm or ri.bzxh = riod.bzhm)
+			)
+    </select>
+
+	<select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.Eri">
+        SELECT * FROM RFID_ERI e
+        <trim prefix="where" prefixOverrides="AND|OR">
+            <if test="tid != null and tid != ''">
+            	and e.tid like '%' || #{tid} || '%'
+            </if>
+            <if test="kh != null and kh != ''">
+            	and e.kh like '%' || #{kh} || '%'
+            </if>
+            <if test="ph != null and ph != ''">
+            	and e.ph = #{ph} 
+            </if>
+            <if test="sf != null and sf != ''">
+            	and e.sf = #{sf} 
+            </if>
+            <if test="zt != null and zt != ''">
+            	and e.zt = #{zt} 
+            </if>
+            <if test="cshrqks != null and cshrqks != ''">
+            	and e.cshrq &gt;= to_date(#{cshrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="cshrqjs != null and cshrqjs != ''">
+            	and e.cshrq &lt;= to_date(#{cshrqjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="qskh != null">
+                and <![CDATA[kh >= #{qskh}]]>
+            </if>
+            <if test="zzkh != null">
+                and <![CDATA[kh <= #{zzkh}]]>
+            </if>
+            <if test="bzhh != null">
+                and e.bzhh = #{bzhh}
+            </if>
+            <if test="clxxbfid != null">
+                and e.clxxbfid = #{clxxbfid}
+            </if>
+            <if test="qsgxhrq != null">
+                and e.scgxhrq &gt;= to_date(#{qsgxhrq}, 'yyyy-mm-dd')
+            </if>
+            <if test="zzgxhrq != null">
+                and e.scgxhrq &lt;= to_date(#{zzgxhrq}, 'yyyy-mm-dd') + 1 - 1/86400
+            </if>
+        </trim>
+    </select>
+
+    <insert id="warehouse" parameterType="com.tmri.rfid.bean.Eri">
+        INSERT INTO RFID_ERI (TID, KH, SF, ZT, PH, CSHRQ, SCGXHRQ, KLX, glbm, BZHH, BZ, CLXXBFID)
+                VALUES (#{tid}, #{kh}, #{sf}, #{zt}, #{ph}, #{cshrq}, #{scgxhrq}, #{klx}, #{glbm}, #{bzhh}, #{bz}, #{clxxbfid})
+    </insert>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.Eri">
+        INSERT INTO RFID_ERI (TID, KH, SF, ZT, PH, CSHRQ, SCGXHRQ, KLX, glbm, BZHH)
+                VALUES (#{tid}, #{kh}, #{sf}, #{zt}, #{ph}, #{cshrq}, #{scgxhrq}, #{klx}, #{glbm}, #{bzhh})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.Eri">
+        UPDATE rfid_eri e
+          SET e.kh = #{kh}, e.sf = #{sf}, e.zt = #{zt},
+              e.ph = upper(#{ph}), e.cshrq = #{cshrq},
+              e.klx = #{klx}, e.scgxhrq = #{scgxhrq}, e.glbm = #{glbm},
+              e.bzhh=#{bzhh}, e.clxxbfid = #{clxxbfid}
+        WHERE e.tid = #{tid}
+    </update>
+
+    <update id="updateByCondition" parameterType="map">
+        UPDATE rfid_eri e
+        <trim prefix="set" suffixOverrides=",">
+            <if test="kh != null">
+                e.KH = #{kh},
+            </if>
+            <if test="sf != null">
+                e.SF = #{sf},
+            </if>
+            <if test="zt != null">
+                e.zt = #{zt},
+            </if>
+            <if test="ph != null">
+                e.ph = upper(#{ph}),
+            </if>
+            <if test="cshrq != null">
+                e.cshrq = #{cshrq},
+            </if>
+            <if test="scgxhrq != null">
+                e.scgxhrq = #{scgxhrq},
+            </if>
+            <if test="clxxbfid != null">
+                e.clxxbfid = #{clxxbfid},
+            </if>
+            <if test="glbm != null">
+                e.glbm = #{glbm},
+            </if>
+            <if test="bzhh != null">
+                e.bzhh = #{bzhh},
+            </if>
+            <if test="bz != null">
+                e.bz = #{bz}
+            </if>
+        </trim>
+         WHERE
+        <trim prefixOverrides="and">
+            <if test="cond_tid != null">
+                and tid = #{cond_tid}
+            </if>
+            <if test="cond_kh != null">
+                and kh = #{cond_kh}
+            </if>
+            <if test="cond_zt != null">
+                and zt = #{cond_zt}
+            </if>
+        </trim>
+    </update>
+    
+    <update id="updateByInventoryId" parameterType="String">
+        UPDATE rfid_eri e SET e.glbm = #{glbm} 
+		where exists (
+			select * from rfid_inventory ri 
+			where <![CDATA[e.kh >= ri.qskh and e.kh <= ri.zzkh and]]> ri.bzhh = #{bzhh}
+		) and e.zt = 1
+    </update>
+    <update id="updateByXh" parameterType="String">
+        UPDATE rfid_eri e SET e.glbm = #{glbm} 
+		where exists (
+			select * from rfid_inventory ri 
+			where <![CDATA[e.kh >= ri.qskh and e.kh <= ri.zzkh and]]> ri.bzxh = #{bzxh}
+		) and e.zt = 1
+    </update>
+    
+    
+
+    <select id="getCidSequence" parameterType="java.lang.String" resultType="long">
+        SELECT SEQ_RFID_ERI_KH__${_parameter}.nextval from dual
+    </select>
+
+    <select id="queryByRegion" parameterType="hashmap" resultType="com.tmri.rfid.bean.Eri">
+        with t as
+        (select rownum - 1 as rn from dual connect by
+        <![CDATA[rownum<=to_number(substr(#{zzkh}, 3)) - to_number(substr(#{qskh}, 3)) + 1)]]>
+        select concat(substr(#{qskh}, 1, 2), lpad(to_number(substr(#{qskh}, 3)) + rn, 10, '0')) as kh,
+        re.tid, re.sf, re.zt, re.ph, re.cshrq, re.klx, re.glbm, re.bzhh from rfid_eri re, t
+        where concat(substr(#{qskh}, 1, 2), lpad(to_number(substr(#{qskh}, 3)) + rn, 10, '0')) = re.kh(+)
+              and re.zt(+) = 1 order by kh
+    </select>
+
+    <select id="count" parameterType="hashmap">
+        SELECT count(1) from RFID_ERI
+         <trim prefix="where" prefixOverrides="AND|OR">
+             <if test="qskh != null">
+                 and <![CDATA[kh >= #{qskh}]]>
+             </if>
+             <if test="zzkh != null">
+                 and <![CDATA[kh <= #{zzkh}]]>
+             </if>
+             <if test="=qsgxhrq != null">
+                 and e.scgxhrq &gt;= to_date(#{qsgxhrq}, 'yyyy-mm-dd')
+             </if>
+             <if test="zzgxhrq != null">
+                 and e.scgxhrq &lt;= to_date(#{zzgxhrq}, 'yyyy-mm-dd') + 1 - 1/86400
+             </if>
+         </trim>
+    </select>
+
+    <select id="fetchDqkc" parameterType="String" resultType="Integer">
+        select count(*) from RFID_ERI re 
+		left join RFID_INVENTORY ri on ri.bzhh = re.bzhh
+		where ri.cpdm = #{cpdm} and ri.ssbm = #{ssbm}
+    </select>
+
+    <select id="fetchByVehicle" parameterType="map" resultType="com.tmri.rfid.bean.Eri">
+        select e.* from RFID_ERI e, RFID_VEHICLE_LOG vl
+        where e.clxxbfid = vl.id
+        and vl.hphm = #{hphm}
+        and vl.hpzl = #{hpzl}
+        and vl.fzjg = #{fzjg}
+        and e.zt = 1
+    </select>
+
+    <select id="fetchByJdcxh" parameterType="String" resultType="com.tmri.rfid.bean.Eri">
+        select e.* from RFID_ERI e, RFID_VEHICLE_LOG vl
+        where e.clxxbfid = vl.id
+        and vl.jdcxh = #{jdcxh}
+        and e.zt = 1
+    </select>
+    
+    <select id="queryByHphm" parameterType="String" resultType="com.tmri.rfid.bean.Eri">
+    	select distinct re.*,rvl.* from RFID_ERI re,RFID_ERI_CUSTOMIZE_RECORD recr,RFID_VEHICLE_LOG rvl
+			where re.tid = recr.tid and recr.clxxbfid = rvl.id 
+			and rvl.hphm = replace(#{hphm},substr(#{hphm},1,1),'') 
+			and rvl.fzjg= substr(#{hphm},1,2)
+    </select>
+    
+    <update id="unbindEri" parameterType="String">
+        UPDATE rfid_eri e SET e.clxxbfid = null,zt=1,bz='系统解绑' where tid = #{tid}
+    </update>
+    
+    
+    
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriPastedMapper">
+
+    <insert id="save" parameterType="com.tmri.rfid.bean.EriPastedLog">
+        INSERT INTO RFID_ERI_PASTED_LOG (TID, KH, HPHM, LYR, BZ, LYRQ)
+                VALUES (#{tid}, #{kh}, #{hphm}, #{lyr}, #{bz}, #{lyrq})
+    </insert>
+
+	<select id="getByTid" parameterType="String" resultType="com.tmri.rfid.bean.EriPastedLog">
+        select * from RFID_ERI_PASTED_LOG where tid = #{tid}
+    </select>
+</mapper>

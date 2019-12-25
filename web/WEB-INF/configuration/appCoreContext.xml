@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:hdp="http://www.springframework.org/schema/hadoop" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:bean="http://www.springframework.org/schema/util" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="false">
+
+	<description>Spring公共配置 </description>
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.tmri"><!-- 多个不同的包路径，用,分割。 -->
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:runtime.properties</value>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+	
+	<import resource="constant.xml"/>
+	
+	<bean id="transactionMan"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource"><ref local="dataSource"/></property>
+    </bean>
+
+	<!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource"><ref local="dataSource"/></property>
+    </bean>
+    
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />		
+			<tx:method name="select*"  read-only="true" />
+			<tx:method name="*insert*" propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+            <tx:method name="*update*" propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+            <tx:method name="*delete*" propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+            <tx:method name="*save*"   propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+			<tx:method name="*write*"  propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<bean id="transactionManagerZp"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource"><ref local="dataSource"/></property>
+    </bean>
+    
+	<tx:advice id="txAdvicePhoto" transaction-manager="transactionManagerZp">
+		<tx:attributes>
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />		
+			<tx:method name="select*"  read-only="true" />
+			<tx:method name="insert*" propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+            <tx:method name="update*" propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+            <tx:method name="delete*" propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+            <tx:method name="save*"   propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+			<tx:method name="write*"  propagation="REQUIRED"  rollback-for="java.lang.Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="txPointcut" expression="execution(* com.tmri.*.service..*.*(..)) or execution(* com.tmri.*.*.service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+	</aop:config>
+	
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="txPointcutPhoto" expression="execution(* com.tmri.*.service..*.*(..)) or execution(* com.tmri.*.*.service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvicePhoto" pointcut-ref="txPointcutPhoto" />
+	</aop:config>
+	
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"><value>${jdbc.driver}</value></property>
+		<property name="url"><value>${jdbc.url}</value></property>
+		<property name="username"><value>${jdbc.username}</value></property>
+		<property name="password"><value>${jdbc.password}</value></property>
+		<property name="maxActive"><value>80</value></property>
+		<property name="maxIdle"><value>20</value></property>
+		<property name="maxWait"><value>20</value></property>
+		<property name="removeAbandoned"><value>false</value></property>
+		<property name="removeAbandonedTimeout"><value>30</value></property>
+		<property name="testOnBorrow"><value>true</value></property>
+		<property name="logAbandoned"><value>false</value></property>
+	</bean>
+	
+	<bean name="jdbcTemplate" class="com.tmri.share.ora.FrmJdbcTemplate">
+		<property name="dataSource"><ref local="dataSource"/></property>
+	</bean>
+	
+	<bean name="jdbcTemplatecs" class="com.tmri.share.ora.FrmJdbcTemplate">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+	</bean>
+	<bean name="jdbcTemplateZp" class="com.tmri.share.ora.FrmJdbcTemplate">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+	</bean>	 
+	<bean name="jdbcTemplatecsZp" class="com.tmri.share.ora.FrmJdbcTemplate">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+	</bean>	
+	
+	<bean name="jdbcTemplateTrff" class="com.tmri.share.ora.FrmJdbcTemplate">
+		<property name="dataSource"><ref local="dataSource"/></property>
+	</bean>
+		
+    <bean id="rmWebCacheService" class="com.tmri.cache.service.impl.WebCacheServiceImpl" init-method="init"/>
+
+    <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"
+          lazy-init="true" />
+    <bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler"/>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.tmri.rfid.mapper"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatisConfig.xml"/>
+    </bean>
+
+    <bean id="checkLoginFilter" class="com.tmri.rfid.filter.CheckLoginFilter">
+        <property name="ignoreList">
+            <list>
+                <value>/be/login.rfid</value>
+				<value>/login.frm</value>
+				<value>/index.jsp</value>
+				<value>/ex/*</value>
+            </list>
+        </property>
+		<property name="timeout" value="${session.timeout}"/>
+    </bean>
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<bean id="tmriJaxRpcOutNewAccessServiceStub" class="com.tmri.rfid.webservice.TmriJaxRpcOutNewAccessServiceStub">
+		<constructor-arg name="targetEndpoint">
+			<value>${remote.fetch.vehicle.endpoint}</value>
+		</constructor-arg>
+		<constructor-arg name="httpClient">
+			<ref bean="httpClient"/>
+		</constructor-arg>
+	</bean>
+
+    <util:list id="sysParaListeners">
+        <ref bean="jmfsListener"/>
+    </util:list>
+
+    <bean id="jmfsListener" class="com.tmri.rfid.listener.JMFSListener"/>
+
+	<bean id="manager" class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager"/>
+
+	<bean id="httpClient" class="org.apache.commons.httpclient.HttpClient">
+		<property name="httpConnectionManager" ref="manager"/>
+	</bean>
+    <!--以下配置均为互联网发卡配置，如无需互联网发卡则将其全部注释，如深圳-->
+	<!--<bean id="DataPassTask" class="com.tmri.rfid.task.DataPassTask">
+		<property name="triggerTasks">
+			<list>
+                &lt;!&ndash;为互联网系统打包时需注释掉以下任务&ndash;&gt;
+				<ref bean="customizeRequestTask"/>
+				<ref bean="externalRequestTask"/>
+                &lt;!&ndash;为互联网系统打包时需注释掉以上任务&ndash;&gt;
+			</list>
+		</property>
+	</bean>
+	&lt;!&ndash;  定时器配置&ndash;&gt;
+	<bean id="timeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="DataPassTask"></property>&lt;!&ndash; 指定任务类&ndash;&gt;
+		<property name="targetMethod" value="doit"></property>&lt;!&ndash; 指定任务方法&ndash;&gt;
+		<property name="concurrent" value="false"></property>
+	</bean>
+	&lt;!&ndash; 定义时间间隔触发器&ndash;&gt;
+	<bean id="timeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="timeDetail"></property>
+		<property name="cronExpression">
+			<value>${data.exchange.cron}</value>
+		</property>
+	</bean>
+	&lt;!&ndash; 启动定时器 &ndash;&gt;
+	<bean id="startJob" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="timeTrigger"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="deviceRegistrationHandler" class="com.tmri.rfid.service.impl.DeviceRegistrationHandler"/>
+	<bean id="customizeResultHandler" class="com.tmri.rfid.service.impl.CustomizeResultHandler"/>
+
+	<bean id="externalRequestTask" class="com.tmri.rfid.task.ExternalRequestTask">
+		<property name="externalRequestHandlers">
+			<list>
+				<ref bean="deviceRegistrationHandler"/>
+				<ref bean="customizeResultHandler"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="customizeRequestTask" class="com.tmri.rfid.task.CustomizeRequestTask"></bean>-->
+    <!--以上配置均为互联网发卡配置，如无需互联网发卡则将其全部注释，如深圳-->
+</beans>

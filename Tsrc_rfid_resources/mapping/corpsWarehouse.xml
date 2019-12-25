@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.CorpsWarehouseMapper">
+
+    <select id="fetchByRkdh" parameterType="String" resultType="com.tmri.rfid.bean.CorpsWarehouse">
+        SELECT * FROM rfid_corps_inventory_in e WHERE e.rkdh = #{rkdh}
+    </select>
+    
+    <select id="getMaxRkdh" parameterType="String" resultType="String">
+        select max(rii.rkdh)+1 from rfid_corps_inventory_in rii 
+		where rii.rkdh like CONCAT('${rkdh}','%' )
+    </select>
+
+	<select id="queryList" parameterType="map" resultType="com.tmri.rfid.bean.CorpsWarehouse">
+        SELECT * FROM rfid_corps_inventory_in e WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="rkdh != null and rkdh != ''">
+            	and e.rkdh = #{rkdh} 
+            </if>
+            <if test="glbm != null and glbm != ''">
+            	and e.ssbm = #{glbm} 
+            </if>
+            <if test="jbr != null and jbr != ''">
+            	and e.jbr = #{jbr} 
+            </if>
+            <if test="rkrqks != null and rkrqks != ''">
+            	and e.rkrq &gt;= to_date(#{rkrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="rkrqjs != null and rkrqjs != ''">
+            	and e.rkrq &lt;= to_date(#{rkrqjs}, 'yyyy-mm-dd')
+            </if>
+        </trim>
+        order by e.rkrq desc
+    </select>
+    
+    <insert id="create" parameterType="com.tmri.rfid.bean.CorpsWarehouse">
+        INSERT INTO rfid_corps_inventory_in (RKDH, JBR, RKRQ, CPLB, CPDM, SSBM, BZ)
+                VALUES (#{rkdh}, #{jbr}, #{rkrq}, #{cplb}, #{cpdm}, #{ssbm}, #{bz})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.CorpsWarehouse">
+        UPDATE rfid_corps_inventory_in e SET 
+          	<trim suffixOverrides=",">
+	          	<if test="rkdh != null">
+	              	rkdh = #{rkdh},
+	          	</if>
+          		<if test="ssbm != null">
+	              	ssbm = #{ssbm},
+	          	</if>
+          		<if test="bz != null">
+	              	bz = #{bz},
+	          	</if>
+          		<if test="cplb != null">
+	              	cplb = #{cplb},
+	          	</if>
+          		<if test="cpdm != null">
+	              	cpdm = #{cpdm},
+	          	</if>
+          </trim>
+        WHERE e.rkdh = #{rkdh}
+    </update>
+    
+    <delete id="deleteByRkdh" parameterType="String">
+        delete from rfid_corps_inventory_in where rkdh=#{rkdh}
+    </delete>
+    
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ProductionTaskMapper">
+
+    <select id="queryById" parameterType="Object" resultType="com.tmri.rfid.bean.ProductionTask">
+        select * from RFID_PRODUCTION_TASK where rwh = #{_parameter}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.ProductionTask">
+        select * from RFID_PRODUCTION_TASK rpt where 1=1
+        <trim>
+            <if test="rwh != null">
+                and rwh = #{rwh}
+            </if>
+            <if test="jbr != null">
+                and jbr = #{jbr}
+            </if>
+            <if test="rwdm != null">
+                and rwdm = #{rwdm}
+            </if>
+            <if test="jhrqks != null">
+                <![CDATA[ and jhrq >= #{jhrqks} ]]>
+            </if>
+            <if test="jhrqjs != null">
+                <![CDATA[ and jhrq <= #{jhrqjs} ]]>
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+        </trim>
+        order by jhrq desc
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.ProductionTask">
+        insert into RFID_PRODUCTION_TASK (RWH, RWDM, ZT, JHRQ, JBR, BZ, KSRQ, WCRQ)
+                values (#{rwh}, #{rwdm}, #{zt}, #{jhrq}, #{jbr}, #{bz}, #{ksrq}, #{wcrq})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.ProductionTask">
+        update RFID_PRODUCTION_TASK
+        set RWDM = #{rwdm}, zt = #{zt}, jhrq = #{jhrq}, jbr = #{jbr}, bz = #{bz}, ksrq = #{ksrq}, wcrq = #{wcrq}
+        where rwh = #{rwh}
+    </update>
+
+    <update id="updateByCondition" parameterType="hashmap">
+        update RFID_PRODUCTION_TASK
+        <trim prefix="set" suffixOverrides=",">
+            <if test="zt != null">
+                zt = #{zt},
+            </if>
+            <if test="jhrq != null">
+                jhrq = #{jhrq},
+            </if>
+            <if test="jbr != null">
+                jbr = #{jbr},
+            </if>
+            <if test="bz != null">
+                bz = #{bz},
+            </if>
+            <if test="ksrq != null">
+                ksrq = #{ksrq},
+            </if>
+            <if test="wcrq != null">
+                wcrq = #{wcrq},
+            </if>
+        </trim>
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="cond_rwh != null">
+                and rwh = #{cond_rwh}
+            </if>
+            <if test="cond_zt != null">
+                and zt = #{cond_zt}
+            </if>
+            <if test="cond_jbr != null">
+                and jbr = #{cond_jbr}
+            </if>
+            <if test="cond_ksrqks != null">
+                <![CDATA[ and ksrq >= #{cond_ksrqks}]]>
+            </if>
+            <if test="cond_ksrqjs != null">
+                <![CDATA[ and ksrq <= #{cond_ksrqjs}]]>
+            </if>
+            <if test="cond_ksrq != null">
+                <![CDATA[ and ksrq = #{cond_ksrq}]]>
+            </if>
+            <if test="cond_wcrqks != null">
+                <![CDATA[ and wcrq >= #{cond_wcrqks}]]>
+            </if>
+            <if test="cond_wcrqjs != null">
+                <![CDATA[ and wcrq <= #{cond_wcrqjs}]]>
+            </if>
+            <if test="cond_wcrq != null">
+                <![CDATA[ and wcrq = #{cond_wcrq}]]>
+            </if>
+        </trim>
+    </update>
+
+
+    <select id="queryForView" parameterType="map" resultType="com.tmri.rfid.ctrl.view.ProductionTaskView">
+        select rpt.rwh, rpt.rwdm, rpt.zt, rpt.jhrq, rpt.jbr, rpt.bz, rpt.ksrq, rpt.wcrq,
+        min(ri.qskh) as qskh, max(ri.zzkh) as zzkh, ri.cpdm as cpdm
+        from RFID_PRODUCTION_TASK rpt, rfid_inventory ri
+        where rpt.rwh = ri.rwh
+        <trim>
+            <if test="rwh != null">
+                and rpt.rwh = #{rwh}
+            </if>
+            <if test="jbr != null">
+                and rpt.jbr = #{jbr}
+            </if>
+            <if test="rwdm != null">
+                and rpt.rwdm = #{rwdm}
+            </if>
+            <if test="jhrqks != null">
+                <![CDATA[ and rpt.jhrq >= #{jhrqks} ]]>
+            </if>
+            <if test="jhrqjs != null">
+                <![CDATA[ and rpt.jhrq <= #{jhrqjs} ]]>
+            </if>
+            <if test="zt != null">
+                and rpt.zt = #{zt}
+            </if>
+            <if test="cpdm != null">
+                and ri.cpdm = #{cpdm}
+            </if>
+        </trim>
+        group by rpt.rwh, rpt.rwdm, rpt.zt, rpt.jhrq, rpt.jbr, rpt.bz, rpt.ksrq, rpt.wcrq, ri.cpdm
+        order by rpt.jhrq desc
+    </select>
+
+</mapper>

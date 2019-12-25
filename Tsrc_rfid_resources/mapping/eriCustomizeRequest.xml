@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriCustomizeRequestMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.EriCustomizeRequest">
+        select * from RFID_ERI_CUSTOMIZE_REQUEST where xh = #{id}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriCustomizeRequest">
+        select * from RFID_ERI_CUSTOMIZE_REQUEST
+        <trim prefix="where" prefixOverrides="and">
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+            <if test="xh != null">
+                and xh = #{xh}
+            </if>
+            <if test="lsh != null">
+                and lsh = #{lsh}
+            </if>
+            <if test="hpzl != null">
+                and hpzl = #{hpzl}
+            </if>
+            <if test="hphm != null and hphm != ''">
+                and upper(hphm) like '%' || upper(#{hphm}) || '%'
+            </if>
+            <if test="fzjg != null">
+                and upper(fzjg) like '%' || upper(#{fzjg}) || '%'
+            </if>
+            <if test="cjr != null">
+                and cjr = #{cjr}
+            </if>
+            <if test="zts != null">
+                and zt in 
+                <foreach collection="zts" item="zt" index="index" open="(" separator="," close=")">
+                    #{zt}
+                </foreach>
+            </if>
+            <if test="kh != null">
+                and kh = #{kh}
+            </if>
+            <if test="tid != null">
+                and tid = #{tid}
+            </if>
+            <if test="glbm != null">
+                and glbm = #{glbm}
+            </if>
+            <if test="ywlx != null">
+                and ywlx = #{ywlx}
+            </if>
+        </trim>
+        order by xh desc
+    </select>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.EriCustomizeRequest">
+        UPDATE RFID_ERI_CUSTOMIZE_REQUEST
+        SET tid = upper(#{tid}), lsh = upper(#{lsh}), hphm = upper(#{hphm}), hpzl = #{hpzl}, fzjg = upper(#{fzjg}), cjr = #{cjr},
+        zt = #{zt}, kh = #{kh}, sbyy = substr(#{sbyy}, 0, 512), gxsj = sysdate, qqxh = #{qqxh}
+        WHERE xh = #{xh}
+    </update>
+
+    <update id="updateByCondition" parameterType="map">
+        UPDATE RFID_ERI_CUSTOMIZE_REQUEST SET gxsj = sysdate,
+        <trim suffixOverrides=",">
+            <if test="tid != null">
+                tid = #{tid},
+            </if>
+            <if test="lsh != null">
+                lsh = #{lsh},
+            </if>
+            <if test="zt != null">
+                zt = #{zt},
+            </if>
+            <if test="hphm != null">
+                hphm = #{hphm},
+            </if>
+            <if test="hpzl != null">
+                hpzl = #{hpzl},
+            </if>
+            <if test="fzjg != null">
+                fzjg = #{fzjg},
+            </if>
+            <if test="sbyy != null">
+                sbyy = substr(#{sbyy}, 0, 512),
+            </if>
+            <if test="kh != null">
+                kh = #{kh},
+            </if>
+            <if test="qqxh != null">
+                qqxh = #{qqxh}
+            </if>
+        </trim>
+        WHERE
+        <trim prefixOverrides="and">
+            <if test="cond_xh != null">
+                and xh = #{cond_xh}
+            </if>
+            <if test="cond_tid != null">
+                and tid = upper(#{cond_tid})
+            </if>
+            <if test="cond_lsh != null">
+                and lsh = upper(#{cond_lsh})
+            </if>
+            <if test="cond_zt != null">
+                and zt = #{cond_zt}
+            </if>
+            <if test="cond_hphm != null">
+                and hphm = upper(#{cond_hphm})
+            </if>
+            <if test="cond_hpzl != null">
+                and hpzl = #{cond_hpzl}
+            </if>
+            <if test="cond_fzjg != null">
+                and fzjg = upper(#{cond_fzjg})
+            </if>
+            <if test="cond_kh != null">
+                and kh = #{cond_kh}
+            </if>
+            <if test="cond_ywlx != null">
+                and ywlx = #{cond_ywlx}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriCustomizeRequest">
+        <selectKey keyProperty="xh" order="BEFORE" resultType="long">
+            select SEQ_RFID_ERI_CUSTOMIZE_RECORD.nextval as xh from dual
+        </selectKey>
+        INSERT INTO RFID_ERI_CUSTOMIZE_REQUEST (XH, LSH, HPHM, HPZL, FZJG, TID, KH, GLBM, ZT, CJR, CJSJ, QQXH, YWLX)
+        VALUES (#{xh}, upper(#{lsh}), upper(#{hphm}), #{hpzl}, upper(#{fzjg}), upper(#{tid}), #{kh}, #{glbm}, #{zt}, #{cjr}, sysdate, #{qqxh}, #{ywlx})
+    </insert>
+
+    <select id="queryLast" parameterType="string" resultType="com.tmri.rfid.bean.EriCustomizeRequest">
+        select * from (
+        select * from rfid_eri_customize_request
+        where tid = #{tid} order by xh desc
+        ) where rownum = 1
+    </select>
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<!-- 在配置文件中配置常量 -->
+<beans>
+	<bean id="dataExchangeMappings" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="com.tmri.rfid.bean.DataExchangeMapping">
+					<property name="className" value="com.tmri.rfid.bean.EriEquipmentBean"/>
+					<property name="tableName" value="RFID_ERI_EQUIPMENT_APPLY"/>
+					<property name="keyName" value="XH"/>
+				</bean>
+				<bean class="com.tmri.rfid.bean.DataExchangeMapping">
+					<property name="className" value="com.tmri.rfid.bean.EriCustomizeRequest"/>
+					<property name="tableName" value="RFID_ERI_CUSTOMIZE_REQUEST"/>
+					<property name="keyName" value="XH"/>
+				</bean>
+				<bean class="com.tmri.rfid.bean.DataExchangeMapping">
+					<property name="className" value="com.tmri.rfid.bean.ExternalRequest"/>
+					<property name="tableName" value="RFID_EXTERNAL_REQUEST"/>
+					<property name="keyName" value="XH"/>
+				</bean>
+				<bean class="com.tmri.rfid.bean.DataExchangeMapping">
+					<property name="className" value="com.tmri.rfid.bean.EriCustomizeData"/>
+					<property name="tableName" value="RFID_ERI_CUSTOMIZE_DATA"/>
+					<property name="keyName" value="XH"/>
+				</bean>
+	        </list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="toolsUtils" class="com.tmri.rfid.util.MyConstantUtils">
+		<!-- 1 专网  2 公安网 -->
+		<constructor-arg value="2" index="0"></constructor-arg>
+		<!-- 将常量注入单例对象中 -->
+		<property name="dataExchangeMappings">
+			<ref bean="dataExchangeMappings" />
+		</property>
+	</bean>
+</beans>

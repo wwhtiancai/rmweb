@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.VehicleMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.Vehicle">
+        <![CDATA[ select * from rfid_vehicle where id = #{id} ]]>
+    </select>
+
+    <select id="queryByLsh" parameterType="String" resultType="com.tmri.rfid.bean.Vehicle">
+        select v.* from rfid_vehicle v, rfid_eri_customize_task t
+        where t.clxxid = v.id
+        and t.lsh = #{lsh}
+        order by id desc
+    </select>
+
+	<select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.Vehicle">
+        SELECT * FROM RFID_VEHICLE e WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="id != null">
+                and e.id = #{id}
+            </if>
+            <if test="hpzl != null and hpzl != ''">
+            	and e.hpzl = #{hpzl} 
+            </if>
+            <if test="hphm != null and hphm != ''">
+            	and upper(e.hphm) like '%' || upper(trim(#{hphm})) || '%'
+            </if>
+            <if test="fzjg != null">
+                and upper(e.fzjg) like '%' || upper(trim(#{fzjg})) || '%'
+            </if>
+            <if test="syr != null and syr != ''">
+            	and e.syr like '%' || trim(#{syr}) || '%'
+            </if>
+            
+            <if test="hdzkks != null and hdzkks != ''">
+            	and e.hdzk &gt;= #{hdzkks}
+            </if>
+            <if test="hdzkjs != null and hdzkjs != ''">
+            	and e.hdzk &gt;= #{hdzkjs}
+            </if>
+            <if test="yxqzks != null and yxqzks != ''">
+            	and e.yxqz &gt;= to_date(#{yxqzks}, 'yyyy-mm-dd')
+            </if>
+            <if test="yxqzjs != null and yxqzjs != ''">
+            	and e.yxqz &lt;= to_date(#{yxqzjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="bxzzrqks != null and bxzzrqks != ''">
+            	and e.bxzzrq &gt;= to_date(#{bxzzrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="bxzzrqjs != null and bxzzrqjs != ''">
+            	and e.bxzzrq &lt;= to_date(#{bxzzrqjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="xh != null">
+                and e.xh = #{xh}
+            </if>
+            <if test="jdcxh != null">
+                and e.jdcxh = #{jdcxh}
+            </if>
+        </trim>
+        order by id desc
+    </select>
+
+    <select id="queryByHphm" parameterType="map" resultType="com.tmri.rfid.bean.Vehicle">
+        SELECT * FROM RFID_VEHICLE e where
+          hpzl = #{hpzl} and substr(fzjg, 1, 1) || hphm = #{hphm} and rownum = 1
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.Vehicle">
+        <selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="id">
+            select SEQ_RFID_VEHICLE_XH.nextval as id from dual
+        </selectKey>
+        insert into RFID_VEHICLE (id, hphm, hpzl, fzjg, cllx, csys, syxz, syr, yxqz, qzbfqz, bxzzrq, pl, hdzzl, hdzk,
+        ccrq, clsbdh, clpp, zzl, gl, jdcxh, cjrq, zqyzl, lsh, xh, zbzl, xszzp)
+        VALUES (#{id}, upper(trim(#{hphm})), trim(#{hpzl}), upper(trim(#{fzjg})), upper(trim(#{cllx})), upper(trim(#{csys})),
+        upper(trim(#{syxz})), trim(#{syr}), #{yxqz}, #{qzbfqz}, #{bxzzrq}, #{pl}, #{hdzzl}, #{hdzk}, #{ccrq}, #{clsbdh},
+        #{clpp}, #{zzl}, #{gl}, #{jdcxh}, sysdate, #{zqyzl}, #{lsh}, #{xh}, #{zbzl}, #{xszzp})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.Vehicle">
+        update RFID_VEHICLE set hphm = upper(#{hphm}),  hpzl = upper(#{hpzl}), fzjg = upper(#{fzjg}),
+        cllx = #{cllx}, csys = #{csys}, syxz = #{syxz},syr = #{syr}, yxqz = #{yxqz}, qzbfqz = #{qzbfqz}, bxzzrq = #{bxzzrq},
+        pl = #{pl}, hdzzl = #{hdzzl}, hdzk = #{hdzk}, ccrq = #{ccrq}, clsbdh = #{clsbdh}, clpp = #{clpp}, zzl = #{zzl},  gl = #{gl},
+        jdcxh = #{jdcxh}, gxrq = sysdate, bz = #{bz}, zqyzl = #{zqyzl}, lsh = #{lsh}, xh=#{xh}, zbzl = #{zbzl}, xszzp = #{xszzp}
+        where id = #{id}
+    </update>
+</mapper>

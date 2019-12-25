@@ -1,0 +1,67 @@
+.jqzoom{
+	border:1px solid black;
+	float:left;
+	position:relative;
+	padding:0px;
+	margin:0px;
+	cursor:pointer;
+	overflow:hidden;
+	height:210px;
+	width:244px;
+	background:#fff url(ajax-loader.gif) center center no-repeat;
+}
+
+.jqzoomPassQuery{
+	border:1px solid black;
+	float:left;
+	position:relative;
+	padding:0px;
+	margin:0px;
+	cursor:pointer;
+	overflow:hidden;
+	background:#fff url(ajax-loader.gif) center center no-repeat;
+}
+
+.jqzoom2{
+	border:1px solid black;
+	float:left;
+	position:relative;
+	padding:0px;
+	margin:0px;
+	cursor:pointer;
+	overflow:hidden;
+	background:#fff url(../../image/ajax-loader.gif) center center no-repeat;
+}
+
+.jqzoom img{
+}
+
+div.zoomdiv {
+z-index                 : 100;
+position                : absolute;
+top:0px;
+left:0px;
+width                   : 200px;
+height                  : 200px;
+background: #ffffff;
+border:1px solid #CCCCCC;
+display:none;
+text-align: center;
+overflow: hidden;
+}
+
+div.jqZoomPup {
+z-index                 : 10;
+visibility              : hidden;
+position                : absolute;
+top:0px;
+left:0px;
+width                   : 50px;
+height                  : 50px;
+border: 1px solid #aaa;
+background: #ffffff;
+opacity: 0.5;
+-moz-opacity: 0.5;
+-khtml-opacity: 0.5;
+filter: alpha(Opacity=50);
+}

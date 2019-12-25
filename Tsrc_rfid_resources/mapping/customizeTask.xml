@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.CustomizeTaskMapper">
+
+    	<select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.CustomizeTask">
+        SELECT e.* FROM RFID_ERI_CUSTOMIZE_TASK e, RFID_VEHICLE v WHERE e.clxxid = v.id(+)
+        <trim suffixOverrides="and">
+            <if test="xh != null">
+                and e.xh = #{xh}
+            </if>
+      	   <if test="clxxid != null and clxxid !=''">
+       			and e.clxxid = #{clxxid}
+            </if>
+            <if test="jbr != null and jbr!=''">
+                and e.jbr = #{jbr} 
+            </if>
+             <if test="lsh != null and lsh!=''">
+                and e.lsh = #{lsh} 
+            </if>
+            <if test="sqr != null and sqr!=''">
+                and e.sqr = #{sqr} 
+            </if>
+           	<if test="lxdh != null and lxdh!=''">
+                and e.lxdh = #{lxdh} 
+            </if>
+            <if test="rwlx != null and rwlx!=''">
+                and e.rwlx = #{rwlx} 
+            </if>
+            <if test="zt != null and zt!=''">
+                and e.zt = #{zt} 
+            </if>
+            <if test="zts != null">
+                and e.zt in
+                <foreach collection="zts" item="zt" open="(" separator="," close=")">
+                    #{zt}
+                </foreach>
+            </if>
+            <if test="czr != null and czr!=''">
+                and e.czr = #{czr} 
+            </if>   
+			<if test="sqrqb != null and sqrqb != ''">
+            	and e.sqrq &gt;= to_date(#{sqrqb}, 'yyyy-mm-dd')
+            </if>
+            <if test="sqrqe != null and sqrqe != ''">
+            	and e.sqrq &lt;= to_date(#{sqrqe}, 'yyyy-mm-dd')
+            </if>
+            <if test="wcrqb != null and wcrqb != ''">
+            	and e.wcrq &gt;= to_date(#{wcrqb}, 'yyyy-mm-dd')
+            </if>
+            <if test="wcrqbe != null and wcrqbe != ''">
+            	and e.wcrqb &lt;= to_date(#{wcrqbe}, 'yyyy-mm-dd')
+            </if>
+            <if test="hphm != null">
+                and v.hphm = #{hphm}
+            </if>
+            <if test="hpzl != null">
+                and v.hpzl = #{hpzl}
+            </if>
+            <if test="fzjg != null">
+                and v.fzjg = #{fzjg,jdbcType=VARCHAR}
+            </if>
+            <if test="tid != null">
+                and e.tid = #{tid}
+            </if>
+        </trim>
+            order by sqrq desc
+    </select>
+
+
+    <select id="queryCustomizeView" parameterType="map" resultType="com.tmri.rfid.ctrl.view.CustomizeTaskView">
+        select rv.xh as jdcxh, rv.hpzl, rv.hphm, rv.syr, rv.cllx, rv.syxz, rv.fzjg, rv.hdzzl, rv.hdzk, rv.yxqz,
+        rv.csys, rv.ccrq, rv.qzbfqz, rv.bxzzrq, rv.bz, rv.pl, rv.clpp, rv.clsbdh, rv.zzl, rv.gl, rv.id,
+        rv.cjrq, rv.gxrq, rv.zqyzl,ct.xh, ct.lsh, ct.sqr,ct.lxdh,ct.jbr,ct.sqrq,ct.rwlx,ct.zt,ct.czr,ct.wcrq,
+        ct.tid as tid, e.kh as kh, ct.tpdz
+        from RFID_ERI_CUSTOMIZE_TASK ct, RFID_VEHICLE rv, rfid_eri e where  ct.clxxid=rv.id(+) and ct.tid = e.tid(+)
+        <trim suffixOverrides="and">
+            <if test="lsh != null and lsh !=''">
+       			and ct.lsh = #{lsh}
+            </if>
+            <if test="clxxid != null and clxxid !=''">
+       			and ct.clxxid = #{clxxid}
+            </if>
+            <if test="hphm != null and hphm !=''">
+       			and rv.hphm = #{hphm}
+            </if>
+            <if test="hpzl != null and hpzl !=''">
+       			and rv.hpzl = #{hpzl}
+            </if>
+            <if test="zt != null">
+       			and ct.zt = #{zt}
+            </if>
+            <if test="fzjg != null">
+                and rv.fzjg = #{fzjg}
+            </if>
+            <if test="rwlx != null and rwlx !=''">
+                and ct.rwlx = #{rwlx}
+            </if>
+            <if test="xh != null">
+                and ct.xh = #{xh}
+            </if>
+        </trim>
+        order by ct.xh desc
+    </select>
+
+    <update id="updateByCondition" parameterType="map">
+        update rfid_eri_customize_task t
+        <trim prefix="set" suffixOverrides=",">
+            <if test="zt != null">
+                zt = #{zt},
+            </if>
+            <if test="czr != null">
+                czr = #{czr},
+            </if>
+            <if test="wcrq != null">
+                wcrq = #{wcrq},
+            </if>
+            <if test="clxxid != null">
+                clxxid = #{clxxid},
+            </if>
+            <if test="yclxxid != null">
+                yclxxid = #{yclxxid}
+            </if>
+            <if test="tid != null">
+                tid = #{tid},
+            </if>
+        </trim>
+        where
+        <trim prefixOverrides="and">
+            <if test="cond_lsh != null">
+                and lsh = #{cond_lsh}
+            </if>
+            <if test="cond_zt != null">
+                and zt = #{cond_zt}
+            </if>
+            <if test="cond_xh != null">
+                and xh = #{cond_xh}
+            </if>
+            <if test="cond_clxxid != null">
+                and clxxid = #{cond_clxxid}
+            </if>
+            <if test="cond_yclxxid != null">
+                and yclxxid = #{cond_yclxxid}
+            </if>
+            <if test="cond_tid != null">
+                and tid = #{cond_tid}
+            </if>
+        </trim>
+    </update>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.CustomizeTask">
+        <selectKey resultType="long" keyProperty="xh" keyColumn="xh" order="BEFORE">
+            select seq_rfid_eri_customize_task_xh.nextval as xh from dual
+        </selectKey>
+          INSERT INTO RFID_ERI_CUSTOMIZE_TASK (XH, LSH, SQR, LXDH, JBR, SQRQ, RWLX, ZT, CZR, WCRQ, CLXXID, TID, BZ, YCLXXID, TPDZ)
+            VALUES (#{xh}, #{lsh}, #{sqr}, #{lxdh}, #{jbr}, #{sqrq}, #{rwlx}, #{zt},#{czr},#{wcrq}, #{clxxid}, #{tid}, #{bz}, #{yclxxid}, #{tpdz})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.CustomizeTask">
+        update rfid_eri_customize_task
+        set lsh = #{lsh}, sqr = #{sqr}, lxdh = #{lxdh}, jbr = #{jbr}, sqrq = #{sqrq}, zt = #{zt}, czr = #{czr}, wcrq = #{wcrq},
+        clxxid = #{clxxid}, tid = #{tid}, bz = #{bz}, yclxxid = #{yclxxid}, tpdz = #{tpdz}
+        where xh = #{xh}
+    </update>
+    
+    
+    <delete id="deleteById" parameterType="string">
+        delete from RFID_ERI_CUSTOMIZE_TASK where lsh=#{lsh}
+    </delete>
+
+	<select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.CustomizeTask">
+		SELECT * FROM RFID_ERI_CUSTOMIZE_TASK e WHERE e.xh = #{id}
+    </select>
+
+</mapper>

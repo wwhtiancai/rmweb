@@ -1,0 +1,96 @@
+apply plugin: "idea"
+apply plugin: "java"
+apply plugin: "war"
+apply plugin: "eclipse"
+
+def javaVersion = JavaVersion.VERSION_1_6;
+sourceCompatibility = javaVersion;
+targetCompatibility = javaVersion; // defaults to sourceCompatibility
+
+task enforceVersion << {
+    def foundVersion = JavaVersion.current();
+    if (foundVersion != javaVersion)
+        throw new IllegalStateException("Wrong Java version; required is "
+                + javaVersion + ", but found " + foundVersion);
+}
+
+enforceVersion.dependsOn(clean)
+compileJava.dependsOn(enforceVersion);
+
+idea {
+    project {
+        jdkName = '1.6'
+        languageLevel = '1.6'
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'Tsrc_frm'
+            srcDir 'Tsrc_rfid'
+            srcDir 'Tsrc_test'
+        }
+        resources {
+            srcDir 'Tsrc_rfid_resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'Tsrc_rfid_test'
+        }
+        resources {
+            srcDir 'Tsrc_rfid_test_resources'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+    maven {
+        url "http://112.124.21.195:8081/nexus/content/groups/public/"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile "javax.servlet:javax.servlet-api:3.0.1"
+    providedCompile "javax.servlet.jsp:javax.servlet.jsp-api:2.2.1"
+    compile "org.apache.httpcomponents:httpclient:4.3.6"
+    compile "org.apache.httpcomponents:httpclient-cache:4.3.6"
+    compile "org.apache.axis2:axis2-kernel:1.6.4"
+    compile "org.apache.axis2:axis2-transport-base:1.6.4"
+    compile "org.apache.axis2:axis2-transport-local:1.6.4"
+    compile "org.apache.axis2:axis2-transport-http:1.6.4"
+    compile "org.apache.axis2:axis2-adb:1.6.4"
+    compile "commons-httpclient:commons-httpclient:3.1"
+    compile fileTree(dir: 'web/WEB-INF/lib', include: '*.jar')
+    testCompile 'junit:junit:4.4'
+    testCompile "org.springframework:spring-test:2.5"
+}
+
+configurations {
+    warLib.extendsFrom compile
+    compile {
+        transitive = true
+    }
+}
+
+processResources {
+    exclude 'production'
+    exclude 'test'
+    exclude 'runtime.template.properties'
+    exclude 'runtime.properties'
+    exclude 'swsds.ini'
+    exclude 'logback.xml'
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'GBK'
+
+war {
+    from 'web'
+    exclude 'WEB-INF/classes'
+    exclude 'WEB-INF/lib'
+    baseName = "rmweb"
+    configurations.all*.exclude group:'javax.servlet', module:'servlet-api'
+}

@@ -1,0 +1,16 @@
+/* for top.jsp */
+ul,form{padding:0;margin:0;}
+ul{list-style:none;}
+div{margin:auto;}
+.top{width:100%;background:url(top.gif) 0 0 repeat-x;margin:0;padding:0;}
+.menu{height:69px;}
+.menu ul {float:right;margin-right:10px;}
+.menu ul li{float:left;width:77px;font-size:14px;color:#000;text-align:center;margin:4px 2px 0 0;padding:4px;lien-height:1;cursor:pointer;}
+.menu ul li:hover{background:#F9F7EA;border-bottom:2px solid #FFD200;cursor:pointer;}
+.current{background:#FFEA00;}
+
+.submenu{height:30px;background:#008F8F;}
+.submenu ul li{float:left;}
+.submenu ul li a:hover{color:#FFEA00;background:url(top_navigation.gif) 0 -60px no-repeat;}
+.submenu ul li .sub{display:block;width:98px;line-height:30px;text-decoration:none;color:#fff;font-size:13px;text-align:left;background:url(top_navigation.gif) 0 0 no-repeat;padding-left:22px;}
+.submenu ul li .subcurrent{display:block;width:98px;line-height:30px;text-decoration:none;color:#FFEA00;font-size:13px;font-weight:bold;text-align:left;background:url(top_navigation.gif) 0 -30px no-repeat;padding-left:22px;}

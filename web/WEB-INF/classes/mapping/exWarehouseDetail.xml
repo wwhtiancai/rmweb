@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ExWarehouseDetailMapper">
+    
+	<select id="fetchByDetailId" parameterType="String" resultType="com.tmri.rfid.bean.ExWarehouseDetail">
+        SELECT * FROM rfid_inventory_out_detail e WHERE e.dw = #{dw} and e.bzhm = #{bzhm}
+        <trim suffixOverrides="and">
+            <if test="ckdh != null and ckdh != ''">
+            	and e.ckdh = #{ckdh} 
+            </if>
+        </trim>
+    </select>
+    
+    <select id="queryList" parameterType="map" resultType="com.tmri.rfid.bean.ExWarehouseDetail">
+        SELECT * FROM rfid_inventory_out_detail e WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="ckdh != null and ckdh != ''">
+            	and e.ckdh = #{ckdh} 
+            </if>
+        </trim>
+    </select>
+    
+    <select id="queryListByCkdh" parameterType="String" resultType="com.tmri.rfid.bean.ExWarehouseDetail">
+        select riod.dw,riod.bzhm,ri.qskh,ri.zzkh,ri.zt from rfid_inventory_out_detail riod 
+			left join rfid_inventory ri on riod.bzhm = ri.bzhh 
+			where riod.dw = 2 and riod.ckdh = #{ckdh} 
+		union 
+		select riod.dw,riod.bzhm,null as qskh,null as zzkh,null as zt from rfid_inventory_out_detail riod 
+			where riod.dw = 1 and riod.ckdh = #{ckdh} 
+    </select>
+    
+    <insert id="create" parameterType="com.tmri.rfid.bean.ExWarehouseDetail">
+        INSERT INTO rfid_inventory_out_detail (DW, BZHM, CKDH, SJSL)
+                VALUES (#{dw}, #{bzhm}, #{ckdh}, #{sjsl})
+    </insert>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.ExWarehouseDetail">
+        UPDATE rfid_inventory_out_detail e
+          SET e.ckdh = #{ckdh}, e.bzxh = #{bzxh}
+        WHERE e.bzhh = #{bzhh}
+    </update>
+    
+    <delete id="deleteByBzhh" parameterType="String">
+        delete from rfid_inventory_out_detail where bzhh=#{bzhh}
+    </delete>
+    
+    <delete id="deleteByCkdh" parameterType="String">
+        delete from rfid_inventory_out_detail where ckdh=#{ckdh}
+    </delete>
+
+
+</mapper>

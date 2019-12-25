@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriScrapDetailMapper">
+
+    <select id="queryById" parameterType="String" resultType="com.tmri.rfid.bean.EriScrapDetail">
+        SELECT * FROM RFID_ERI_SCRAP_DETAIL e WHERE e.bfdh = #{bfdh}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriScrapDetail">
+        SELECT * FROM RFID_ERI_SCRAP_DETAIL e WHERE 1=1
+        <trim suffixOverrides="and">
+      	   <if test="xh != null and xh !=''">
+       			and xh = #{xh} 
+            </if>
+            <if test="bfdh != null and bfdh!=''">
+               and bfdh = #{bfdh} 
+            </if>
+            <if test="tid != null and tid!=''">
+               and tid = #{tid} 
+            </if>
+          	<if test="kh != null and kh!=''">
+               and kh = #{kh} 
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+        </trim>
+    </select>
+    
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriScrapDetail">
+       <selectKey resultType="int" keyProperty="xh" order="BEFORE">
+         select SEQ_RFID_ERI_SCRAP_DETAIL.nextval as xh from dual  
+        </selectKey>
+        INSERT INTO RFID_ERI_SCRAP_DETAIL (xh, bfdh, tid, kh,gxrq, zt)
+            VALUES (#{xh}, #{bfdh}, #{tid}, #{kh}, #{gxrq}, #{zt})
+    </insert>
+	 <update id="update" parameterType="com.tmri.rfid.bean.EriScrapDetail">
+        UPDATE RFID_ERI_SCRAP_DETAIL e
+          SET e.bfdh = #{bfdh},
+          <trim suffixOverrides=",">
+              <if test="tid != null and tid !=''">
+                e.tid = #{tid},
+              </if>
+              <if test="kh != null and kh !=''">
+                e.kh = #{kh},
+              </if>
+        </trim>
+        WHERE e.xh = #{xh}
+    </update>
+    
+    <update id="deleteById" parameterType="String">
+        update rfid_eri_scrap_detail set zt = 2 where xh = #{xh} and zt = 1
+    </update>
+    <update id="deleteByBfdh" parameterType="String">
+      update rfid_eri_scrap_detail set zt = 2 where bfdh = #{bfdh} and zt = 1
+    </update>
+</mapper>

@@ -1,0 +1,48 @@
+.opeTable
+{
+	table-layout:fixed;
+	background:#666;
+	font-size:12px;
+}
+
+.opeTable TH
+{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	height:16px;
+	background:#ccc;
+}
+
+.opeTable TD
+{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	cursor:pointer
+}
+.opeTablehead{
+	background:#72AFCA;
+	text-align:center;
+	padding:2px 2px 2px 2px;
+	font-size:12px;
+	font-weight:bold;
+	color:white;
+	height:24px;
+}
+.opeTableout{
+	background:#FAFAFA;
+	text-align:center;
+	padding:2px 2px 2px 2px;
+	font-size:12px;
+	color:black;
+	height:22px;
+}
+.opeTableover{
+	background:#FFFF33;
+	text-align:center;
+	padding:2px 2px 2px 2px;
+	font-size:12px;
+	color:black;
+	height:22px;
+}

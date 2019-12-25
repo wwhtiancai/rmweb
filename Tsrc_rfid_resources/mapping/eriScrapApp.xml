@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriScrapAppMapper">
+
+    <select id="queryByBfdh" parameterType="String" resultType="com.tmri.rfid.bean.EriScrapApp">
+        SELECT e.* FROM RFID_ERI_SCRAP_APPLICATION e WHERE e.bfdh = #{bfdh} 
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriScrapApp">
+        SELECT e.* FROM RFID_ERI_SCRAP_APPLICATION e WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="bfdh != null and bfdh !=''">
+                and e.bfdh = #{bfdh}
+            </if>
+            <if test="bfyy != null and bfyy!=''">
+                and e.bfyy like CONCAT(CONCAT('%', #{bfyy}), '%')
+            </if>
+            <if test="zt != null">
+                and e.zt = #{zt}
+            </if>
+        </trim>
+    </select>
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriScrapApp">
+        <selectKey keyProperty="bfdh" resultType="string" order="BEFORE">
+            select to_char(sysdate, 'YYYYMMDD') || #{xh} as bfdh from dual
+        </selectKey>
+        INSERT INTO RFID_ERI_SCRAP_APPLICATION (bfdh, bfyy, qqrq, wcrq, jbr, czr, bz, zt, scr, shrq, shbz)
+        VALUES (#{bfdh}, #{bfyy}, #{qqrq}, #{wcrq}, #{jbr}, #{czr}, #{bz} , #{zt}, #{scr}, #{shrq}, #{shbz})
+    </insert>
+    <update id="update" parameterType="com.tmri.rfid.bean.EriScrapApp">
+        UPDATE RFID_ERI_SCRAP_APPLICATION e
+        <trim prefix="set" suffixOverrides=",">
+            <if test="bfyy != null and bfyy !=''">
+                e.bfyy = #{bfyy},
+            </if>
+            <if test="qqrq != null and qqrq !=''">
+                e.qqrq = #{qqrq},
+            </if>
+            <if test="jbr != null and jbr !=''">
+                e.jbr = #{jbr},
+            </if>
+            <if test="czr != null and czr !=''">
+                e.czr = #{czr},
+            </if>
+            <if test="bz != null and bz !=''">
+                e.bz = #{bz},
+            </if>
+            <if test="scr != null and scr !=''">
+                e.scr = #{scr},
+            </if>
+            <if test="zt != null and zt !=''">
+                e.zt = #{zt},
+                <if test="zt == 2">
+                    e.wcrq = sysdate,
+                </if>
+            </if>
+            <if test="shrq != null">
+                e.shrq = #{shrq},
+            </if>
+            <if test="shbz != null and shbz !=''">
+                e.shbz = #{shbz},
+            </if>
+        </trim>
+        WHERE e.bfdh = #{bfdh}
+    </update>
+
+    <update id="updateByCondition" parameterType="hashmap">
+        UPDATE RFID_ERI_SCRAP_APPLICATION e
+        <trim prefix="set" suffixOverrides=",">
+            <if test="bfyy != null">
+                e.bfyy = #{bfyy},
+            </if>
+            <if test="qqrq != null">
+                e.qqrq = #{qqrq},
+            </if>
+            <if test="jbr != null">
+                e.jbr = #{jbr},
+            </if>
+            <if test="czr != null">
+                e.czr = #{czr},
+            </if>
+            <if test="bz != null">
+                e.bz = #{bz},
+            </if>
+            <if test="scr != null">
+                e.scr = #{scr},
+            </if>
+            <if test="zt != null">
+                e.zt = #{zt},
+                <if test="zt == 2">
+                    e.wcrq = sysdate,
+                </if>
+            </if>
+            <if test="shrq != null">
+                e.shrq = #{shrq},
+            </if>
+            <if test="shbz != null">
+                e.shbz = #{shbz}
+            </if>
+        </trim>
+        WHERE
+        <trim prefixOverrides="and">
+            <if test="cond_zt != null">
+                and e.zt = #{cond_zt}
+            </if>
+            <if test="cond_bfdh != null">
+                and e.bfdh = #{cond_bfdh}
+            </if>
+        </trim>
+    </update>
+
+    <update id="deleteById" parameterType="String">
+        update rfid_eri_scrap_application set zt = 4 where bfdh = #{bfdh}
+    </update>
+</mapper>

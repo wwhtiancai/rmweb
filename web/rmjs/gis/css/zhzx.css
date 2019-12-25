@@ -1,0 +1,151 @@
+#tool-jczyfl .icon {
+		background: url(../images/business/common/toolbar/zhzx_jczyfl.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}
+	#tool-jczyfl.hover .icon {
+		background: url(../images/business/common/toolbar/zhzx_jczyfl_hover.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}
+	#tool-jczyfl.active .icon {
+		background: url(../images/business/common/toolbar/zhzx_jczyfl_hover.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}	
+	#tool-xzqh .icon {
+		background: url(../images/business/common/toolbar/zhzx_xzqh.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}
+	#tool-xzqh.hover .icon {
+		background: url(../images/business/common/toolbar/zhzx_xzqh_hover.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}
+	#tool-xzqh.active .icon {
+		background: url(../images/business/common/toolbar/zhzx_xzqh_hover.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}
+	
+	#tool-road .icon {
+		background: url(../images/business/common/toolbar/zhzx_road.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}
+	#tool-road.hover .icon {
+		background: url(../images/business/common/toolbar/zhzx_road_hover.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}
+	#tool-road.active .icon {
+		background: url(../images/business/common/toolbar/zhzx_road_hover.png) no-repeat center center;
+		height: 29px;
+		width: 29px;
+	}
+ 	#leftPane{
+		float:left;width:240;height:100%;border-top:solid 1px #9cbdff;
+		overflow: hidden;
+	}
+	#rightPane{	/*Contains toolbar and horizontal splitter*/
+		float:right;width:100%;height:100%;
+	}
+	.jcleftCsss{
+	   padding-top:5;
+	   line-height:20px;
+	   font-weight: bold;
+       font-size: 14px;
+       color:#000000;
+       font-family:宋体;
+	   /*background-color:#99ffcc; 绿*/
+	   /*background-color:#73b1f0; 蓝*/
+	   background-color:#eef3ee;
+	   text-align:center;
+	   vertical-align:middle;
+	   height:30px
+	}
+	body{
+		font-size:12px
+	}
+	.dialogDivCss{
+	   /* background-color:#ffffd1; */
+	    background-color:#faf5f7;
+	    min-width: 400px; 
+	    height: 94%; 
+	    margin: 0 auto
+	}
+	.dialogTitleFontCss{
+	    text-align:center;
+	    color:#28557e;
+	    font-family:Verdana;
+	    font-size:18px;
+	    font-weight:bold
+	}
+	.dialogRowCss{
+	    width:80px;
+	    height:30px;
+	    line-height:30px;
+	    margin-left:10px;
+	    margin-top:5px;
+	    /** float:left; */
+	    font-family:Verdana;
+	    font-size:14px;
+	    color:#28557e;
+	    font:bold;
+	}
+	.dialogRowValueCss{	    
+	    height:30px;
+	    line-height:30px;
+	    border-bottom:f2f2f5 solid 1px;
+	    margin-left:15px;
+	    margin-top:5px;
+	    float:left;
+	    font-family:Verdana;
+	    font-size:12px;
+	}
+	.inforWindowTitleFontCss{
+	    text-align:center;
+	    color:#28557e;
+	    font-family:方正综艺简体;
+	    font-size:16px;
+	    font-weight:bold;
+	    margin-bottom:10px;	
+	}
+	.inforWindowFontCss{
+		text-align:left;
+	    color:#28557e;
+	    font-family:方正综艺简体;
+	    font-size:14px;
+	    
+	}
+	.inforWindowRowCss{
+	    width:80px;
+	    height:30px;
+	    line-height:30px;
+	   /* border-bottom:f2f2f5 solid 1px;*/
+	    color:#73bcf0;
+	     font-weight:bold;
+	    margin-left:15px;
+	    margin-top:5px;	    
+	    float:left
+	}
+	.inforWindowRowValueCss{	    
+	    height:30px;
+	    line-height:30px;
+      /*  border-bottom:f2f2f5 solid 1px;*/
+	    margin-left:1px;
+	    margin-top:5px;
+	    float:left
+	}
+	.button{
+	    width:38px;
+	    height:18px;
+	    line-height:18px;
+	    border:0;
+	    margin:4px 0 0 10px;
+	    /*background:url(../images/tx54header_bg.gif);*/
+	} 
+	a:link{text-decoration:none;}
+	a:visited{text-decoration:none;}
+	a:hover{text-decoration:underline;} 

@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>JQUERY-loading弹出蒙版框实例</title>
+<script type="text/javascript" src="js/jquery-1.3.1.js"></script>
+<script type="text/javascript" src="js/jquery-loading.js"></script>
+<link rel="stylesheet" type="text/css" href="css/load.css">
+<style type="text/css">
+	body{
+		padding:0px;
+		margin:0px;
+		text-align:center;
+		font-size:12px;
+	}
+	.loading1{
+		margin:0px auto;
+		width:300px;
+		height:330px;
+		border:2px solid green;
+	}
+	.loading2{
+		margin:0px auto;
+		width:800px;
+		height:50px;
+		padding:10px;
+		border:1px solid green;
+		background-color:#efefef;
+	}
+</style>
+<script type="text/javascript">
+    $(function(){
+    	$("#b1").click(function(){
+    		$(".loading1").toggleLoading();
+    		if($(this).html()=="显示"){
+    			$(this).html("消失");
+    		}else{
+    			$(this).html("显示");
+    		}
+    	});
+    	
+    	$("#b2").click(function(){
+    		$(".loading2").toggleLoading();
+    		if($(this).html()=="显示"){
+    			$(this).html("消失");
+    		}else{
+    			$(this).html("显示");
+    		}
+    	});
+    	
+    	$("#b3").click(function(){
+    		$(".loading3").toggleLoading();
+    		if($(this).html()=="显示"){
+    			$(this).html("消失");
+    		}else{
+    			$(this).html("显示");
+    		}
+    	});
+    	
+    	$("#b4").click(function(){
+	    		$(document.body).toggleLoading();
+    	});
+	});
+</script>
+</head>
+	<body>
+	<div class="imgplayer-body">
+		<div class="imgplayer-top"></div>
+		<div class="imgplayer-content">
+			<div class="imgplayer-title">介绍&introduce</div>
+			<div class="imgplayer-introduce">
+				此插件实现了蒙版效果,可以在自己的页面上任意的元素中增加蒙版<br/>
+				声明:例子中用到的图片来源与互联网,版权归原作者所有.<br/>
+				语法:<br/>
+				1.$("selectr").toggleLoading();//页面元素<br/>
+				2.$(document.body).toggleLoading();//整个浏览器内容<br/>
+				<br/>
+			</div>
+			<div class="imgplayer-title">例子&example</div>
+			<div class="imgPlayer1-stitle">例子1:</div>
+				<div class="loading1">
+					<img src="images/girl.jpg" width="300px" height="330px"/>
+				</div>
+				<div style="text-algin:center">
+					<button id="b1" style="width:50px;height:25px;" >显示</button>
+				</div>
+			<div class="imgplayer-example">
+				<span class="imgplayer-example-html">
+				例子1:html<br/>
+					&lt;div class="loading1"&gt;<br/>
+						&nbsp;&nbsp;&lt;img src="images/girl.jpg" width="300px" height="330px"/&gt;<br/>
+					&lt;/div&gt;<br/>
+				</span>
+				<span class="imgplayer-example-js">
+				例子1:js<br/>
+					$("#b1").click(function(){<br/>
+			    		&nbsp;&nbsp;$(".loading1").toggleLoading();<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;if($(this).html()=="显示"){<br/>
+			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).html("消失");<br/>
+			    		&nbsp;&nbsp;&nbsp;&nbsp;}else{<br/>
+			    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(this).html("显示");<br/>
+			    		&nbsp;&nbsp;}<br/>
+			    	});<br/>
+				</span>
+				<span class="imgplayer-example-say">
+					&nbsp;&nbsp;say: $(".loading1").toggleLoading(); toggleLoading()方法自动切换蒙版的显示和消失;
+				</span>
+			</div>
+			<div class="imgPlayer1-stitle">例子2:</div>
+			<div class="loading2">
+				王者归来-don't make me think!
+			</div>
+			<div style="text-algin:center">
+				<button id="b2" style="width:50px;height:25px;" >显示</button>
+			</div>
+			<div class="imgplayer-example">
+				<span class="imgplayer-example-say">
+					&nbsp;&nbsp;say:和例子1一样;
+				</span>
+			</div>
+			<div class="imgPlayer1-stitle">例子3:</div>
+			<div style="height:200px;margin:0px auto;width:1024px;background-color:#e1e1e1;text-indent:2em;"  class="loading3">
+				美联社报道引发美国网友大争论
+				近年国内外对于传说中的反舰弹道导弹，开始了越来越多的报道。今年7、8月间随着美韩军事演习的展开，美国CVN-73华盛顿号航母是否进入黄海受到严重关注，被称为“航母克星”的反舰弹道导弹（ASBM）也吸引了众人的眼球。美国雅虎网站8月5日登载了一篇题为“Chinese missile could shift Pacific power balance” 的美联社综述文章，提到中国反舰弹道导弹可能终结美国航母海面上肆无忌惮的历史。文章提到，由东风21中程导弹改装而成的反舰弹道导弹，射程达到1500 公里，超越航母舰载战斗机的作战半径；具有10倍音速的最高速度，难以拦截。截至9日晚，该篇文章的评论竟然高达1万4千条，这是一个罕有的记录。可见，对于视为海上权力象征的航空母舰，美国人同样寄予了极高的希望，以至于对可能削弱航母战斗力的装备，都给予极大的关注。
+				国内军事论坛长达10余年的“论战”
+				由于整个项目处于高度机密状态，因此对反舰弹道导弹的来龙去脉，外界只能根据不多的公开资料推测。20世纪90年代，台海两岸关系恶化，美国明确军事介入后，打击航母的能力就开始正式提上日程。此前，中国开展了弹道导弹末段雷达制导的研究，相关技术成熟后自然也用于反舰弹道导弹项目。对于外界来说，不管是由于有意无意的外泄，还是军事爱好者所见略同的猜测，在90年代末的军事论坛上弹道导弹打航母的设想流行一时。反对者和赞成者的论战，成为当时主流军事论坛舰船知识论坛的一景，舰船知识论坛衰败后，论战继续在虚幻军事天空、超级大本营等军事论坛里升级。但由于没有充分的证据，争论似乎会永远进行下去。
+			</div>
+			<div style="text-algin:center">
+				<button id="b3" style="width:50px;height:25px;" >显示</button>
+			</div>
+			<div class="imgplayer-example">
+				<span class="imgplayer-example-say">
+					&nbsp;&nbsp;say:和例子1一样;
+				</span>
+			</div>
+			<div class="imgPlayer1-stitle">例子4:</div>
+			<div class="imgplayer-example">
+				<span class="imgplayer-example-js">
+					例子4:js<br/>
+					$("#b4").click(function(){<br/>
+			    		&nbsp;&nbsp;$(document.body).toggleLoading();<br/>
+			    	});<br/>
+				</span>
+				<span class="imgplayer-example-say">
+					&nbsp;&nbsp;say:如果是浏览器全屏蒙版则是:$(document.body).toggleLoading();
+				</span>
+			</div>
+			<div style="text-algin:center">
+				<button id="b4" style="width:50px;height:25px;" >显示</button>
+			</div>
+			<div class="imgplayer-title">配置&configure</div>
+			<div class="imgplayer-setting">
+				<table class="imgplayer-setting-list">
+					<tr style="color:#577aa6"><td>全部配置</td><td>默认值</td><td>说明</td></tr>
+					<tr><td width="150px">z:</td><td width="150px">9999</td><td width="600px">图层z-index,当蒙版遮罩不住时候适当增大其值</td></tr>
+					<tr><td>msg:</td><td>数据加载中...</td><td>提示信息</td></tr>
+					<tr><td>iconUrl:</td><td>loading.gif</td><td>提示图片url</td></tr>
+					<tr><td>height:</td><td>18</td><td>图标默认高(px)</td></tr>
+					<tr><td>width:</td><td>18</td><td>图标默认宽(px)</td></tr>
+					<tr><td>borderColor</td><td>#6bc4f5</td><td>提示的边框颜色</td></tr>
+					<tr><td>opacity:</td><td>0.5</td><td>蒙版的透明度</td></tr>
+				</table>
+				<br/>
+			</div>
+		</div>
+		
+		<div class="imgplayer-bottom">any problem please mail-to&nbsp;:&nbsp;wanghetommy@163.com</div>
+		
+	</div>
+	</body>
+</html>

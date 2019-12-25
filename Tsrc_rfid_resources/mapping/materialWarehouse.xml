@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.MaterialWarehouseMapper">
+    
+    <select id="getMaxRkdh" parameterType="String" resultType="String">
+        select max(e.rkdh)+1 from rfid_raw_eri_inventory_in e
+    	where e.rkdh like CONCAT('${rkdh}','%' )
+    </select>
+    
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.MaterialWarehouse">
+        insert into rfid_raw_eri_inventory_in (RKDH, JFDW, JBR, RKRQ, ZT, BZ, DGDH)
+              values (#{rkdh}, #{jfdw}, #{jbr}, #{rkrq}, #{zt}, #{bz}, #{dgdh})
+    </insert>
+
+	<select id="queryList" parameterType="map" resultType="com.tmri.rfid.bean.MaterialWarehouse">
+        SELECT e.*, fs.xm as jbrxm FROM rfid_raw_eri_inventory_in e 
+			left join frm_sysuser fs on e.jbr = fs.yhdh
+			WHERE 1=1
+        <trim suffixOverrides="and">
+            <if test="rkdh != null and rkdh != ''">
+            	and e.rkdh = #{rkdh} 
+            </if>
+            <if test="jfdw != null and jfdw != ''">
+            	and e.jfdw like CONCAT(CONCAT('%','${jfdw}'),'%')
+            </if>
+            <if test="jbrxm != null and jbrxm != ''">
+            	and fs.xm like CONCAT(CONCAT('%','${jbrxm}'),'%')
+            </if>
+            <if test="zt != null and zt != ''">
+            	and e.zt = #{zt} 
+            </if>
+            <if test="rkrqks != null and rkrqks != ''">
+            	and e.rkrq &gt;= to_date(#{rkrqks}, 'yyyy-mm-dd')
+            </if>
+            <if test="rkrqjs != null and rkrqjs != ''">
+            	and e.rkrq &lt;= to_date(#{rkrqjs}, 'yyyy-mm-dd')
+            </if>
+            <if test="type == 2">
+            	and e.zt = 1
+            </if>
+        </trim>
+        order by rkrq desc
+    </select>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.MaterialWarehouse">
+        UPDATE rfid_raw_eri_inventory_in e SET 
+          	<trim suffixOverrides=",">
+	          	<if test="jfdw != null">
+	              	jfdw = #{jfdw},
+	          	</if>
+	          	<if test="zt != null">
+	              	zt = #{zt},
+	          	</if>
+          		<if test="bz != null">
+	              	bz = #{bz},
+	          	</if>
+          </trim>
+        WHERE e.rkdh = #{rkdh}
+    </update>
+    
+    <update id="deleteByRkdh" parameterType="String">
+        UPDATE rfid_raw_eri_inventory_in e SET 
+	        zt = 2
+	        where e.rkdh=#{rkdh}
+    </update>
+	
+	<select id="queryWarehouseDetails" parameterType="String" resultType="com.tmri.rfid.bean.PackageCase">
+		select e.bzxh,min(e.bzhh) as qshh,max(e.bzhh) as zzhh 
+			from RFID_RAW_ERI_INVENTORY e where e.rkdh = #{rkdh} group by e.bzxh
+	</select>
+	
+</mapper>

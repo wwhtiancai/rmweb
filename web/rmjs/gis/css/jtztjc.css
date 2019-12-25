@@ -1,0 +1,364 @@
+/** 操作控制样式 control-button */
+
+/**周边基础资源 */
+a.zbjczyOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/zbjczy.png) no-repeat;
+}
+a.zbjczyOff:hover {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/zbjczy_hover.png) no-repeat;
+}
+a.zbjczyOn {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/zbjczy_down.png) no-repeat;
+}
+a.zbjczyOn:hover {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/zbjczy_hover.png) no-repeat;
+}
+
+/**周边警力资源 */
+a.zbjlzyOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/zbjlzy.png) no-repeat;
+}
+a.zbjlzyOff:hover {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/zbjlzy_hover.png) no-repeat;
+}
+a.zbjlzyOn {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/zbjlzy_down.png) no-repeat;
+}
+a.zbjlzyOn:hover {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/zbjlzy_hover.png) no-repeat;
+}
+
+/**交通流量 */
+a.jtllOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/jtll.png) no-repeat;
+}
+a.jtllOff:hover {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/jtll_hover.png) no-repeat;
+}
+a.jtllOn {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/jtll_down.png) no-repeat;
+}
+a.jtllOn:hover {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/jtll_hover.png) no-repeat;
+}
+
+/**道路施工 */
+a.dlsgOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/dlsg.png) no-repeat;
+}
+a.dlsgOff:hover {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/dlsg_hover.png) no-repeat;
+}
+a.dlsgOn {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/dlsg_down.png) no-repeat;
+}
+a.dlsgOn:hover {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/dlsg_hover.png) no-repeat;
+}
+
+/**交通事故 */
+a.jtsgOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/jtsg.png) no-repeat;
+}
+a.jtsgOff:hover {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/jtsg_hover.png) no-repeat;
+}
+a.jtsgOn {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/jtsg_down.png) no-repeat;
+}
+a.jtsgOn:hover {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/jtsg_hover.png) no-repeat;
+}
+
+/**恶劣天气 */
+a.eltqOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/eltq.png) no-repeat;
+}
+a.eltqOff:hover {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/eltq_hover.png) no-repeat;
+}
+a.eltqOn {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/eltq_down.png) no-repeat;
+}
+a.eltqOn:hover {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/eltq_hover.png) no-repeat;
+}
+
+/**交通事故 */
+a.qtzdsjOff {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/qtzdsj.png) no-repeat;
+}
+a.qtzdsjOff:hover {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/qtzdsj_hover.png) no-repeat;
+}
+a.qtzdsjOn {
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/qtzdsj_down.png) no-repeat;
+}
+a.qtzdsjOn:hover {	
+	height: 64px;
+	width: 64px;
+	background: url(../images/business/jtztjc/bottomToolbar/qtzdsj_hover.png) no-repeat;
+}
+
+/** 工具按钮样式 */
+/** 最新阻断信息背景颜色 */
+.zxzdxx{
+	background:url(../images/business/jtztjc/zxzdxx.png) no-repeat ;
+	vertical-align:top;
+	width:175px;
+	height:30px;
+	border:0px;
+	cursor:default;
+}
+
+.toolxzqh{
+	background: url(../images/business/common/toolbar/zhzx_xzqh.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolroad{
+	background: url(../images/business/common/toolbar/zhzx_road.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolgjx{
+	background: url(../images/business/common/toolbar/gjx.png) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+
+.toolpan{
+	background: url(../images/business/map_custom/pan.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolzoomin{
+	background: url(../images/business/map_custom/zoomin.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolzoomout{
+	background: url(../images/business/map_custom/zoomout.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolleft{
+	background: url(../images/business/map_custom/left.png) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolright{
+	background: url(../images/business/map_custom/right.png) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolextent{
+	background: url(../images/business/map_custom/extent.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolprint{
+	background: url(../images/business/map_custom/print.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+
+.toolmeasurelen{
+	background: url(../images/business/map_custom/measure-len.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolmeasurearea{
+	background: url(../images/business/map_custom/measure-area.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolpointsearch{
+	background: url(../images/business/map_custom/point-search.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toollinesearch{
+	background: url(../images/business/map_custom/line-search.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolrecsearch{
+	background: url(../images/business/map_custom/rec-search.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+.toolpolygonsearch{
+	background: url(../images/business/map_custom/polygon-search.jpg) no-repeat;
+	vertical-align:top;
+	height: 29px;
+	width: 29px;
+	border:0px;
+	margin:0px;
+	cursor:pointer;
+}
+
+/** 返回结果样式 result */
+.menu_list {
+	margin: 1px auto;
+	width: 185px;
+}
+.menu_head {
+	width: 270px;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 15px;
+	font-size: 12px;
+	color: #2F42B0;
+	cursor: pointer;
+	border: 1px solid #e1e1e1;
+	position: relative;
+	font-weight: bold;
+	background: #E7F0FF url(../images/business/jtztjc/pro_left.png) center right no-repeat;
+	margin: 0;
+}
+
+.menu_list .current {
+	background: #E7F0FF url(../images/business/jtztjc/pro_down.png) center right no-repeat;
+}
+
+.menu_body {
+	width: 270px;
+	height: 410px;
+	overflow: hidden;
+	line-height: 29px;
+	border-left: 1px solid #e1e1e1;
+	backguound: #fff;
+	border-right: 1px solid #e1e1e1;
+}
+
+.menu_body a {
+	display: block;
+	width: 270px;
+	height: 27px;
+	line-height: 27px;
+	padding-top: 4px;
+	padding-left: 15px;
+	color: #777777;
+	background: #fff;
+	text-decoration: none;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+.menu_body a:hover {
+	text-decoration: none;	
+}

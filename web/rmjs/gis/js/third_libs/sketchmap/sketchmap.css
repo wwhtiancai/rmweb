@@ -1,0 +1,110 @@
+.road{
+	padding:0px;
+	position: relative;	
+}
+.direction{
+	width:100%;
+	height:25px;
+	background:url(img/direction.png) no-repeat bottom;
+	text-align: center;
+	font-size: 12px;
+}
+.roadway{
+	width:100%;
+	height:22px;
+	background:url(img/roadway.png) repeat-x bottom;
+	position: relative;
+	font-size: 12px;
+}
+.roadway_1{
+	width:100%;
+	height:22px;
+	background:url(img/roadway_1.png) repeat-x bottom;
+	position: relative;
+}
+.roadway2{
+	width:100%;
+	height:22px;
+	background:url(img/roadway2.png) repeat-x bottom;
+	position: relative;
+	font-size: 12px;
+}
+.roadway2_1{
+	width:100%;
+	height:22px;
+	background:url(img/roadway2_1.png) repeat-x bottom;
+	position: relative;
+}
+.roundnumleft,.roundnumright{
+	padding-top:3px;
+	width: 15px;
+	height: 15px;
+	position:absolute;
+	background:url(img/round.png) repeat-x bottom;
+	text-align: center;
+	color: #FFF;
+	font-weight: bold;
+	font-size:10px;
+}
+.roundnumright{
+	top: 2px;
+	right: 20px;
+}
+.roundnumleft{
+	top: 8px;
+	left: 20px;
+}
+.arrowright{
+	width: 12px;
+	height: 12px;
+	background:url(img/arrowright.png) no-repeat;
+	top: 10px;
+	right: 20px;
+	position:absolute
+}
+.arrowleft{
+	width: 12px;
+	height: 12px;
+	background:url(img/arrowleft.png) no-repeat;
+	top: 4px;
+	left: 20px;
+	position: absolute
+}
+.greentree{
+	width:100%;
+	background-image:url(img/greentree.png);
+	background-repeat:repeat-x;
+	height:13px ;
+	font-size:9px;
+}
+.splitcontent{
+	width: 36px;
+	height:90%;
+	position: absolute;
+	left: 50%;
+	top: 25px;
+}
+.splitcontent .split{
+	width: 4px;
+	height:100%;
+	background:url(img/split.png) repeat-y;
+	left: 18px;
+	top: 0px;
+	position: absolute;
+}
+.splitcontent .videoleft{
+	width: 20px;
+	height:20px;
+	background:url(img/videoleft.png);
+	left: 10px;
+	top: 5px;
+	position: absolute;
+}
+.splitcontent .videoright{
+	width: 20px;
+	height: 19px;
+	background:url(img/videoright.png);
+	left: 10px;
+	bottom: 5px;
+	position: absolute;
+}

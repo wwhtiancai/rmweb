@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.InstallHistoryMapper">
+
+    <select id="queryById" parameterType="String" resultType="com.tmri.rfid.bean.InstallHistory">
+        SELECT * FROM rfid_install_history h WHERE h.xh = #{xh}
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.InstallHistory">
+        <selectKey keyColumn="xh" order="BEFORE" resultType="long" keyProperty="xh">
+            select SEQ_RFID_INSTALL_HISTORY__XH.nextval from dual
+        </selectKey>
+        insert into RFID_INSTALL_HISTORY (xh, tid, kh, hphm, hpzl, azrq, azr)
+        values (#{xh}, #{tid}, #{kh}, #{hphm}, #{hpzl}, #{azrq}, #{azr})
+    </insert>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.InstallHistory">
+        select * from rfid_install_history
+        <trim prefix="where" prefixOverrides="and">
+            <if test="xh != null">
+                and xh = #{xh}
+            </if>
+            <if test="tid != null">
+                and tid = #{tid}
+            </if>
+            <if test="kh != null">
+                and kh = #{kh}
+            </if>
+            <if test="hphm != null">
+                and upper(hphm) = upper(#{hphm})
+            </if>
+            <if test="hpzl != null">
+                and upper(hpzl) = upper(#{hpzl})
+            </if>
+            <if test="azr != null">
+                and upper(azr) = upper(#{azr})
+            </if>
+        </trim>
+    </select>
+</mapper>

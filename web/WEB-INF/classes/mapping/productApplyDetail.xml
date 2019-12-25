@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.ProductApplyDetailMapper">
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.ProductApplyDetail">
+        insert into RFID_PRODUCT_APPLY_DETAIL (ID, LYDH, BZH) values
+            (SEQ_RFID_PRODUCT_APPLY_DETAIL.nextval, #{lydh}, #{bzh})
+    </insert>
+
+    <select id="queryByCondition" resultType="com.tmri.rfid.bean.ProductApplyDetail" parameterType="hashmap">
+        select * from RFID_PRODUCT_APPLY_DETAIL where 1 = 1
+        <trim>
+            <if test="lydh != null">
+                and lydh = #{lydh}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.DeviceStationMapper">
+
+	<select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.DeviceStation">
+        SELECT * FROM RFID_WORK_STATION e WHERE e.xh = #{xh}
+    </select>
+    
+	<select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.DeviceStation">
+        SELECT * FROM RFID_WORK_STATION e WHERE  1 = 1
+        <trim suffixOverrides="and">
+      	   <if test="sbxh != null and sbxh !=''">
+       			and sbxh = #{sbxh} 
+            </if>
+        </trim>
+    </select>
+    
+    <delete id="deleteById" parameterType="long">
+        delete from RFID_WORK_STATION where xh=#{xh}
+    </delete>
+    
+    
+    <delete id="deleteBySbxh" parameterType="long">
+        delete from RFID_WORK_STATION where sbxh=#{sbxh}
+    </delete>
+    
+    <insert id="create" parameterType="com.tmri.rfid.bean.DeviceStation">
+        <selectKey keyProperty="xh" resultType="long" order="BEFORE">
+            SELECT SEQ_RFID_WORK_STATION.nextval as xh from dual
+        </selectKey>
+    INSERT INTO rfid_work_station (XH, GWMC, GWXH, SBXH, ZT)
+            VALUES (#{xh}, #{gwmc}, #{gwxh}, #{sbxh}, #{zt})
+    </insert>
+</mapper>

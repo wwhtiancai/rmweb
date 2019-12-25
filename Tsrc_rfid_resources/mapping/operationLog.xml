@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.OperationLogMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.OperationLog">
+      select * from RFID_OPERATION_LOG where xh = #{id}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.OperationLog">
+        select * from RFID_OPERATION_LOG
+        <trim prefix="where" prefixOverrides="and">
+            <if test="czmcs != null">
+                and czmc in
+                <foreach collection="czmcs" item="czmc" open="(" separator="," close=")">
+                    #{czmc}
+                </foreach>
+            </if>
+            <if test="czmc != null">
+                and upper(czmc) = upper(#{czmc})
+            </if>
+            <if test="gjz != null">
+                and gjz like '%' || #{gjz} || '%'
+            </if>
+            <if test="jg != null">
+                and jg = #{jg}
+            </if>
+            <if test="xxnr != null">
+                and xxnr like '%' || #{xxnr} || '%'
+            </if>
+        </trim>
+        order by xh desc
+    </select>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.OperationLog">
+        <selectKey resultType="long" keyProperty="xh" order="BEFORE">
+            select SEQ_RFID_OPERATION_LOG.nextval as xh from dual
+        </selectKey>
+        <![CDATA[
+        insert into RFID_OPERATION_LOG (XH, CZMC, GJZ, XXNR, JG, CZR, CJSJ)
+        values (#{xh}, upper(#{czmc}), #{gjz}, substr(#{xxnr}, 0, 2000), #{jg}, #{czr}, sysdate)
+        ]]>
+    </insert>
+
+    <select id="count" parameterType="map" resultType="int">
+        select count(1) from RFID_OPERATION_LOG
+        <trim prefix="where" prefixOverrides="and">
+            <if test="czmc != null">
+                and czmc = upper(#{czmc})
+            </if>
+            <if test="gjz != null">
+                and gjz = #{gjz}
+            </if>
+            <if test="jg != null">
+                and jg = #{jg}
+            </if>
+            <if test="czr != null">
+                and czr = #{czr}
+            </if>
+        </trim>
+    </select>
+
+
+
+</mapper>

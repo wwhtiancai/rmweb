@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.StatisticsMapper">
+
+    <select id="countCustomizationByYhdh" parameterType="map" resultType="map">
+        <![CDATA[ select gxhczr as czr, count(*) as sl, t.rwlx as ywlx  from rfid_eri_customize_task t, rfid_eri_customize_record r
+        where t.lsh = r.lsh and t.zt = 2 and r.zt = 1  ]]>
+        <trim>
+            <if test="qsrq != null">
+                <![CDATA[
+                    and r.gxhrq >= to_date(#{qsrq}, 'yyyy-MM-dd')
+                    and t.wcrq >= to_date(#{qsrq}, 'yyyy-MM-dd')
+                ]]>
+            </if>
+            <if test="zzrq != null">
+                <![CDATA[
+                    and r.gxhrq < to_date(#{zzrq}, 'yyyy-MM-dd') + 1
+                    and t.wcrq < to_date(#{zzrq}, 'yyyy-MM-dd') + 1
+                ]]>
+            </if>
+            <if test="yhdh != null">
+                <![CDATA[ and r.gxhczr = #{yhdh} ]]>
+            </if>
+        </trim>
+        group by r.gxhczr, t.rwlx
+        order by r.gxhczr
+    </select>
+    <select id="countEri" parameterType="map" resultType="map">
+        <![CDATA[
+ select a.*,fc.dmsm1 as cllx
+from
+ (select rvl.syxz,count(*) as zksl
+  from RFID_ERI re,RFID_VEHICLE_LOG rvl
+  where re.clxxbfid = rvl.id
+
+]]>
+        <trim>
+            <if test="fzjg != null">
+                and upper(rvl.fzjg) like upper(trim(#{fzjg})) || '%'
+            </if>
+        </trim>
+        and re.zt = 1
+        group by rvl.syxz) a,FRM_CODE fc
+        where trim(fc.dmz) = trim(a.syxz) and fc.xtlb='00' and fc.dmlb='1003'
+    </select>
+</mapper>

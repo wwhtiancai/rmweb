@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tmri.rfid.mapper.EriCustomizeDataMapper">
+
+    <select id="queryById" parameterType="long" resultType="com.tmri.rfid.bean.EriCustomizeData">
+        select * from RFID_ERI_CUSTOMIZE_DATA where xh = #{id}
+    </select>
+
+    <select id="queryByCondition" parameterType="map" resultType="com.tmri.rfid.bean.EriCustomizeData">
+        select * from RFID_ERI_CUSTOMIZE_DATA
+        <trim prefix="where" prefixOverrides="and">
+            <if test="tid != null">
+                and tid = #{tid}
+            </if>
+            <if test="aqmkxh != null">
+                and aqmkxh = #{aqmkxh}
+            </if>
+            <if test="qqxh != null">
+                and qqxh = #{qqxh}
+            </if>
+            <if test="zt != null">
+                and zt = #{zt}
+            </if>
+        </trim>
+    </select>
+
+    <update id="update" parameterType="com.tmri.rfid.bean.EriCustomizeData">
+        UPDATE RFID_ERI_CUSTOMIZE_DATA
+        SET tid = #{tid}, qqxh = #{qqxh}, zt = #{zt}, aqmkxh = #{aqmkxh}, data=#{data}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateByCondition" parameterType="map">
+        UPDATE RFID_ERI_CUSTOMIZE_DATA SET
+        <trim suffixOverrides=",">
+            <if test="zt != null">
+                zt = #{zt},
+            </if>
+        </trim>
+        WHERE
+        <trim prefixOverrides="and">
+            <if test="cond_xh != null">
+                and xh = #{cond_xh}
+            </if>
+            <if test="cond_aqmkxh != null">
+                and aqmkxh = #{cond_aqmkxh}
+            </if>
+            <if test="cond_tid != null">
+                and tid = #{cond_tid}
+            </if>
+            <if test="cond_qqxh != null">
+                and qqxh = #{cond_qqxh}
+            </if>
+
+        </trim>
+    </update>
+
+    <insert id="create" parameterType="com.tmri.rfid.bean.EriCustomizeData">
+        <selectKey resultType="long" keyProperty="xh" order="BEFORE">
+            select SEQ_RFID_ERI_CUSTOMIZE_DATA.nextval as xh from dual
+        </selectKey>
+        INSERT INTO RFID_ERI_CUSTOMIZE_DATA (XH, QQXH, TID, AQMKXH, DATA, ZT)
+        VALUES (#{xh}, #{qqxh}, #{tid}, #{aqmkxh}, #{data}, #{zt})
+    </insert>
+
+    <delete id="deleteByTid" parameterType="string">
+        delete from RFID_ERI_CUSTOMIZE_DATA where tid = #{tid}
+    </delete>
+
+
+</mapper>
